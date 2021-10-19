@@ -1,0 +1,16 @@
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/obj/Debug/net5.0/Toursss.csproj.AssemblyReference.cache
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/obj/Debug/net5.0/Toursss.GeneratedMSBuildEditorConfig.editorconfig
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/obj/Debug/net5.0/Toursss.AssemblyInfoInputs.cache
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/obj/Debug/net5.0/Toursss.AssemblyInfo.cs
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/obj/Debug/net5.0/Toursss.csproj.CoreCompileInputs.cache
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/bin/Debug/net5.0/appsettings.json
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/bin/Debug/net5.0/Toursss.deps.json
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/bin/Debug/net5.0/Toursss.runtimeconfig.json
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/bin/Debug/net5.0/Toursss.runtimeconfig.dev.json
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/bin/Debug/net5.0/Toursss.dll
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/bin/Debug/net5.0/ref/Toursss.dll
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/bin/Debug/net5.0/Toursss.pdb
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/obj/Debug/net5.0/Toursss.dll
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/obj/Debug/net5.0/ref/Toursss.dll
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/obj/Debug/net5.0/Toursss.pdb
+/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/obj/Debug/net5.0/Toursss.genruntimeconfig.cache
