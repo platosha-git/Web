@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ToursWeb.ModelsDB;
 using ToursWeb.Repositories;
+using ToursWeb.ImpRepositories;
 
 namespace ToursWeb.ComponentsBL
 {

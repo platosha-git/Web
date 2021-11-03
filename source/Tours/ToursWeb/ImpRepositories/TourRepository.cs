@@ -4,6 +4,7 @@ using System.Linq;
 using ToursWeb.Repositories;
 using Serilog.Core;
 using Microsoft.EntityFrameworkCore;
+using ToursWeb.ModelsDB;
 
 namespace ToursWeb.ImpRepositories
 {

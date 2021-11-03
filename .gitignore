@@ -679,3 +679,8 @@ TSWLatexianTemp*
 *.xwm
 
 */Logfile.txt
+
+*.cache
+bin/
+obj/
+*.idea

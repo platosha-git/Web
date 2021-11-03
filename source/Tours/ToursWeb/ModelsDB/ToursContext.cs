@@ -3,10 +3,11 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using ToursWeb.ModelsDB;
+using ToursWeb;
 
 #nullable disable
 
-namespace ToursWeb
+namespace ToursWeb.ModelsDB
 {
     public partial class ToursContext : DbContext
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ToursWeb.Repositories;
 using Serilog.Core;
+using ToursWeb.ModelsDB;
 
 namespace ToursWeb.ImpRepositories
 {
