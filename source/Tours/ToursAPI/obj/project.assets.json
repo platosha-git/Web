@@ -587,7 +587,7 @@
           }
         }
       },
-      "Toursss/1.0.0": {
+      "ToursWeb/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
@@ -599,10 +599,10 @@
           "Serilog": "2.10.0"
         },
         "compile": {
-          "bin/placeholder/Toursss.dll": {}
+          "bin/placeholder/ToursWeb.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Toursss.dll": {}
+          "bin/placeholder/ToursWeb.dll": {}
         }
       }
     }
@@ -1853,16 +1853,16 @@
         "version.txt"
       ]
     },
-    "Toursss/1.0.0": {
+    "ToursWeb/1.0.0": {
       "type": "project",
-      "path": "../Toursss/Toursss.csproj",
-      "msbuildProject": "../Toursss/Toursss.csproj"
+      "path": "../ToursWeb/ToursWeb.csproj",
+      "msbuildProject": "../ToursWeb/ToursWeb.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "Swashbuckle.AspNetCore >= 5.6.3",
-      "Toursss >= 1.0.0"
+      "ToursWeb >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1890,8 +1890,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/Toursss.csproj": {
-              "projectPath": "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/Toursss.csproj"
+            "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursWeb/ToursWeb.csproj": {
+              "projectPath": "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursWeb/ToursWeb.csproj"
             }
           }
         }

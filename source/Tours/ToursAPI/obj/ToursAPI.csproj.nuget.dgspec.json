@@ -26,8 +26,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/Toursss.csproj": {
-                "projectPath": "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/Toursss.csproj"
+              "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursWeb/ToursWeb.csproj": {
+                "projectPath": "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursWeb/ToursWeb.csproj"
               }
             }
           }
@@ -69,14 +69,14 @@
         }
       }
     },
-    "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/Toursss.csproj": {
+    "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursWeb/ToursWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/Toursss.csproj",
-        "projectName": "Toursss",
-        "projectPath": "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/Toursss.csproj",
+        "projectUniqueName": "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursWeb/ToursWeb.csproj",
+        "projectName": "ToursWeb",
+        "projectPath": "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursWeb/ToursWeb.csproj",
         "packagesPath": "/home/platosha/.nuget/packages/",
-        "outputPath": "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/Toursss/obj/",
+        "outputPath": "/home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursWeb/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/platosha/.nuget/NuGet/NuGet.Config"
