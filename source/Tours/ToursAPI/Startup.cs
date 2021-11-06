@@ -11,13 +11,6 @@ using ToursWeb.ModelsDB;
 using ToursWeb.ComponentsBL;
 using ToursWeb.Repositories;
 using ToursWeb.ImpRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace ToursAPI
 {
@@ -35,41 +28,22 @@ namespace ToursAPI
         {
             services.AddControllers();
             
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "ToursAPI", Version = "v1"}); });
+
             IConfiguration config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
             
-            services.AddDbContext<ToursContext>(option => option.UseNpgsql(config["Connections:Manager"]));
+            AddDbContext(services, config);
+            AddLogging(services, config);
+            
+            AddRepositories(services);
+            AddControllers(services);
             
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
-            
-            var log = new LoggerConfiguration()
-                .WriteTo.File(config["Logger"])
-                .CreateLogger();
-            
-            services.AddLogging(loggingBuilder =>
-                loggingBuilder.AddSerilog(logger: log, dispose: true));
-
-            services.AddScoped<ITourRepository, TourRepository>();
-            services.AddScoped<IHotelRepository, HotelRepository>();
-            services.AddScoped<IFoodRepository, FoodRepository>();
-            services.AddScoped<ITransferRepository, TransferRepository>();
-            services.AddScoped<IBusRepository, BusRepository>();
-            services.AddScoped<IPlaneRepository, PlaneRepository>();
-            services.AddScoped<ITrainRepository, TrainRepository>();
-            services.AddScoped<IFunctionsRepository, FunctionsRepository>();
-            services.AddScoped<IUsersRepository, UsersRepository>();
-
-            services.AddScoped<UserController>();
-            services.AddScoped<GuestController>();
-            services.AddScoped<TouristController>();
-            services.AddScoped<ManagerController>();
-            services.AddScoped<TransferManagerController>();
-
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "ToursAPI", Version = "v1"}); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,6 +63,43 @@ namespace ToursAPI
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+
+        private static void AddDbContext(IServiceCollection services, IConfiguration config)
+        {
+            services.AddDbContext<ToursContext>(option => option.UseNpgsql(config["Connections:Manager"]));
+        }
+        
+        private static void AddLogging(IServiceCollection services, IConfiguration config)
+        {
+            var log = new LoggerConfiguration()
+                .WriteTo.File(config["Logger"])
+                .CreateLogger();
+            
+            services.AddLogging(loggingBuilder =>
+                loggingBuilder.AddSerilog(logger: log, dispose: true));
+        }
+        
+        private static void AddRepositories(IServiceCollection services)
+        {
+            services.AddScoped<ITourRepository, TourRepository>();
+            services.AddScoped<IHotelRepository, HotelRepository>();
+            services.AddScoped<IFoodRepository, FoodRepository>();
+            services.AddScoped<ITransferRepository, TransferRepository>();
+            services.AddScoped<IBusRepository, BusRepository>();
+            services.AddScoped<IPlaneRepository, PlaneRepository>();
+            services.AddScoped<ITrainRepository, TrainRepository>();
+            services.AddScoped<IFunctionsRepository, FunctionsRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
+        }
+
+        private static void AddControllers(IServiceCollection services)
+        {
+            services.AddScoped<UserController>();
+            services.AddScoped<GuestController>();
+            services.AddScoped<TouristController>();
+            services.AddScoped<ManagerController>();
+            services.AddScoped<TransferManagerController>();
         }
     }
 }
