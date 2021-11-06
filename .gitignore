@@ -684,3 +684,4 @@ TSWLatexianTemp*
 bin/
 obj/
 *.idea
+*.dll

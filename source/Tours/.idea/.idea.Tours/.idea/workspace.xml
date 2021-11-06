@@ -15,11 +15,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b08addc-33cb-4e41-86c2-2b90f7f80639" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/UserController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/LogFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/LogFile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Startup.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/bin/Debug/net5.0/ToursAPI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/bin/Debug/net5.0/ToursAPI.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/bin/Debug/net5.0/ToursAPI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/bin/Debug/net5.0/ToursAPI.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/bin/Debug/net5.0/ref/ToursAPI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/bin/Debug/net5.0/ref/ToursAPI.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ref/ToursAPI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ref/ToursAPI.dll" afterDir="false" />
@@ -226,7 +228,7 @@
       <workItem from="1635976029760" duration="330000" />
       <workItem from="1635976578374" duration="3692000" />
       <workItem from="1636216532084" duration="14473000" />
-      <workItem from="1636236136072" duration="2442000" />
+      <workItem from="1636236136072" duration="3840000" />
     </task>
     <servers />
   </component>
