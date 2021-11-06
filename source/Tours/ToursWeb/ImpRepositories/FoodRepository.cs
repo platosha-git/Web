@@ -2,44 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using ToursWeb.Repositories;
-using Serilog.Core;
+using Microsoft.Extensions.Logging;
 using ToursWeb.ModelsDB;
 
 namespace ToursWeb.ImpRepositories
 {
     public class FoodRepository : IFoodRepository, IDisposable
     {
-        private readonly ToursContext db;
-        private readonly Logger logger;
+        private readonly ToursContext _db;
+        private readonly ILogger<FoodRepository> _logger;
 
-        public FoodRepository(ToursContext createDB, Logger logDB)
+        public FoodRepository(ToursContext createDB, ILogger<FoodRepository> logDB)
         {
-            db = createDB;
-            logger = logDB;
+            _db = createDB;
+            _logger = logDB;
         }
 
         public List<Food> FindAll()
         {
-            return db.Foods.ToList();
+            return _db.Foods.ToList();
         }
 
         public Food FindByID(int id)
         {
-            return db.Foods.Find(id);
+            return _db.Foods.Find(id);
         }
 
         public void Add(Food obj)
         {
             try 
             {
-                obj.Foodid = db.Foods.Count() + 1;
-                db.Foods.Add(obj);
-                db.SaveChanges();
-                logger.Information("+FoodRep : Food {Number} was added to Food", obj.Foodid);
+                obj.Foodid = _db.Foods.Count() + 1;
+                _db.Foods.Add(obj);
+                _db.SaveChanges();
+                _logger.LogInformation("+FoodRep : Food {Number} was added to Food", obj.Foodid);
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+FoodRep : Error trying to add food to Food");
+                _logger.LogError(err, "+FoodRep : Error trying to add food to Food");
             }
         }
 
@@ -52,13 +52,13 @@ namespace ToursWeb.ImpRepositories
                 uFood.Childrenmenu = obj.Childrenmenu; uFood.Bar = obj.Bar; 
                 uFood.Cost = obj.Cost;
 
-                db.Foods.Update(uFood);
-                db.SaveChanges();
-                logger.Information("+FoodRep : Food {Number} was updated at Food", obj.Foodid);
+                _db.Foods.Update(uFood);
+                _db.SaveChanges();
+                _logger.LogInformation("+FoodRep : Food {Number} was updated at Food", obj.Foodid);
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+FoodRep : Error trying to update food to Food");
+                _logger.LogError(err, "+FoodRep : Error trying to update food to Food");
             }
         }
 
@@ -67,13 +67,13 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 List<Food> allFoods = FindAll();
-                db.Foods.RemoveRange(allFoods);
-                db.SaveChanges();
-                logger.Information("+FoodRep : All food were deleted from Food");
+                _db.Foods.RemoveRange(allFoods);
+                _db.SaveChanges();
+                _logger.LogInformation("+FoodRep : All food were deleted from Food");
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+FoodRep : Error trying to delete all food from Food");
+                _logger.LogError(err, "+FoodRep : Error trying to delete all food from Food");
             }
         }
 
@@ -82,43 +82,43 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 Food food = FindByID(id);
-                db.Foods.Remove(food);
-                db.SaveChanges();
-                logger.Information("+FoodRep : Food {Number} was deleted from Food", id);
+                _db.Foods.Remove(food);
+                _db.SaveChanges();
+                _logger.LogInformation("+FoodRep : Food {Number} was deleted from Food", id);
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+FoodRep : Error trying to delete food {Number} from Food", id);
+                _logger.LogError(err, "+FoodRep : Error trying to delete food {Number} from Food", id);
             }
         }
 
         public List<Food> FindFoodByCategory(string cat)
         {
-            IQueryable<Food> foods = db.Foods.Where(needed => needed.Category == cat);
+            IQueryable<Food> foods = _db.Foods.Where(needed => needed.Category == cat);
             return foods.ToList();
         }
 
         public List<Food> FindFoodByVegMenu(bool vm)
         {
-            IQueryable<Food> foods = db.Foods.Where(needed => needed.Vegmenu == vm);
+            IQueryable<Food> foods = _db.Foods.Where(needed => needed.Vegmenu == vm);
             return foods.ToList();
         }
 
         public List<Food> FindFoodByChildMenu(bool cm)
         {
-            IQueryable<Food> foods = db.Foods.Where(needed => needed.Childrenmenu == cm);
+            IQueryable<Food> foods = _db.Foods.Where(needed => needed.Childrenmenu == cm);
             return foods.ToList();
         }
 
         public List<Food> FindFoodByBar(bool bar)
         {
-            IQueryable<Food> foods = db.Foods.Where(needed => needed.Bar == bar);
+            IQueryable<Food> foods = _db.Foods.Where(needed => needed.Bar == bar);
             return foods.ToList();
         }
 
         public List<Food> FindFoodByParams(string cat, bool vm, bool cm, bool bar)
         {
-            IQueryable<Food> foods = db.Foods.Where(needed => needed.Category == cat &&
+            IQueryable<Food> foods = _db.Foods.Where(needed => needed.Category == cat &&
                                                               needed.Vegmenu == vm &&
                                                               needed.Childrenmenu == cm &&
                                                               needed.Bar == bar);
@@ -127,7 +127,7 @@ namespace ToursWeb.ImpRepositories
 
         public List<Food> FindFoodByParams(bool vm, bool cm, bool bar)
         {
-            IQueryable<Food> foods = db.Foods.Where(needed => needed.Vegmenu == vm &&
+            IQueryable<Food> foods = _db.Foods.Where(needed => needed.Vegmenu == vm &&
                                                               needed.Childrenmenu == cm &&
                                                               needed.Bar == bar);
             return foods.ToList();
@@ -135,7 +135,7 @@ namespace ToursWeb.ImpRepositories
 
         public void Dispose()
         {
-            db.Dispose();
+            _db.Dispose();
         }
     }
 }

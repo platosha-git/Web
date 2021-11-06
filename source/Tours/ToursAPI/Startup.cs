@@ -1,22 +1,23 @@
+using Serilog;
+using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
-using Serilog;
+
+using ToursWeb.ModelsDB;
 using ToursWeb.ComponentsBL;
+using ToursWeb.Repositories;
+using ToursWeb.ImpRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ToursWeb.ModelsDB;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ToursWeb.ImpRepositories;
-using ToursWeb.Repositories;
 
 namespace ToursAPI
 {
@@ -34,17 +35,39 @@ namespace ToursAPI
         {
             services.AddControllers();
             
-            AddLoggerExtensions(services);
-            AddRepositoryExtensions(services); 
-            AddControllerExtensions(services);
+            IConfiguration config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
             
-            /*services.AddControllersWithViews()
+            services.AddDbContext<ToursContext>(option => option.UseNpgsql(config["Connections:Manager"]));
+            
+            services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
-            */
-            services.AddDbContext<ToursContext>(option => option.UseNpgsql(Configuration["Connections:Manager"]));
-            //services.AddSingleton(provider => { return user; });
+            
+            var log = new LoggerConfiguration()
+                .WriteTo.File(config["Logger"])
+                .CreateLogger();
+            
+            services.AddLogging(loggingBuilder =>
+                loggingBuilder.AddSerilog(logger: log, dispose: true));
+
+            services.AddScoped<ITourRepository, TourRepository>();
+            services.AddScoped<IHotelRepository, HotelRepository>();
+            services.AddScoped<IFoodRepository, FoodRepository>();
+            services.AddScoped<ITransferRepository, TransferRepository>();
+            services.AddScoped<IBusRepository, BusRepository>();
+            services.AddScoped<IPlaneRepository, PlaneRepository>();
+            services.AddScoped<ITrainRepository, TrainRepository>();
+            services.AddScoped<IFunctionsRepository, FunctionsRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
+
+            services.AddScoped<UserController>();
+            services.AddScoped<GuestController>();
+            services.AddScoped<TouristController>();
+            services.AddScoped<ManagerController>();
+            services.AddScoped<TransferManagerController>();
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "ToursAPI", Version = "v1"}); });
         }
@@ -66,40 +89,6 @@ namespace ToursAPI
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-        }
-
-        private void AddLoggerExtensions(IServiceCollection services)
-        {
-            var log = new LoggerConfiguration()
-                .WriteTo.File(Configuration["Logger"])
-                .CreateLogger();
-            
-            services.AddLogging(x =>
-            {
-                x.AddSerilog(logger: log, dispose: true);
-            });
-        }
-        
-        private void AddControllerExtensions(IServiceCollection services)
-        {
-            services.AddScoped<UserController>();
-            services.AddScoped<TransferManagerController>();
-            services.AddScoped<TouristController>();
-            services.AddScoped<ManagerController>();
-            services.AddScoped<GuestController>();
-        }
-        
-        private void AddRepositoryExtensions(IServiceCollection services)
-        {
-            services.AddScoped<IBusRepository, BusRepository>();
-            services.AddScoped<IFoodRepository, FoodRepository>();
-            services.AddScoped<IFunctionsRepository, FunctionsRepository>();
-            services.AddScoped<IHotelRepository, HotelRepository>();
-            services.AddScoped<IPlaneRepository, PlaneRepository>();
-            services.AddScoped<ITourRepository, TourRepository>();
-            services.AddScoped<ITrainRepository, TrainRepository>();
-            services.AddScoped<ITransferRepository, TransferRepository>();
-            services.AddScoped<IUsersRepository, UsersRepository>();
         }
     }
 }

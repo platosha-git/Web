@@ -1,0 +1,117 @@
+2021-11-06 23:29:05.767 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-06 23:29:07.212 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-06 23:29:07.212 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-06 23:29:07.212 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-06 23:29:07.213 +03:00 [INF] Hosting environment: Development
+2021-11-06 23:29:07.213 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-06 23:29:07.909 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-06 23:29:07.976 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 69.3770ms
+2021-11-06 23:29:07.995 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-06 23:29:08.108 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 112.6718ms
+2021-11-06 23:29:08.149 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-06 23:29:08.149 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-06 23:29:08.149 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-06 23:29:08.206 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-06 23:29:08.206 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-06 23:29:08.206 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-06 23:29:08.210 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 60.7517ms
+2021-11-06 23:29:08.210 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 60.7222ms
+2021-11-06 23:29:08.211 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 61.9887ms
+2021-11-06 23:29:08.855 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-06 23:29:08.901 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/favicon-32x32.png - -
+2021-11-06 23:29:08.941 +03:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2021-11-06 23:29:08.941 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/favicon-32x32.png - - - 200 628 image/png 40.0057ms
+2021-11-06 23:29:08.997 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 142.1713ms
+2021-11-06 23:29:11.219 +03:00 [INF] Application is shutting down...
+2021-11-07 01:06:11.655 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-07 01:06:13.064 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-07 01:06:13.064 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-07 01:06:13.065 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-07 01:06:13.065 +03:00 [INF] Hosting environment: Development
+2021-11-07 01:06:13.065 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-07 01:06:21.806 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-07 01:06:22.120 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 316.0535ms
+2021-11-07 01:06:24.154 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-07 01:06:24.369 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 214.4701ms
+2021-11-07 01:06:27.993 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-07 01:06:28.222 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-07 01:06:28.222 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-07 01:06:28.552 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-07 01:06:28.553 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-07 01:06:28.567 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 345.2481ms
+2021-11-07 01:06:28.567 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 573.6048ms
+2021-11-07 01:06:28.576 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-07 01:06:28.577 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 354.9104ms
+2021-11-07 01:06:42.650 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-07 01:06:42.779 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 128.8853ms
+2021-11-07 01:06:42.968 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/favicon-32x32.png - -
+2021-11-07 01:06:42.970 +03:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2021-11-07 01:06:42.971 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/favicon-32x32.png - - - 200 628 image/png 2.1177ms
+2021-11-07 01:06:49.086 +03:00 [INF] Application is shutting down...
+2021-11-07 01:12:45.276 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-07 01:12:46.596 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-07 01:12:46.597 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-07 01:12:46.598 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-07 01:12:46.598 +03:00 [INF] Hosting environment: Development
+2021-11-07 01:12:46.598 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-07 01:12:51.217 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-07 01:12:51.222 +03:00 [INF] Application is shutting down...
+2021-11-07 01:12:51.653 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 441.6680ms
+2021-11-07 01:32:18.740 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-07 01:32:22.373 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-07 01:32:22.373 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-07 01:32:22.374 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-07 01:32:22.374 +03:00 [INF] Hosting environment: Development
+2021-11-07 01:32:22.374 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-07 01:32:26.130 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-07 01:32:26.324 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 197.0689ms
+2021-11-07 01:32:26.327 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-07 01:32:26.528 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 201.4783ms
+2021-11-07 01:32:26.572 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-07 01:32:26.572 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-07 01:32:26.573 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-07 01:32:26.941 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-07 01:32:26.941 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-07 01:32:26.942 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-07 01:32:26.959 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 387.1029ms
+2021-11-07 01:32:26.959 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 385.5313ms
+2021-11-07 01:32:26.960 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 387.3390ms
+2021-11-07 01:32:27.409 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-07 01:32:27.531 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 121.8125ms
+2021-11-07 01:32:27.797 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/favicon-32x32.png - -
+2021-11-07 01:32:27.798 +03:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2021-11-07 01:32:27.798 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/favicon-32x32.png - - - 200 628 image/png 0.8167ms
+2021-11-07 01:32:35.163 +03:00 [INF] Application is shutting down...
+2021-11-07 01:33:40.880 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-07 01:33:41.331 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-07 01:33:41.331 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-07 01:33:41.332 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-07 01:33:41.332 +03:00 [INF] Hosting environment: Development
+2021-11-07 01:33:41.332 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-07 01:33:44.272 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-07 01:33:44.329 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 59.3551ms
+2021-11-07 01:33:44.337 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-07 01:33:44.440 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 103.5550ms
+2021-11-07 01:33:44.655 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-07 01:33:44.675 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-07 01:33:44.687 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-07 01:33:44.780 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-07 01:33:44.780 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-07 01:33:44.781 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-07 01:33:44.788 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 113.3210ms
+2021-11-07 01:33:44.788 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 133.1435ms
+2021-11-07 01:33:44.789 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 101.2923ms
+2021-11-07 01:33:45.018 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-07 01:33:45.157 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 139.7585ms
+2021-11-07 01:33:48.691 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ApiUser/Tour - -
+2021-11-07 01:33:48.731 +03:00 [INF] Executing endpoint 'ToursAPI.Controllers.ApiUserController.GetAllUsers (ToursAPI)'
+2021-11-07 01:33:48.762 +03:00 [INF] Route matched with {action = "GetAllUsers", controller = "ApiUser"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllUsers() on controller ToursAPI.Controllers.ApiUserController (ToursAPI).
+2021-11-07 01:33:51.194 +03:00 [INF] Entity Framework Core 5.0.11 initialized 'ToursContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+2021-11-07 01:33:53.903 +03:00 [INF] Executed DbCommand (128ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.tourid, t.cost, t.datebegin, t.dateend, t.food, t.hotel, t.transfer
+FROM tour AS t
+2021-11-07 01:33:54.032 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ToursWeb.Tour, ToursWeb, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-11-07 01:33:54.394 +03:00 [INF] Executed action ToursAPI.Controllers.ApiUserController.GetAllUsers (ToursAPI) in 5619.6829ms
+2021-11-07 01:33:54.394 +03:00 [INF] Executed endpoint 'ToursAPI.Controllers.ApiUserController.GetAllUsers (ToursAPI)'
+2021-11-07 01:33:54.401 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ApiUser/Tour - - - 200 5934 application/json;+charset=utf-8 5710.0646ms
+2021-11-07 01:34:16.458 +03:00 [INF] Application is shutting down...

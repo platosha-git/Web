@@ -2,44 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using ToursWeb.Repositories;
-using Serilog.Core;
+using Microsoft.Extensions.Logging;
 using ToursWeb.ModelsDB;
 
 namespace ToursWeb.ImpRepositories
 {
     public class TransferRepository : ITransferRepository, IDisposable
     {
-        private readonly ToursContext db;
-        private readonly Logger logger;
+        private readonly ToursContext _db;
+        private readonly ILogger<TransferRepository> _logger;
 
-        public TransferRepository(ToursContext createDB, Logger logDB)
+        public TransferRepository(ToursContext createDB, ILogger<TransferRepository> logDB)
         {
-            db = createDB;
-            logger = logDB;
+            _db = createDB;
+            _logger = logDB;
         }
 
         public List<Transfer> FindAll()
         {
-            return db.Transfers.ToList();
+            return _db.Transfers.ToList();
         }
 
         public Transfer FindByID(int id)
         {
-            return db.Transfers.Find(id);
+            return _db.Transfers.Find(id);
         }
 
         public void Add(Transfer obj)
         {
             try
             {
-                obj.Transferid = db.Transfers.Count() + 1;
-                db.Transfers.Add(obj);
-                db.SaveChanges();
-                logger.Information("+TransferRep : Transfer {Number} was added to Transfers", obj.Transferid);
+                obj.Transferid = _db.Transfers.Count() + 1;
+                _db.Transfers.Add(obj);
+                _db.SaveChanges();
+                _logger.LogInformation("+TransferRep : Transfer {Number} was added to Transfers", obj.Transferid);
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+TransferRep : Error trying to add transfer to Transfers");
+                _logger.LogError(err, "+TransferRep : Error trying to add transfer to Transfers");
             }
         }
 
@@ -47,13 +47,13 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                db.Transfers.Update(obj);
-                db.SaveChanges();
-                logger.Information("+TransferRep : Transfer {Number} was updated at Transfers", obj.Transferid);
+                _db.Transfers.Update(obj);
+                _db.SaveChanges();
+                _logger.LogInformation("+TransferRep : Transfer {Number} was updated at Transfers", obj.Transferid);
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+TransferRep : Error trying to update transfer at Transfers");
+                _logger.LogError(err, "+TransferRep : Error trying to update transfer at Transfers");
             }
         }
 
@@ -62,13 +62,13 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 List<Transfer> allTransfers = FindAll();
-                db.Transfers.RemoveRange(allTransfers);
-                db.SaveChanges();
-                logger.Information("+TransferRep : All transfers were deleted from Transfer");
+                _db.Transfers.RemoveRange(allTransfers);
+                _db.SaveChanges();
+                _logger.LogInformation("+TransferRep : All transfers were deleted from Transfer");
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+TransferRep : Error trying to delete all transfers from Transfer");
+                _logger.LogError(err, "+TransferRep : Error trying to delete all transfers from Transfer");
             }
         }
 
@@ -77,19 +77,19 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 Transfer transfer = FindByID(id);
-                db.Transfers.Remove(transfer);
-                db.SaveChanges();
-                logger.Information("+TransferRep : Transfer {Number} was deleted from Transfers", transfer.Transferid);
+                _db.Transfers.Remove(transfer);
+                _db.SaveChanges();
+                _logger.LogInformation("+TransferRep : Transfer {Number} was deleted from Transfers", transfer.Transferid);
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+TransferRep : Error trying to delete transfer from Transfer");
+                _logger.LogError(err, "+TransferRep : Error trying to delete transfer from Transfer");
             }
         }
 
         public void Dispose()
         {
-            db.Dispose();
+            _db.Dispose();
         }
     }
 }

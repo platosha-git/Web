@@ -5,15 +5,13 @@ namespace ToursWeb.ComponentsBL
 {
     public class ManagerController : UserController
     {
-        protected IUsersRepository bookingRepository;
         protected IUsersRepository usersRepository;
         
         public ManagerController(ITourRepository tourRep, IHotelRepository hotelRep, IFoodRepository foodRep,
                                 ITransferRepository transferRep, IBusRepository busRep, IPlaneRepository planeRep, ITrainRepository trainRep,
-                                IUsersRepository bookingRep, IUsersRepository usersRep, IFunctionsRepository funcRep) :
+                                IUsersRepository usersRep, IFunctionsRepository funcRep) :
             base(tourRep, hotelRep, foodRep, transferRep, busRep, planeRep, trainRep, funcRep)
         {
-            bookingRepository = bookingRep;
             usersRepository = usersRep;
         }
 

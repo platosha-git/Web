@@ -1,32 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using ToursWeb.Repositories;
-using Serilog.Core;
+using Microsoft.Extensions.Logging;
 using ToursWeb.ModelsDB;
 
 namespace ToursWeb.ImpRepositories
 {
     public class FunctionsRepository : IFunctionsRepository, IDisposable
     {
-        private readonly ToursContext db;
-        private readonly Logger logger;
+        private readonly ToursContext _db;
 
-        public FunctionsRepository(ToursContext createDB, Logger logDB)
+        public FunctionsRepository(ToursContext createDB)
         {
-            db = createDB;
-            logger = logDB;
+            _db = createDB;
         }
 
         public FullUserTour GetFullTour(int TID)
         {
-            IQueryable<FullUserTour> tour = db.fulltour(TID);
+            IQueryable<FullUserTour> tour = _db.fulltour(TID);
             return tour.First();
         }
 
         public void Dispose()
         {
-            db.Dispose();
+            _db.Dispose();
         }
     }
 }

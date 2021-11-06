@@ -2,46 +2,46 @@
 using System.Collections.Generic;
 using System.Linq;
 using ToursWeb.Repositories;
-using Serilog.Core;
+using Microsoft.Extensions.Logging;
 using ToursWeb.ModelsDB;
 
 namespace ToursWeb.ImpRepositories
 {
     public class TrainRepository : ITrainRepository, IDisposable
     {
-        private readonly ToursContext db;
-        private readonly Logger logger;
+        private readonly ToursContext _db;
+        private readonly ILogger<TrainRepository> _logger;
 
-        public TrainRepository(ToursContext createDB, Logger logDB)
+        public TrainRepository(ToursContext createDB, ILogger<TrainRepository> logDB)
         {
-            db = createDB;
-            logger = logDB;
+            _db = createDB;
+            _logger = logDB;
         }
 
         public List<Trainticket> FindAll()
         {
-            List<Trainticket> trains = db.Traintickets.ToList();
+            List<Trainticket> trains = _db.Traintickets.ToList();
             trains.RemoveAt(0);
             return trains;
         }
 
         public Trainticket FindByID(int id)
         {
-            return db.Traintickets.Find(id);
+            return _db.Traintickets.Find(id);
         }
 
         public void Add(Trainticket obj)
         {
             try
             {
-                obj.Traintid = db.Traintickets.Count() + 1;
-                db.Traintickets.Add(obj);
-                db.SaveChanges();
-                logger.Information("+TrainRep : Trainticket {Number} was added to Traintickets", obj.Traintid);
+                obj.Traintid = _db.Traintickets.Count() + 1;
+                _db.Traintickets.Add(obj);
+                _db.SaveChanges();
+                _logger.LogInformation("+TrainRep : Trainticket {Number} was added to Traintickets", obj.Traintid);
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+TrainRep : Error trying to add trainticket to Traintickets");
+                _logger.LogError(err.Message, "+TrainRep : Error trying to add trainticket to Traintickets");
             }
         }
 
@@ -49,13 +49,13 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                db.Traintickets.Update(obj);
-                db.SaveChanges();
-                logger.Information("+TrainRep : Trainticket {Number} was updated at Traintickets", obj.Traintid);
+                _db.Traintickets.Update(obj);
+                _db.SaveChanges();
+                _logger.LogInformation("+TrainRep : Trainticket {Number} was updated at Traintickets", obj.Traintid);
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+TrainRep : Error trying to update trainticket at Traintickets");
+                _logger.LogError(err, "+TrainRep : Error trying to update trainticket at Traintickets");
             }
         }
 
@@ -64,13 +64,13 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 List<Trainticket> allTrainTicket = FindAll();
-                db.Traintickets.RemoveRange(allTrainTicket);
-                db.SaveChanges();
-                logger.Information("+TrainRep : All traintickets were deleted from Traintickets");
+                _db.Traintickets.RemoveRange(allTrainTicket);
+                _db.SaveChanges();
+                _logger.LogInformation("+TrainRep : All traintickets were deleted from Traintickets");
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+TrainRep : Error trying to delete all traintickets from Traintickets");
+                _logger.LogError(err, "+TrainRep : Error trying to delete all traintickets from Traintickets");
             }
         }
 
@@ -79,44 +79,44 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 Trainticket trainTicket = FindByID(id);
-                db.Traintickets.Remove(trainTicket);
-                db.SaveChanges();
-                logger.Information("+TrainRep : Trainticket {Number} was deleted from Traintickets", id);
+                _db.Traintickets.Remove(trainTicket);
+                _db.SaveChanges();
+                _logger.LogInformation("+TrainRep : Trainticket {Number} was deleted from Traintickets", id);
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+TrainRep : Error trying to delete trainticket {Number} from Traintickets", id);
+                _logger.LogError(err, "+TrainRep : Error trying to delete trainticket {Number} from Traintickets", id);
             }
         }
 
         public List<Trainticket> FindTrainsByCityFrom(string city)
         {
-            IQueryable<Trainticket> trainTickets = db.Traintickets.Where(needed => needed.Cityfrom.Contains(city));
+            IQueryable<Trainticket> trainTickets = _db.Traintickets.Where(needed => needed.Cityfrom.Contains(city));
             return trainTickets.ToList();
         }
 
         public List<Trainticket> FindTrainsByCityTo(string city)
         {
-            IQueryable<Trainticket> trainTickets = db.Traintickets.Where(needed => needed.Cityto.Contains(city));
+            IQueryable<Trainticket> trainTickets = _db.Traintickets.Where(needed => needed.Cityto.Contains(city));
             return trainTickets.ToList();
         }
 
         public List<Trainticket> FindTrainsByDate(DateTime date)
         {
             DateTime dBeg = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0);
-            IQueryable<Trainticket> trainTickets = db.Traintickets.Where(needed => needed.Departuretime >= dBeg);
+            IQueryable<Trainticket> trainTickets = _db.Traintickets.Where(needed => needed.Departuretime >= dBeg);
             return trainTickets.ToList();
         }
 
         public List<Trainticket> FindTrainByLowCost(int cost)
         {
-            IQueryable<Trainticket> trainTickets = db.Traintickets.Where(needed => needed.Cost <= cost && needed.Traintid > 0);
+            IQueryable<Trainticket> trainTickets = _db.Traintickets.Where(needed => needed.Cost <= cost && needed.Traintid > 0);
             return trainTickets.ToList();
         }
 
         public void Dispose()
         {
-            db.Dispose();
+            _db.Dispose();
         }
     }
 }

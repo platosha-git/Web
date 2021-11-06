@@ -2,45 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using ToursWeb.Repositories;
-using Serilog.Core;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ToursWeb.ModelsDB;
 
 namespace ToursWeb.ImpRepositories
 {
     public class TourRepository : ITourRepository, IDisposable
     {
-        private readonly ToursContext db;
-        private Logger logger;
+        private readonly ToursContext _db;
+        private readonly ILogger<TourRepository> _logger;
 
-        public TourRepository(ToursContext createDB, Logger logDB)
+        public TourRepository(ToursContext createDB, ILogger<TourRepository> logDB)
         {
-            db = createDB;
-            logger = logDB;
+            _db = createDB;
+            _logger = logDB;
         }
 
         public List<Tour> FindAll()
         {
-            return db.Tours.ToList();
+            return _db.Tours.ToList();
         }
 
         public Tour FindByID(int id)
         {
-            return db.Tours.Find(id);
+            return _db.Tours.Find(id);
         }
 
         public void Add(Tour obj)
         {
             try
             {
-                obj.Tourid = db.Tours.Count() + 1;
-                db.Tours.Add(obj);
-                db.SaveChanges();
-                logger.Information("+TourRep : Tourss {Number} was added to Tours", obj.Tourid);
+                obj.Tourid = _db.Tours.Count() + 1;
+                _db.Tours.Add(obj);
+                _db.SaveChanges();
+                _logger.LogInformation("+TourRep : Tour {Number} was added to Tours", obj.Tourid);
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+TourRep : Error trying to add tour to Tours");
+                _logger.LogError(err, "+TourRep : Error trying to add tour to Tours");
             }
         }
 
@@ -54,13 +53,13 @@ namespace ToursWeb.ImpRepositories
                 uTour.Datebegin = obj.Datebegin;
                 uTour.Dateend = obj.Dateend;
 
-                db.Tours.Update(uTour);
-                db.SaveChanges();
-                logger.Information("+TourRep : Tourss {Number} was updated at Tours", obj.Tourid);
+                _db.Tours.Update(uTour);
+                _db.SaveChanges();
+                _logger.LogInformation("+TourRep : Tours {Number} was updated at Tours", obj.Tourid);
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+TourRep : Error trying to update tour at Tours");
+                _logger.LogError(err, "+TourRep : Error trying to update tour at Tours");
             }
         }
 
@@ -69,13 +68,13 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 List<Tour> allTours = FindAll();
-                db.Tours.RemoveRange(allTours);
-                db.SaveChanges();
-                logger.Information("+TourRep : All tours were deleted from Tours");
+                _db.Tours.RemoveRange(allTours);
+                _db.SaveChanges();
+                _logger.LogInformation("+TourRep : All tours were deleted from Tours");
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+TourRep : Error trying to delete all tours from Tours");
+                _logger.LogError(err, "+TourRep : Error trying to delete all tours from Tours");
             }
         }
 
@@ -84,31 +83,31 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 Tour tour = FindByID(id);
-                db.Tours.Remove(tour);
-                db.SaveChanges();
-                logger.Information("+TourRep : Tourss {Number} was deleted from Tours", tour.Tourid);
+                _db.Tours.Remove(tour);
+                _db.SaveChanges();
+                _logger.LogInformation("+TourRep : Tours {Number} was deleted from Tours", tour.Tourid);
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+TourRep : Error trying to delete tour from Tours");
+                _logger.LogError(err, "+TourRep : Error trying to delete tour from Tours");
             }
         }
 
         public List<Tour> FindTourByDate(DateTime b, DateTime e)
         {
-            IQueryable<Tour> tours = db.Tours.Where(needed => needed.Datebegin >= b && needed.Dateend <= e);
+            IQueryable<Tour> tours = _db.Tours.Where(needed => needed.Datebegin >= b && needed.Dateend <= e);
             return tours.ToList();
         }
 
         public List<Tour> FindToursByHotel(int hotelID)
         {
-            IQueryable<Tour> tours = db.Tours.Where(needed => needed.Hotel == hotelID);
+            IQueryable<Tour> tours = _db.Tours.Where(needed => needed.Hotel == hotelID);
             return tours.ToList();
         }
 
         public void Dispose()
         {
-            db.Dispose();
+            _db.Dispose();
         }
     }
 }

@@ -2,30 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using ToursWeb.Repositories;
-using Serilog.Core;
+using Microsoft.Extensions.Logging;
 using ToursWeb.ModelsDB;
 
 namespace ToursWeb.ImpRepositories
 {
     public class UsersRepository : IUsersRepository, IDisposable
     {
-        private readonly ToursContext db;
-        private readonly Logger logger;
+        private readonly ToursContext _db;
+        private readonly ILogger<UsersRepository> _logger;
 
-        public UsersRepository(ToursContext createDB, Logger logDB)
+        public UsersRepository(ToursContext createDB, ILogger<UsersRepository> logDB)
         {
-            db = createDB;
-            logger = logDB;
+            _db = createDB;
+            _logger = logDB;
         }
 
         public List<User> FindAll()
         {
-            return db.Users.ToList();
+            return _db.Users.ToList();
         }
 
         public User FindByID(int id)
         {
-            return db.Users.Find(id);
+            return _db.Users.Find(id);
         }
 
         public void Add(User obj)
@@ -36,13 +36,13 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                db.Users.Update(obj);
-                db.SaveChanges();
-                logger.Information("+BookingRep : Booking {Number} was updated at Bookings", obj.Userid);
+                _db.Users.Update(obj);
+                _db.SaveChanges();
+                _logger.LogInformation("+BookingRep : Booking {Number} was updated at Bookings", obj.Userid);
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+BookingRep : Error trying to update booking at Bookings");
+                _logger.LogError(err, "+BookingRep : Error trying to update booking at Bookings");
             }
         }
 
@@ -51,13 +51,13 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 List<User> allBookings = FindAll();
-                db.Users.RemoveRange(allBookings);
-                db.SaveChanges();
-                logger.Information("+BookingRep : All bookings were deleted from Bookings");
+                _db.Users.RemoveRange(allBookings);
+                _db.SaveChanges();
+                _logger.LogInformation("+BookingRep : All bookings were deleted from Bookings");
             }
             catch (Exception err)
             {
-                logger.Error(err.Message, "+BookingRep : Error trying to delete all bookings from Bookings");
+                _logger.LogError(err, "+BookingRep : Error trying to delete all bookings from Bookings");
             }
         }
 
@@ -67,7 +67,7 @@ namespace ToursWeb.ImpRepositories
 
         public User GetUserByLP(string login, string password)
         {
-            IQueryable<User> users = db.Users.Where(needed => needed.Login.Equals(login) &&
+            IQueryable<User> users = _db.Users.Where(needed => needed.Login.Equals(login) &&
                                                                    needed.Password.Equals(password));
             if (users != null)
             {
@@ -83,7 +83,7 @@ namespace ToursWeb.ImpRepositories
 
         public void Dispose()
         {
-            db.Dispose();
+            _db.Dispose();
         }
     }
 }

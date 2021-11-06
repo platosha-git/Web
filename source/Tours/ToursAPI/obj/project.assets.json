@@ -24,6 +24,36 @@
           "buildTransitive/netcoreapp3.0/EntityFramework.targets": {}
         }
       },
+      "Microsoft.AspNetCore.JsonPatch/5.0.11": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "Newtonsoft.Json": "12.0.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.NewtonsoftJson/5.0.11": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.JsonPatch": "5.0.11",
+          "Newtonsoft.Json": "12.0.2",
+          "Newtonsoft.Json.Bson": "1.0.2"
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.CSharp/4.7.0": {
         "type": "package",
         "compile": {
@@ -380,6 +410,18 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+      "Newtonsoft.Json.Bson/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {}
+        }
+      },
       "Npgsql/5.0.10": {
         "type": "package",
         "dependencies": {
@@ -582,6 +624,19 @@
         },
         "runtime": {
           "lib/netstandard2.0/Serilog.Sinks.File.dll": {}
+        }
+      },
+      "Serilog.Sinks.ILogger/1.0.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "2.1.1",
+          "Serilog": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Serilog.Sinks.ILogger.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Serilog.Sinks.ILogger.dll": {}
         }
       },
       "Swashbuckle.AspNetCore/5.6.3": {
@@ -1256,13 +1311,15 @@
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "EntityFramework": "6.4.4",
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "5.0.11",
           "Microsoft.EntityFrameworkCore": "5.0.11",
           "Microsoft.Extensions.Configuration": "5.0.0",
           "Newtonsoft.Json": "13.0.1",
           "Npgsql": "5.0.10",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.10",
           "Serilog": "2.10.0",
-          "Serilog.AspNetCore": "4.1.0"
+          "Serilog.AspNetCore": "4.1.0",
+          "Serilog.Sinks.ILogger": "1.0.3"
         },
         "compile": {
           "bin/placeholder/ToursWeb.dll": {}
@@ -1332,6 +1389,38 @@
         "tools/netcoreapp3.0/any/ef6.dll",
         "tools/netcoreapp3.0/any/ef6.pdb",
         "tools/netcoreapp3.0/any/ef6.runtimeconfig.json"
+      ]
+    },
+    "Microsoft.AspNetCore.JsonPatch/5.0.11": {
+      "sha512": "uBftjbW1fDnFVr/JTpdeeyp48C1hyzzsBDQ7sR4b3fvLp6eNLAAOBTZnPQMOs0EvUt66ttPeUKRuWZjpAHQu2Q==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.jsonpatch/5.0.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.AspNetCore.JsonPatch.dll",
+        "lib/net461/Microsoft.AspNetCore.JsonPatch.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.xml",
+        "microsoft.aspnetcore.jsonpatch.5.0.11.nupkg.sha512",
+        "microsoft.aspnetcore.jsonpatch.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Mvc.NewtonsoftJson/5.0.11": {
+      "sha512": "Et5eJGuxtMSqYmHv3FYzLh8pf66RxSsDtw2Uy1ihDOvGSy4YKUBLW2Um+WlecLfMMrrq/QcW/asRPkCcLveiuA==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.mvc.newtonsoftjson/5.0.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll",
+        "lib/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.xml",
+        "microsoft.aspnetcore.mvc.newtonsoftjson.5.0.11.nupkg.sha512",
+        "microsoft.aspnetcore.mvc.newtonsoftjson.nuspec"
       ]
     },
     "Microsoft.CSharp/4.7.0": {
@@ -1937,6 +2026,27 @@
         "packageIcon.png"
       ]
     },
+    "Newtonsoft.Json.Bson/1.0.2": {
+      "sha512": "QYFyxhaABwmq3p/21VrZNYvCg3DaEoN/wUuw5nmfAf0X3HLjgupwhkEWdgfb9nvGAUIv3osmZoD3kKl4jxEmYQ==",
+      "type": "package",
+      "path": "newtonsoft.json.bson/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net45/Newtonsoft.Json.Bson.dll",
+        "lib/net45/Newtonsoft.Json.Bson.pdb",
+        "lib/net45/Newtonsoft.Json.Bson.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.pdb",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.Bson.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.Bson.pdb",
+        "lib/netstandard2.0/Newtonsoft.Json.Bson.xml",
+        "newtonsoft.json.bson.1.0.2.nupkg.sha512",
+        "newtonsoft.json.bson.nuspec"
+      ]
+    },
     "Npgsql/5.0.10": {
       "sha512": "3TB9le3lfu5Hc+LSHqMCVLcA+qUPg1enyM4+u0pMUBmNNGwc0sVPrnfnys2TVZIdkF8Aww/AZlnJHDsnEGqD0g==",
       "type": "package",
@@ -2211,6 +2321,21 @@
         "lib/netstandard2.0/Serilog.Sinks.File.xml",
         "serilog.sinks.file.4.1.0.nupkg.sha512",
         "serilog.sinks.file.nuspec"
+      ]
+    },
+    "Serilog.Sinks.ILogger/1.0.3": {
+      "sha512": "b1mI1z/juPZoLYMKSSjzs5iS0pPAHGlfxDI16lmcCsoTYlutBdrflq0CIbFAi/2/nG5X731pTsB/nMzQ2I7kkA==",
+      "type": "package",
+      "path": "serilog.sinks.ilogger/1.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "lib/netstandard2.0/Serilog.Sinks.ILogger.dll",
+        "lib/netstandard2.0/Serilog.Sinks.ILogger.xml",
+        "logo.png",
+        "serilog.sinks.ilogger.1.0.3.nupkg.sha512",
+        "serilog.sinks.ilogger.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore/5.6.3": {
@@ -4642,6 +4767,8 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 5.0.11",
+      "Microsoft.EntityFrameworkCore >= 5.0.11",
       "Newtonsoft.Json >= 13.0.1",
       "Serilog.AspNetCore >= 4.1.0",
       "Swashbuckle.AspNetCore >= 5.6.3",
@@ -4689,6 +4816,14 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+            "target": "Package",
+            "version": "[5.0.11, )"
+          },
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[5.0.11, )"
+          },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.1, )"
