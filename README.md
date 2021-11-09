@@ -9,7 +9,7 @@
 - Менеджер иммет возможность просмотра, добавления и удаления туров, отелей, питания.
 
 ## Use-case
-![](https://github.com/platosha-git/Web/blob/main/lab1/Use-case.png)
+![](https://github.com/platosha-git/Web/blob/main/docs/Use-case.png)
 
 ## Er-диаграмма
-![](https://github.com/platosha-git/Web/blob/main/lab1/ER.png)
+![](https://github.com/platosha-git/Web/blob/main/docs/ER.png)
