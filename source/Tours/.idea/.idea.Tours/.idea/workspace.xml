@@ -21,7 +21,7 @@
       <change beforePath="$PROJECT_DIR$/ToursAPI/bin/Debug/net5.0/ToursAPI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/bin/Debug/net5.0/ToursAPI.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/bin/Debug/net5.0/ToursAPI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/bin/Debug/net5.0/ToursAPI.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/bin/Debug/net5.0/ref/ToursAPI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/bin/Debug/net5.0/ref/ToursAPI.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ToursAPI.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ref/ToursAPI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/obj/Debug/net5.0/ref/ToursAPI.dll" afterDir="false" />
@@ -229,6 +229,9 @@
       <workItem from="1635976578374" duration="3692000" />
       <workItem from="1636216532084" duration="14473000" />
       <workItem from="1636236136072" duration="3840000" />
+      <workItem from="1636389963834" duration="1245000" />
+      <workItem from="1636476458582" duration="4473000" />
+      <workItem from="1636484511604" duration="5645000" />
     </task>
     <servers />
   </component>

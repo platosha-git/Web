@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ToursWeb;
@@ -18,35 +19,171 @@ namespace ToursAPI.Controllers
             _userController = userController;
         }
         
-        [Route("Tour")]
+        /*--------------------------------------------------------------
+         *                          Tours
+         * -----------------------------------------------------------*/
+        
         [HttpGet]
-        [ProducesResponseType(typeof(List<Tour>), statusCode: StatusCodes.Status200OK)]
+        [Route("Tours")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Tour>))]
         [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
         public IActionResult GetAllTours()
         {
             var tours = _userController.GetAllTours();
-            if (tours == null) {
+            if (tours == null) 
+            {
+                return NotFound();
+            }
+            return Ok(tours);
+        }
+
+        [HttpGet]
+        [Route("FullTour/{TourID:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FullUserTour))]
+        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        public ActionResult GetFullTour([FromRoute(Name = "TourID")] int tourID)
+        {
+            var fullTour = _userController.GetFullTour(tourID);
+            if (fullTour == null)
+            {
+                return NotFound();
+            }
+            return Ok(fullTour);
+        }
+
+        [HttpGet]
+        [Route("TourByDate/{DateBegin}/{DateEnd}")]
+        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Tour>))]
+        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        public IActionResult GetToursByDate([FromRoute(Name = "DateBegin")] string dBegin, 
+                                            [FromRoute(Name = "DateEnd")] string dEnd)
+        {
+            //01-12-2020    01-12-2021
+            DateTime beg = Convert.ToDateTime(dBegin);
+            DateTime end = Convert.ToDateTime(dEnd);
+            
+            var tours = _userController.GetToursByDate(beg, end);
+            if (tours == null)
+            {
                 return NotFound();
             }
             return Ok(tours);
         }
         
-        /*public FullUserTour GetFullTour(int TID)
-        public List<Tour> GetToursByDate(DateTime beg, DateTime end)
-        public List<Tour> GetToursByCity(string city)
-        */
+        [HttpGet]
+        [Route("TourByCity/{City}")]
+        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Tour>))]
+        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        public IActionResult GetToursByCity([FromRoute(Name = "City")] string city)
+        {
+            var tours = _userController.GetToursByCity("Москва");
+            if (tours == null)
+            {
+                return NotFound();
+            }
+            return Ok(tours);
+        }
 
         /*--------------------------------------------------------------
          *                          Hotels
          * -----------------------------------------------------------*/
-        /*public List<Hotel> GetAllHotels()
-        public Hotel GetHotelByID(int hotelID)
-        public List<Hotel> GetHotelsByCity(string city)
-        public Hotel GetHotelByName(string name)
-        public List<Hotel> GetHotelsByType(string type)
-        public List<Hotel> GetHotelsByClass(int cls)
-        public List<Hotel> GetHotelsBySwimPool(bool sp)
-        */
+        [HttpGet]
+        [Route("Hotels")]
+        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
+        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        public IActionResult GetAllHotels()
+        {
+            var hotels = _userController.GetAllHotels();
+            if (hotels == null)
+            {
+                return NotFound();
+            }
+            return Ok(hotels);
+        }
+        
+        [HttpGet]
+        [Route("HotelByID/{HotelID:int}")]
+        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(Hotel))]
+        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        public IActionResult GetHotelByID([FromRoute(Name = "HotelID")] int hotelID)
+        {
+            var hotel = _userController.GetHotelByID(hotelID);
+            if (hotel == null)
+            {
+                return NotFound();
+            }
+            return Ok(hotel);
+        }
+        
+        [HttpGet]
+        [Route("HotelByCity/{City}")]
+        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
+        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        public IActionResult GetHotelsByCity([FromRoute(Name = "City")] string city)
+        {
+            var hotels = _userController.GetHotelsByCity("Москва");
+            if (hotels == null)
+            {
+                return NotFound();
+            }
+            return Ok(hotels);
+        }
+        
+        [HttpGet]
+        [Route("HotelByName/{Name}")]
+        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(Hotel))]
+        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        public IActionResult GetHotelByName([FromRoute(Name = "Name")] string name)
+        {
+            var hotel = _userController.GetHotelByName(name);
+            if (hotel == null)
+            {
+                return NotFound();
+            }
+            return Ok(hotel);
+        }
+        
+        [HttpGet]
+        [Route("HotelsByType/{Type}")]
+        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
+        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        public IActionResult GetHotelsByType([FromRoute(Name = "Type")] string type)
+        {
+            var hotels = _userController.GetHotelsByType("Апартамент");
+            if (hotels == null)
+            {
+                return NotFound();
+            }
+            return Ok(hotels);
+        }
+        
+        [HttpGet]
+        [Route("HotelsByClass/{Class:int}")]
+        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
+        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        public IActionResult GetHotelsByClass([FromRoute(Name = "Class")] int cls)
+        {
+            var hotels = _userController.GetHotelsByClass(cls);
+            if (hotels == null)
+            {
+                return NotFound();
+            }
+            return Ok(hotels);
+        }
+        
+        [HttpGet]
+        [Route("HotelsBySwimPool/{SP:bool}")]
+        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
+        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        public IActionResult GetHotelsBySwimPool([FromRoute(Name = "SP")] bool sp)
+        {
+            var hotels = _userController.GetHotelsBySwimPool(sp);
+            if (hotels == null)
+            {
+                return NotFound();
+            }
+            return Ok(hotels);
+        }
 
         /*--------------------------------------------------------------
          *                          Food
@@ -57,7 +194,8 @@ namespace ToursAPI.Controllers
         public List<Food> GetFoodByVegMenu(bool vm)
         public List<Food> GetFoodByChildMenu(bool cm)
         public List<Food> GetFoodByBar(bool bar)
-        public Transfer GetTransferByID(int transfID)
+        
+        //public Transfer GetTransferByID(int transfID)
         */
 
         /*--------------------------------------------------------------
