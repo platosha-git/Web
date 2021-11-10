@@ -26,7 +26,7 @@ namespace ToursAPI.Controllers
         [HttpGet]
         [Route("Tours")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Tour>))]
-        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllTours()
         {
             var tours = _userController.GetAllTours();
@@ -40,7 +40,7 @@ namespace ToursAPI.Controllers
         [HttpGet]
         [Route("FullTour/{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FullUserTour))]
-        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult GetFullTour([FromRoute(Name = "TourID")] int tourID)
         {
             var fullTour = _userController.GetFullTour(tourID);
@@ -53,8 +53,8 @@ namespace ToursAPI.Controllers
 
         [HttpGet]
         [Route("TourByDate/{DateBegin}/{DateEnd}")]
-        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Tour>))]
-        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Tour>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetToursByDate([FromRoute(Name = "DateBegin")] string dBegin, 
                                             [FromRoute(Name = "DateEnd")] string dEnd)
         {
@@ -72,8 +72,8 @@ namespace ToursAPI.Controllers
         
         [HttpGet]
         [Route("TourByCity/{City}")]
-        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Tour>))]
-        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Tour>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetToursByCity([FromRoute(Name = "City")] string city)
         {
             var tours = _userController.GetToursByCity("Москва");
@@ -89,8 +89,8 @@ namespace ToursAPI.Controllers
          * -----------------------------------------------------------*/
         [HttpGet]
         [Route("Hotels")]
-        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
-        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllHotels()
         {
             var hotels = _userController.GetAllHotels();
@@ -103,8 +103,8 @@ namespace ToursAPI.Controllers
         
         [HttpGet]
         [Route("HotelByID/{HotelID:int}")]
-        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(Hotel))]
-        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Hotel))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetHotelByID([FromRoute(Name = "HotelID")] int hotelID)
         {
             var hotel = _userController.GetHotelByID(hotelID);
@@ -117,8 +117,8 @@ namespace ToursAPI.Controllers
         
         [HttpGet]
         [Route("HotelByCity/{City}")]
-        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
-        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetHotelsByCity([FromRoute(Name = "City")] string city)
         {
             var hotels = _userController.GetHotelsByCity("Москва");
@@ -131,8 +131,8 @@ namespace ToursAPI.Controllers
         
         [HttpGet]
         [Route("HotelByName/{Name}")]
-        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(Hotel))]
-        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Hotel))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetHotelByName([FromRoute(Name = "Name")] string name)
         {
             var hotel = _userController.GetHotelByName(name);
@@ -145,8 +145,8 @@ namespace ToursAPI.Controllers
         
         [HttpGet]
         [Route("HotelsByType/{Type}")]
-        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
-        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetHotelsByType([FromRoute(Name = "Type")] string type)
         {
             var hotels = _userController.GetHotelsByType("Апартамент");
@@ -159,8 +159,8 @@ namespace ToursAPI.Controllers
         
         [HttpGet]
         [Route("HotelsByClass/{Class:int}")]
-        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
-        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetHotelsByClass([FromRoute(Name = "Class")] int cls)
         {
             var hotels = _userController.GetHotelsByClass(cls);
@@ -173,8 +173,8 @@ namespace ToursAPI.Controllers
         
         [HttpGet]
         [Route("HotelsBySwimPool/{SP:bool}")]
-        [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
-        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetHotelsBySwimPool([FromRoute(Name = "SP")] bool sp)
         {
             var hotels = _userController.GetHotelsBySwimPool(sp);

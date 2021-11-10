@@ -2095,3 +2095,381 @@ WHERE h.swimpool = @__sp_0
 2021-11-09 23:46:22.544 +03:00 [INF] Executed endpoint 'ToursAPI.Controllers.ApiUserController.GetHotelsBySwimPool (ToursAPI)'
 2021-11-09 23:46:22.544 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ApiUser/HotelsBySwimPool/true - - - 200 2162 application/json;+charset=utf-8 3.6064ms
 2021-11-09 23:46:39.673 +03:00 [INF] Application is shutting down...
+2021-11-10 01:03:54.766 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-10 01:03:58.874 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-10 01:03:58.875 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-10 01:03:58.875 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-10 01:03:58.875 +03:00 [INF] Hosting environment: Development
+2021-11-10 01:03:58.875 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-10 01:04:29.134 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-10 01:04:29.727 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 594.6146ms
+2021-11-10 01:04:30.190 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-10 01:04:30.520 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 330.9379ms
+2021-11-10 01:04:32.605 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-10 01:04:32.630 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-10 01:04:32.630 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-10 01:04:33.003 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-10 01:04:33.003 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-10 01:04:33.008 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 378.1463ms
+2021-11-10 01:04:33.008 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 403.7935ms
+2021-11-10 01:04:33.858 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-10 01:04:33.858 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 1228.3080ms
+2021-11-10 01:04:35.872 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-10 01:04:36.142 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 270.2791ms
+2021-11-10 01:05:27.705 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ApiUser/HotelsBySwimPool/true - -
+2021-11-10 01:05:27.881 +03:00 [INF] Executing endpoint 'ToursAPI.Controllers.ApiUserController.GetHotelsBySwimPool (ToursAPI)'
+2021-11-10 01:05:28.064 +03:00 [INF] Route matched with {action = "GetHotelsBySwimPool", controller = "ApiUser"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHotelsBySwimPool(Boolean) on controller ToursAPI.Controllers.ApiUserController (ToursAPI).
+2021-11-10 01:05:30.703 +03:00 [INF] Entity Framework Core 5.0.11 initialized 'ToursContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+2021-11-10 01:05:32.270 +03:00 [INF] Executed DbCommand (45ms) [Parameters=[@__sp_0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SELECT h.hotelid, h.city, h.class, h.cost, h.name, h.swimpool, h.type
+FROM hotel AS h
+WHERE h.swimpool = @__sp_0
+2021-11-10 01:05:32.412 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ToursWeb.Hotel, ToursWeb, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-11-10 01:05:32.623 +03:00 [INF] Executed action ToursAPI.Controllers.ApiUserController.GetHotelsBySwimPool (ToursAPI) in 4549.6445ms
+2021-11-10 01:05:32.623 +03:00 [INF] Executed endpoint 'ToursAPI.Controllers.ApiUserController.GetHotelsBySwimPool (ToursAPI)'
+2021-11-10 01:05:32.631 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ApiUser/HotelsBySwimPool/true - - - 200 2162 application/json;+charset=utf-8 4925.9060ms
+2021-11-10 01:05:55.216 +03:00 [INF] Application is shutting down...
+2021-11-10 01:12:30.317 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-10 01:12:51.036 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-10 01:12:51.037 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-10 01:12:51.038 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-10 01:12:51.038 +03:00 [INF] Hosting environment: Development
+2021-11-10 01:12:51.038 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-10 01:13:02.729 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-10 01:13:03.173 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 445.9277ms
+2021-11-10 01:13:03.581 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-10 01:13:03.838 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 256.8918ms
+2021-11-10 01:13:06.669 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-10 01:13:06.669 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-10 01:13:06.672 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-10 01:13:06.921 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-10 01:13:06.984 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-10 01:13:07.059 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 390.0628ms
+2021-11-10 01:13:07.060 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 388.1589ms
+2021-11-10 01:13:07.407 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-10 01:13:07.408 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 738.4967ms
+2021-11-10 01:13:11.366 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-10 01:13:11.598 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 232.5574ms
+2021-11-10 01:13:22.873 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ApiManager/Users - -
+2021-11-10 01:13:22.943 +03:00 [INF] Executing endpoint 'ToursAPI.Controllers.ApiManagerController.GetAllUsers (ToursAPI)'
+2021-11-10 01:13:22.979 +03:00 [INF] Route matched with {action = "GetAllUsers", controller = "ApiManager"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllUsers() on controller ToursAPI.Controllers.ApiManagerController (ToursAPI).
+2021-11-10 01:13:25.941 +03:00 [INF] Entity Framework Core 5.0.11 initialized 'ToursContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+2021-11-10 01:13:28.458 +03:00 [INF] Executed DbCommand (137ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u.userid, u.accesslevel, u.login, u.password, u.toursid
+FROM users AS u
+2021-11-10 01:13:28.600 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ToursWeb.User, ToursWeb, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-11-10 01:13:28.871 +03:00 [INF] Executed action ToursAPI.Controllers.ApiManagerController.GetAllUsers (ToursAPI) in 5850.3841ms
+2021-11-10 01:13:28.871 +03:00 [INF] Executed endpoint 'ToursAPI.Controllers.ApiManagerController.GetAllUsers (ToursAPI)'
+2021-11-10 01:13:28.876 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ApiManager/Users - - - 200 1661 application/json;+charset=utf-8 6002.8480ms
+2021-11-10 01:13:44.541 +03:00 [INF] Application is shutting down...
+2021-11-10 01:16:39.872 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-10 01:16:40.941 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-10 01:16:40.941 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-10 01:16:40.942 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-10 01:16:40.942 +03:00 [INF] Hosting environment: Development
+2021-11-10 01:16:40.942 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-10 01:16:47.981 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-10 01:16:48.037 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 58.7084ms
+2021-11-10 01:16:48.056 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-10 01:16:48.154 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 97.3525ms
+2021-11-10 01:16:48.364 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-10 01:16:48.380 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-10 01:16:48.380 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-10 01:16:48.557 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-10 01:16:48.557 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-10 01:16:48.557 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-10 01:16:48.565 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 185.1749ms
+2021-11-10 01:16:48.565 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 201.7784ms
+2021-11-10 01:16:48.565 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 185.1023ms
+2021-11-10 01:16:49.109 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-10 01:16:49.346 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 237.5678ms
+2021-11-10 01:16:58.931 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ApiManager/Tour/1 - -
+2021-11-10 01:16:58.995 +03:00 [INF] Executing endpoint 'ToursAPI.Controllers.ApiManagerController.GetTourById (ToursAPI)'
+2021-11-10 01:16:59.041 +03:00 [INF] Route matched with {action = "GetTourById", controller = "ApiManager"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTourById(Int32) on controller ToursAPI.Controllers.ApiManagerController (ToursAPI).
+2021-11-10 01:17:00.837 +03:00 [INF] Entity Framework Core 5.0.11 initialized 'ToursContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+2021-11-10 01:17:02.715 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.tourid, t.cost, t.datebegin, t.dateend, t.food, t.hotel, t.transfer
+FROM tour AS t
+WHERE t.tourid = @__p_0
+LIMIT 1
+2021-11-10 01:17:02.840 +03:00 [INF] Executing OkObjectResult, writing value of type 'ToursWeb.Tour'.
+2021-11-10 01:17:03.033 +03:00 [INF] Executed action ToursAPI.Controllers.ApiManagerController.GetTourById (ToursAPI) in 3983.8946ms
+2021-11-10 01:17:03.035 +03:00 [INF] Executed endpoint 'ToursAPI.Controllers.ApiManagerController.GetTourById (ToursAPI)'
+2021-11-10 01:17:03.043 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ApiManager/Tour/1 - - - 200 197 application/json;+charset=utf-8 4111.9917ms
+2021-11-10 01:17:07.839 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ApiManager/Tour/2 - -
+2021-11-10 01:17:07.845 +03:00 [INF] Executing endpoint 'ToursAPI.Controllers.ApiManagerController.GetTourById (ToursAPI)'
+2021-11-10 01:17:07.846 +03:00 [INF] Route matched with {action = "GetTourById", controller = "ApiManager"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTourById(Int32) on controller ToursAPI.Controllers.ApiManagerController (ToursAPI).
+2021-11-10 01:17:07.897 +03:00 [INF] Entity Framework Core 5.0.11 initialized 'ToursContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+2021-11-10 01:17:07.914 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.tourid, t.cost, t.datebegin, t.dateend, t.food, t.hotel, t.transfer
+FROM tour AS t
+WHERE t.tourid = @__p_0
+LIMIT 1
+2021-11-10 01:17:07.915 +03:00 [INF] Executing OkObjectResult, writing value of type 'ToursWeb.Tour'.
+2021-11-10 01:17:07.916 +03:00 [INF] Executed action ToursAPI.Controllers.ApiManagerController.GetTourById (ToursAPI) in 69.6506ms
+2021-11-10 01:17:07.916 +03:00 [INF] Executed endpoint 'ToursAPI.Controllers.ApiManagerController.GetTourById (ToursAPI)'
+2021-11-10 01:17:07.917 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ApiManager/Tour/2 - - - 200 197 application/json;+charset=utf-8 77.6452ms
+2021-11-10 01:17:11.780 +03:00 [INF] Application is shutting down...
+2021-11-10 13:14:01.100 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-10 13:14:11.999 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-10 13:14:11.999 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-10 13:14:11.999 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-10 13:14:11.999 +03:00 [INF] Hosting environment: Development
+2021-11-10 13:14:11.999 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-10 13:14:27.007 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-10 13:14:27.357 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 350.9289ms
+2021-11-10 13:14:27.368 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-10 13:14:27.563 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 195.0605ms
+2021-11-10 13:14:27.766 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-10 13:14:27.777 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-10 13:14:27.778 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-10 13:14:27.936 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-10 13:14:27.936 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-10 13:14:27.940 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 162.4194ms
+2021-11-10 13:14:27.940 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 174.6499ms
+2021-11-10 13:14:28.149 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-10 13:14:28.149 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 372.7991ms
+2021-11-10 13:14:28.730 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-10 13:14:29.063 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 332.8200ms
+2021-11-10 13:15:54.759 +03:00 [INF] Request starting HTTP/2 POST https://localhost:5001/ApiManager/Tour/23000/10-11-2020/20-11-2020 - 0
+2021-11-10 13:15:54.811 +03:00 [INF] Executing endpoint 'ToursAPI.Controllers.ApiManagerController.AddTour (ToursAPI)'
+2021-11-10 13:15:54.856 +03:00 [INF] Route matched with {action = "AddTour", controller = "ApiManager"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddTour(Int32, System.String, System.String) on controller ToursAPI.Controllers.ApiManagerController (ToursAPI).
+2021-11-10 13:15:57.432 +03:00 [INF] Entity Framework Core 5.0.11 initialized 'ToursContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+2021-11-10 13:15:59.917 +03:00 [INF] Executed DbCommand (243ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)::INT
+FROM tour AS t
+2021-11-10 13:16:00.360 +03:00 [INF] Executed DbCommand (136ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Date), @p3='?' (DbType = Date), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO tour (tourid, cost, datebegin, dateend, food, hotel, transfer)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2021-11-10 13:16:00.458 +03:00 [INF] +TourRep : Tour 31 was added to Tours
+2021-11-10 13:16:00.480 +03:00 [INF] Executing HttpStatusCodeResult, setting HTTP status code 200
+2021-11-10 13:16:00.496 +03:00 [INF] Executed action ToursAPI.Controllers.ApiManagerController.AddTour (ToursAPI) in 5625.2536ms
+2021-11-10 13:16:00.496 +03:00 [INF] Executed endpoint 'ToursAPI.Controllers.ApiManagerController.AddTour (ToursAPI)'
+2021-11-10 13:16:00.504 +03:00 [INF] Request finished HTTP/2 POST https://localhost:5001/ApiManager/Tour/23000/10-11-2020/20-11-2020 - 0 - 200 0 - 5745.2327ms
+2021-11-10 13:17:01.692 +03:00 [INF] Application is shutting down...
+2021-11-10 13:31:37.712 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-10 13:31:42.019 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-10 13:31:42.019 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-10 13:31:42.019 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-10 13:31:42.020 +03:00 [INF] Hosting environment: Development
+2021-11-10 13:31:42.020 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-10 13:31:47.388 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-10 13:31:47.705 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 319.6066ms
+2021-11-10 13:31:47.709 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-10 13:31:47.915 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 205.4662ms
+2021-11-10 13:31:47.998 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-10 13:31:48.003 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-10 13:31:48.004 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-10 13:31:48.813 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-10 13:31:48.814 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 816.2025ms
+2021-11-10 13:31:48.819 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-10 13:31:48.836 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 832.3954ms
+2021-11-10 13:31:48.992 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-10 13:31:48.993 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 989.2092ms
+2021-11-10 13:31:49.816 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-10 13:31:50.236 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 420.3114ms
+2021-11-10 13:32:19.741 +03:00 [INF] Request starting HTTP/2 POST https://localhost:5001/ApiManager/AddHotel/NewHotel/5/true/23000 - 0
+2021-11-10 13:32:19.793 +03:00 [INF] Executing endpoint 'ToursAPI.Controllers.ApiManagerController.AddHotel (ToursAPI)'
+2021-11-10 13:32:19.838 +03:00 [INF] Route matched with {action = "AddHotel", controller = "ApiManager"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddHotel(System.String, Int32, Boolean, Int32) on controller ToursAPI.Controllers.ApiManagerController (ToursAPI).
+2021-11-10 13:32:22.088 +03:00 [INF] Entity Framework Core 5.0.11 initialized 'ToursContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+2021-11-10 13:32:23.462 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)::INT
+FROM hotel AS h
+2021-11-10 13:32:23.878 +03:00 [INF] Executed DbCommand (99ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?', @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?', @p5='?' (DbType = Boolean), @p6='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO hotel (hotelid, city, class, cost, name, swimpool, type)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2021-11-10 13:32:23.920 +03:00 [INF] +HotelRep : Hotel 31 was added to Hotels
+2021-11-10 13:32:23.937 +03:00 [INF] Executing HttpStatusCodeResult, setting HTTP status code 200
+2021-11-10 13:32:23.945 +03:00 [INF] Executed action ToursAPI.Controllers.ApiManagerController.AddHotel (ToursAPI) in 4099.5386ms
+2021-11-10 13:32:23.946 +03:00 [INF] Executed endpoint 'ToursAPI.Controllers.ApiManagerController.AddHotel (ToursAPI)'
+2021-11-10 13:32:23.954 +03:00 [INF] Request finished HTTP/2 POST https://localhost:5001/ApiManager/AddHotel/NewHotel/5/true/23000 - 0 - 200 0 - 4212.9019ms
+2021-11-10 13:32:35.852 +03:00 [INF] Application is shutting down...
+2021-11-10 13:37:28.146 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-10 13:37:28.972 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-10 13:37:28.973 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-10 13:37:28.973 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-10 13:37:28.973 +03:00 [INF] Hosting environment: Development
+2021-11-10 13:37:28.973 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-10 13:37:33.647 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-10 13:37:33.862 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 219.7089ms
+2021-11-10 13:37:34.300 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-10 13:37:34.470 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-10 13:37:34.471 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 170.7470ms
+2021-11-10 13:37:41.857 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-10 13:37:41.862 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 4.6320ms
+2021-11-10 13:37:41.971 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-10 13:37:41.973 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 1.4080ms
+2021-11-10 13:37:42.000 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-10 13:37:42.002 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-10 13:37:42.002 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-10 13:37:42.009 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-10 13:37:42.014 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 13.5499ms
+2021-11-10 13:37:42.089 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-10 13:37:42.090 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 88.0628ms
+2021-11-10 13:37:42.227 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-10 13:37:42.228 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 226.2435ms
+2021-11-10 13:37:42.500 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-10 13:37:42.611 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/favicon-32x32.png - -
+2021-11-10 13:37:42.612 +03:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2021-11-10 13:37:42.613 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/favicon-32x32.png - - - 200 628 image/png 1.4972ms
+2021-11-10 13:37:42.822 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 322.4799ms
+2021-11-10 13:37:50.628 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ApiManager/Tour - -
+2021-11-10 13:37:50.680 +03:00 [INF] Executing endpoint 'ToursAPI.Controllers.ApiManagerController.GetHotelByID (ToursAPI)'
+2021-11-10 13:37:50.738 +03:00 [INF] Route matched with {action = "GetHotelByID", controller = "ApiManager"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHotelByID() on controller ToursAPI.Controllers.ApiManagerController (ToursAPI).
+2021-11-10 13:37:52.999 +03:00 [INF] Entity Framework Core 5.0.11 initialized 'ToursContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+2021-11-10 13:37:54.480 +03:00 [INF] Executed DbCommand (39ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT h.hotelid, h.city, h.class, h.cost, h.name, h.swimpool, h.type
+FROM hotel AS h
+WHERE h.hotelid = @__p_0
+LIMIT 1
+2021-11-10 13:37:54.618 +03:00 [INF] Executing OkObjectResult, writing value of type 'ToursWeb.Hotel'.
+2021-11-10 13:37:54.924 +03:00 [INF] Executed action ToursAPI.Controllers.ApiManagerController.GetHotelByID (ToursAPI) in 4175.3847ms
+2021-11-10 13:37:54.924 +03:00 [INF] Executed endpoint 'ToursAPI.Controllers.ApiManagerController.GetHotelByID (ToursAPI)'
+2021-11-10 13:37:54.932 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ApiManager/Tour - - - 200 124 application/json;+charset=utf-8 4303.8787ms
+2021-11-10 13:38:02.485 +03:00 [INF] Application is shutting down...
+2021-11-10 13:40:02.272 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-10 13:40:03.311 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-10 13:40:03.311 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-10 13:40:03.312 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-10 13:40:03.312 +03:00 [INF] Hosting environment: Development
+2021-11-10 13:40:03.312 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-10 13:40:06.555 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-10 13:40:07.150 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 597.9242ms
+2021-11-10 13:40:07.154 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-10 13:40:07.308 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 153.6217ms
+2021-11-10 13:40:07.343 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-10 13:40:07.343 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-10 13:40:07.345 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-10 13:40:07.482 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-10 13:40:07.483 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-10 13:40:07.484 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 138.6946ms
+2021-11-10 13:40:07.484 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-10 13:40:07.494 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 150.5902ms
+2021-11-10 13:40:07.494 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 151.2148ms
+2021-11-10 13:40:07.758 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-10 13:40:08.093 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 335.3586ms
+2021-11-10 13:40:12.686 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ApiManager/Tour - -
+2021-11-10 13:40:12.739 +03:00 [INF] Executing endpoint 'ToursAPI.Controllers.ApiManagerController.GetHotelByID (ToursAPI)'
+2021-11-10 13:40:12.772 +03:00 [INF] Route matched with {action = "GetHotelByID", controller = "ApiManager"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHotelByID() on controller ToursAPI.Controllers.ApiManagerController (ToursAPI).
+2021-11-10 13:40:15.096 +03:00 [INF] Entity Framework Core 5.0.11 initialized 'ToursContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+2021-11-10 13:40:16.885 +03:00 [INF] Executed DbCommand (32ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT h.hotelid, h.city, h.class, h.cost, h.name, h.swimpool, h.type
+FROM hotel AS h
+WHERE h.hotelid = @__p_0
+LIMIT 1
+2021-11-10 13:40:17.027 +03:00 [INF] Executing OkObjectResult, writing value of type 'ToursWeb.Hotel'.
+2021-11-10 13:40:17.295 +03:00 [INF] Executed action ToursAPI.Controllers.ApiManagerController.GetHotelByID (ToursAPI) in 4510.8989ms
+2021-11-10 13:40:17.295 +03:00 [INF] Executed endpoint 'ToursAPI.Controllers.ApiManagerController.GetHotelByID (ToursAPI)'
+2021-11-10 13:40:17.304 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ApiManager/Tour - - - 200 124 application/json;+charset=utf-8 4618.0415ms
+2021-11-10 13:40:37.208 +03:00 [INF] Application is shutting down...
+2021-11-10 13:44:32.938 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-10 13:44:33.902 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-10 13:44:33.903 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-10 13:44:33.903 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-10 13:44:33.903 +03:00 [INF] Hosting environment: Development
+2021-11-10 13:44:33.903 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-10 13:44:36.351 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-10 13:44:36.418 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 69.2936ms
+2021-11-10 13:44:36.424 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-10 13:44:36.531 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 107.4580ms
+2021-11-10 13:44:36.568 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-10 13:44:36.569 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-10 13:44:36.569 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-10 13:44:36.636 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-10 13:44:36.637 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-10 13:44:36.639 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-10 13:44:36.643 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 74.3021ms
+2021-11-10 13:44:36.644 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 74.9657ms
+2021-11-10 13:44:36.644 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 76.0340ms
+2021-11-10 13:44:36.927 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-10 13:44:37.110 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 182.7294ms
+2021-11-10 13:44:41.200 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ApiManager/Tour - -
+2021-11-10 13:44:41.250 +03:00 [INF] Executing endpoint 'ToursAPI.Controllers.ApiManagerController.GetHotelByID (ToursAPI)'
+2021-11-10 13:44:41.286 +03:00 [INF] Route matched with {action = "GetHotelByID", controller = "ApiManager"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHotelByID() on controller ToursAPI.Controllers.ApiManagerController (ToursAPI).
+2021-11-10 13:44:43.003 +03:00 [INF] Entity Framework Core 5.0.11 initialized 'ToursContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+2021-11-10 13:44:44.391 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT h.hotelid, h.city, h.class, h.cost, h.name, h.swimpool, h.type
+FROM hotel AS h
+WHERE h.hotelid = @__p_0
+LIMIT 1
+2021-11-10 13:44:44.534 +03:00 [INF] Executing OkObjectResult, writing value of type 'ToursWeb.Hotel'.
+2021-11-10 13:44:44.745 +03:00 [INF] Executed action ToursAPI.Controllers.ApiManagerController.GetHotelByID (ToursAPI) in 3447.1131ms
+2021-11-10 13:44:44.746 +03:00 [INF] Executed endpoint 'ToursAPI.Controllers.ApiManagerController.GetHotelByID (ToursAPI)'
+2021-11-10 13:44:44.754 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ApiManager/Tour - - - 200 124 application/json;+charset=utf-8 3553.9811ms
+2021-11-10 13:44:48.869 +03:00 [INF] Application is shutting down...
+2021-11-10 13:49:48.473 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-10 13:49:49.220 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-10 13:49:49.221 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-10 13:49:49.221 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-10 13:49:49.221 +03:00 [INF] Hosting environment: Development
+2021-11-10 13:49:49.223 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-10 13:49:53.638 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-10 13:49:53.703 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 67.7844ms
+2021-11-10 13:49:53.819 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-10 13:49:53.984 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 164.7919ms
+2021-11-10 13:49:54.016 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-10 13:49:54.017 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-10 13:49:54.016 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-10 13:49:54.141 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-10 13:49:54.143 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-10 13:49:54.143 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-10 13:49:54.150 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 133.1139ms
+2021-11-10 13:49:54.150 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 134.2664ms
+2021-11-10 13:49:54.150 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 134.2090ms
+2021-11-10 13:49:54.383 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-10 13:49:54.565 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 182.3602ms
+2021-11-10 13:50:17.611 +03:00 [INF] Request starting HTTP/2 POST https://localhost:5001/ApiManager/AddFood/true/true/true/1100 - 0
+2021-11-10 13:50:17.677 +03:00 [INF] Executing endpoint 'ToursAPI.Controllers.ApiManagerController.AddFood (ToursAPI)'
+2021-11-10 13:50:17.728 +03:00 [INF] Route matched with {action = "AddFood", controller = "ApiManager"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddFood(Boolean, Boolean, Boolean, Int32) on controller ToursAPI.Controllers.ApiManagerController (ToursAPI).
+2021-11-10 13:50:19.641 +03:00 [INF] Entity Framework Core 5.0.11 initialized 'ToursContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+2021-11-10 13:50:21.031 +03:00 [INF] Executed DbCommand (141ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)::INT
+FROM food AS f
+2021-11-10 13:50:21.393 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Boolean), @p2='?', @p3='?' (DbType = Boolean), @p4='?' (DbType = Int32), @p5='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO food (foodid, bar, category, childrenmenu, cost, vegmenu)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2021-11-10 13:50:21.489 +03:00 [INF] +FoodRep : Food 31 was added to Food
+2021-11-10 13:50:21.509 +03:00 [INF] Executing HttpStatusCodeResult, setting HTTP status code 200
+2021-11-10 13:50:21.523 +03:00 [INF] Executed action ToursAPI.Controllers.ApiManagerController.AddFood (ToursAPI) in 3781.577ms
+2021-11-10 13:50:21.524 +03:00 [INF] Executed endpoint 'ToursAPI.Controllers.ApiManagerController.AddFood (ToursAPI)'
+2021-11-10 13:50:21.530 +03:00 [INF] Request finished HTTP/2 POST https://localhost:5001/ApiManager/AddFood/true/true/true/1100 - 0 - 200 0 - 3919.2906ms
+2021-11-10 13:50:34.473 +03:00 [INF] Application is shutting down...
+2021-11-10 13:54:51.466 +03:00 [INF] User profile is available. Using '/home/platosha/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-10 13:54:51.938 +03:00 [INF] Now listening on: https://localhost:5001
+2021-11-10 13:54:51.938 +03:00 [INF] Now listening on: http://localhost:5000
+2021-11-10 13:54:51.939 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-10 13:54:51.939 +03:00 [INF] Hosting environment: Development
+2021-11-10 13:54:51.939 +03:00 [INF] Content root path: /home/platosha/Desktop/BMSTU/7sem/Web/source/Tours/ToursAPI
+2021-11-10 13:54:53.287 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger - -
+2021-11-10 13:54:53.343 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 59.6038ms
+2021-11-10 13:54:53.352 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-11-10 13:54:53.468 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 116.3407ms
+2021-11-10 13:54:53.537 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - -
+2021-11-10 13:54:53.538 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - -
+2021-11-10 13:54:53.539 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - -
+2021-11-10 13:54:53.609 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-10 13:54:53.613 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-10 13:54:53.613 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-10 13:54:53.616 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 78.6128ms
+2021-11-10 13:54:53.616 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 77.2825ms
+2021-11-10 13:54:53.617 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 78.9701ms
+2021-11-10 13:54:53.856 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-11-10 13:54:54.035 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 178.6548ms
+2021-11-10 13:55:08.032 +03:00 [INF] Request starting HTTP/2 POST https://localhost:5001/ApiManager/UpdateTour/31/11000 - 0
+2021-11-10 13:55:08.088 +03:00 [INF] Executing endpoint 'ToursAPI.Controllers.ApiManagerController.AddTour (ToursAPI)'
+2021-11-10 13:55:08.136 +03:00 [INF] Route matched with {action = "AddTour", controller = "ApiManager"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddTour(Int32, Int32) on controller ToursAPI.Controllers.ApiManagerController (ToursAPI).
+2021-11-10 13:55:09.970 +03:00 [INF] Entity Framework Core 5.0.11 initialized 'ToursContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+2021-11-10 13:55:11.391 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.tourid, t.cost, t.datebegin, t.dateend, t.food, t.hotel, t.transfer
+FROM tour AS t
+WHERE t.tourid = @__p_0
+LIMIT 1
+2021-11-10 13:55:11.691 +03:00 [INF] Executed DbCommand (20ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (DbType = Date), @p2='?' (DbType = Date), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE tour SET cost = @p0, datebegin = @p1, dateend = @p2, food = @p3, hotel = @p4, transfer = @p5
+WHERE tourid = @p6;
+2021-11-10 13:55:11.726 +03:00 [INF] +TourRep : Tours 31 was updated at Tours
+2021-11-10 13:55:11.734 +03:00 [INF] Executing HttpStatusCodeResult, setting HTTP status code 200
+2021-11-10 13:55:11.747 +03:00 [INF] Executed action ToursAPI.Controllers.ApiManagerController.AddTour (ToursAPI) in 3598.9317ms
+2021-11-10 13:55:11.748 +03:00 [INF] Executed endpoint 'ToursAPI.Controllers.ApiManagerController.AddTour (ToursAPI)'
+2021-11-10 13:55:11.756 +03:00 [INF] Request finished HTTP/2 POST https://localhost:5001/ApiManager/UpdateTour/31/11000 - 0 - 200 0 - 3724.2889ms
+2021-11-10 13:55:38.086 +03:00 [INF] Application is shutting down...

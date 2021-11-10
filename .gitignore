@@ -678,10 +678,10 @@ TSWLatexianTemp*
 # xwatermark package
 *.xwm
 
-*/Logfile.txt
+*LogFile.txt
 
 *.cache
-bin/
-obj/
+*bin/
+*obj/
 *.idea
 *.dll

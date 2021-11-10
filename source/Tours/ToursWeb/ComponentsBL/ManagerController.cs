@@ -5,19 +5,19 @@ namespace ToursWeb.ComponentsBL
 {
     public class ManagerController : UserController
     {
-        protected IUsersRepository usersRepository;
+        private readonly IUsersRepository _usersRepository;
         
         public ManagerController(ITourRepository tourRep, IHotelRepository hotelRep, IFoodRepository foodRep,
                                 ITransferRepository transferRep, IBusRepository busRep, IPlaneRepository planeRep, ITrainRepository trainRep,
                                 IUsersRepository usersRep, IFunctionsRepository funcRep) :
             base(tourRep, hotelRep, foodRep, transferRep, busRep, planeRep, trainRep, funcRep)
         {
-            usersRepository = usersRep;
+            _usersRepository = usersRep;
         }
 
         public List<User> GetAllUsers()
         {
-            return usersRepository.FindAll();
+            return _usersRepository.FindAll();
         }
         public Tour GetTourByID(int tourID)
         {
