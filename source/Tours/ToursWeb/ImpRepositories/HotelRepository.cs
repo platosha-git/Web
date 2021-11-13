@@ -53,11 +53,11 @@ namespace ToursWeb.ImpRepositories
 
                 _db.Hotels.Update(uHotel);
                 _db.SaveChanges();
-                _logger.LogInformation("+HotelRep : Hotel {Number} was added to Hotels", obj.Hotelid);
+                _logger.LogInformation("+HotelRep : Hotel {Number} was updated in Hotels", obj.Hotelid);
             }
             catch (Exception err)
             {
-                _logger.LogError(err, "+HotelRep : Error trying to add hotel to Hotels");
+                _logger.LogError(err, "+HotelRep : Error trying to update hotel in Hotels");
             }
         }
 

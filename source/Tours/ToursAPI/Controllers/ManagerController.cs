@@ -117,7 +117,7 @@ namespace ToursAPI.Controllers
         [Route("UpdateTour/{TourID:int}/{Cost:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult AddTour([FromRoute(Name = "TourID")] int tourID,
+        public IActionResult UpdateTour([FromRoute(Name = "TourID")] int tourID,
             [FromRoute(Name = "Cost")] int cost)
         {
             Tour tour = _managerController.GetTourByID(tourID);
@@ -137,18 +137,100 @@ namespace ToursAPI.Controllers
             return Ok();
         }
         
-        /*public void UpdateTour(Tour ntour)
-        public void UpdateHotel(Hotel nhotel)
-        public void UpdateFood(Food nfood)
-        */
+        [HttpPost]
+        [Route("UpdateHotel/{HotelID:int}/{Cost:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult UpdateHotel([FromRoute(Name = "HotelID")] int hotelID,
+            [FromRoute(Name = "Cost")] int cost)
+        {
+            Hotel hotel = _managerController.GetHotelByID(hotelID);
+
+            if (hotel == null)
+            {
+                return NotFound();
+            }
+
+            hotel.Cost = cost;
+            _managerController.UpdateHotel(hotel);
+            
+            if (_managerController.GetHotelByID(hotelID).Cost != cost) 
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+        
+        [HttpPost]
+        [Route("UpdateFood/{FoodID:int}/{Cost:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult UpdateFood([FromRoute(Name = "FoodID")] int foodID,
+            [FromRoute(Name = "Cost")] int cost)
+        {
+            Food food = _managerController.GetFoodByID(foodID);
+
+            if (food == null)
+            {
+                return NotFound();
+            }
+
+            food.Cost = cost;
+            _managerController.UpdateFood(food);
+            
+            if (_managerController.GetFoodByID(foodID).Cost != cost) 
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
 
         /*--------------------------------------------------------------
          *                          Delete
          * -----------------------------------------------------------*/
-        /*public void DeleteTourByID(int tourID)
-        public void DeleteHotelByID(int hotelID)
-        public void DeleteHotelByName(string name)
-        public void DeleteFoodByID(int foodID)
-        */
+        [HttpDelete]
+        [Route("DeleteTour/{TourID:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult DeleteTour([FromRoute(Name = "TourID")] int tourID)
+        {
+            _managerController.DeleteTourByID(tourID);
+
+            if (_managerController.GetTourByID(tourID) != null) 
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+        
+        [HttpDelete]
+        [Route("DeleteHotel/{HotelID:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult DeleteHotel([FromRoute(Name = "HotelID")] int hotelID)
+        {
+            _managerController.DeleteHotelByID(hotelID);
+
+            if (_managerController.GetHotelByID(hotelID) != null) 
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+        
+        [HttpDelete]
+        [Route("DeleteFood/{FoodID:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult DeleteFood([FromRoute(Name = "FoodID")] int foodID)
+        {
+            _managerController.DeleteFoodByID(foodID);
+
+            if (_managerController.GetFoodByID(foodID) != null) 
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
     }
 }
