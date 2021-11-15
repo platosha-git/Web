@@ -1,4 +1,3 @@
-using System;
 using ToursWeb.ModelsDB;
 
 namespace ToursAPI.ModelsDTO

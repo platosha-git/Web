@@ -16,9 +16,12 @@
   <component name="ChangeListManager">
     <list default="true" id="7b08addc-33cb-4e41-86c2-2b90f7f80639" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/FoodController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/FoodController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/ManagerController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/TouristController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/TransferManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/UserController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Food.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Food.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/Controllers/FoodController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Controllers/FoodController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +44,6 @@
     <setting file="file://$PROJECT_DIR$/ToursWeb/ImpRepositories/FoodRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ToursAPI/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ToursWeb/ImpRepositories/BusRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ToursAPI/Controllers/UserController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ToursWeb/Repositories/CrudRepository.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1zgLU1aO970WhBhfmH4Kuey3cRB" />
@@ -227,7 +229,7 @@
       <workItem from="1636815596453" duration="2835000" />
       <workItem from="1636979943298" duration="8050000" />
       <workItem from="1636992557329" duration="10039000" />
-      <workItem from="1637007851949" duration="10107000" />
+      <workItem from="1637007851949" duration="11099000" />
     </task>
     <servers />
   </component>

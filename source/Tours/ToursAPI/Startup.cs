@@ -96,17 +96,11 @@ namespace ToursAPI
 
         private static void AddControllers(IServiceCollection services)
         {
-            /*services.AddScoped<UserController>();
-            services.AddScoped<GuestController>();
-            services.AddScoped<TouristController>();
-            services.AddScoped<ManagerController>();
-            services.AddScoped<TransferManagerController>();
-            */
-
             services.AddScoped<TourController>();
             services.AddScoped<HotelRepository>();
             services.AddScoped<FoodController>();
             services.AddScoped<HotelController>();
+            services.AddScoped<FullUserTourController>();
         }
     }
 }
