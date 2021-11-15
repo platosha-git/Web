@@ -76,7 +76,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetToursByCity([FromRoute(Name = "City")] string city)
         {
-            var tours = _userController.GetToursByCity("Москва");
+            var tours = _userController.GetToursByCity(city);
             if (tours == null)
             {
                 return NotFound();
@@ -121,7 +121,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetHotelsByCity([FromRoute(Name = "City")] string city)
         {
-            var hotels = _userController.GetHotelsByCity("Москва");
+            var hotels = _userController.GetHotelsByCity(city);
             if (hotels == null)
             {
                 return NotFound();
@@ -149,7 +149,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetHotelsByType([FromRoute(Name = "Type")] string type)
         {
-            var hotels = _userController.GetHotelsByType("Апартамент");
+            var hotels = _userController.GetHotelsByType(type);
             if (hotels == null)
             {
                 return NotFound();
@@ -188,44 +188,46 @@ namespace ToursAPI.Controllers
         /*--------------------------------------------------------------
          *                          Food
          * -----------------------------------------------------------*/
-        /*public List<Food> GetAllFood()
-        public Food GetFoodByID(int foodID)
-        public List<Food> GetFoodByCategory(string cat)
-        public List<Food> GetFoodByVegMenu(bool vm)
-        public List<Food> GetFoodByChildMenu(bool cm)
-        public List<Food> GetFoodByBar(bool bar)
+        [HttpGet]
+        [Route("Food")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Food>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetAllFood()
+        {
+            var food = _userController.GetAllFood();
+            if (food == null)
+            {
+                return NotFound();
+            }
+            return Ok(food);
+        }
         
-        //public Transfer GetTransferByID(int transfID)
-        */
-
-        /*--------------------------------------------------------------
-         *                          BusTicket
-         * -----------------------------------------------------------*/
-        /*public List<Busticket> GetAllBuses()
-        public Busticket GetBusByID(int busID)
-        public List<Busticket> GetBusesByCityFrom(string city)
-        public List<Busticket> GetBusesByCityTo(string city)
-        public List<Busticket> GetBusesByDate(DateTime date)
-        */
-
-        /*--------------------------------------------------------------
-         *                          PlaneTicket
-         * -----------------------------------------------------------*/
-        /*public List<Planeticket> GetAllPlanes()
-        public Planeticket GetPlaneByID(int planeID)
-        public List<Planeticket> GetPlanesByCityFrom(string city)
-        public List<Planeticket> GetPlanesByCityTo(string city)
-        public List<Planeticket> GetPlanesByDate(DateTime date)
-        */
-
-        /*--------------------------------------------------------------
-         *                          TrainTicket
-         * -----------------------------------------------------------*/
-        /*public List<Trainticket> GetAllTrains()
-        public Trainticket GetTrainByID(int trainID)
-        public List<Trainticket> GetTrainsByCityFrom(string city)
-        public List<Trainticket> GetTrainsByCityTo(string city)
-        public List<Trainticket> GetTrainsByDate(DateTime date)
-        */
+        [HttpGet]
+        [Route("FoodByID/{FoodID:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Food))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetFoodByID([FromRoute(Name = "FoodID")] int foodID)
+        {
+            var food = _userController.GetFoodByID(foodID);
+            if (food == null)
+            {
+                return NotFound();
+            }
+            return Ok(food);
+        }
+        
+        [HttpGet]
+        [Route("FoodByVegMenu/{VegMenu:bool}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Food>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetFoodByVegMenu([FromRoute(Name = "VegMenu")] bool vegMenu)
+        {
+            var food = _userController.GetFoodByVegMenu(vegMenu);
+            if (food == null)
+            {
+                return NotFound();
+            }
+            return Ok(food);
+        }
     }
 }
