@@ -8,7 +8,7 @@ using ToursWeb.ComponentsBL;
 namespace ToursAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[api/v1/controller]")]
     
     public class ApiManagerController : ControllerBase
     {
@@ -20,7 +20,6 @@ namespace ToursAPI.Controllers
         }
 
         [HttpGet]
-        [Route("Users")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<User>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllUsers()
@@ -53,8 +52,8 @@ namespace ToursAPI.Controllers
          * -----------------------------------------------------------*/
         [HttpPost]
         [Route("AddTour/{Cost:int}/{DateBegin}/{DateEnd}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Tour))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult AddTour([FromRoute(Name = "Cost")] int cost, 
             [FromRoute(Name = "DateBegin")] string dBegin, 
             [FromRoute(Name = "DateEnd")] string dEnd)
@@ -66,15 +65,15 @@ namespace ToursAPI.Controllers
             _managerController.AddTour(nTour);
             if (_managerController.GetTourByID(nTour.Tourid) == null) 
             {
-                return NotFound();
+                return BadRequest();
             }
-            return Ok();
+            return Ok(nTour);
         }
         
         [HttpPost]
         [Route("AddHotel/{Name}/{Class:int}/{SwimPool:bool}/{Cost:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Hotel))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult AddHotel([FromRoute(Name = "Name")] string name, 
             [FromRoute(Name = "Class")] int cls, 
             [FromRoute(Name = "SwimPool")] bool sp,
@@ -85,9 +84,9 @@ namespace ToursAPI.Controllers
             _managerController.AddHotel(nHotel);
             if (_managerController.GetHotelByID(nHotel.Hotelid) == null) 
             {
-                return NotFound();
+                return BadRequest();
             }
-            return Ok();
+            return Ok(nHotel);
         }
         
         [HttpPost]

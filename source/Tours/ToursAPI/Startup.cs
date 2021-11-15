@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using ToursWeb.ModelsDB;
 using ToursWeb.ComponentsBL;
+using ToursWeb.Controllers;
 using ToursWeb.Repositories;
 using ToursWeb.ImpRepositories;
 
@@ -100,6 +101,9 @@ namespace ToursAPI
             services.AddScoped<TouristController>();
             services.AddScoped<ManagerController>();
             services.AddScoped<TransferManagerController>();
+
+            services.AddScoped<TourController>();
+            services.AddScoped<HotelRepository>();
         }
     }
 }
