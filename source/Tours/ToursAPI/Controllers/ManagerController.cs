@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -46,10 +46,11 @@ namespace ToursAPI.Controllers
 
             return Ok(tour);
         }
-
-        /*--------------------------------------------------------------
-         *                          Add
-         * -----------------------------------------------------------*/
+*/
+/*--------------------------------------------------------------
+ *                          Add
+ * -----------------------------------------------------------*/
+/*
         [HttpPost]
         [Route("AddTour/{Cost:int}/{DateBegin}/{DateEnd}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Tour))]
@@ -107,10 +108,11 @@ namespace ToursAPI.Controllers
             }
             return Ok();
         }
-
+*/
         /*--------------------------------------------------------------
          *                          Update
          * -----------------------------------------------------------*/
+/*
         [HttpPost]
         [Route("UpdateTour/{TourID:int}/{Cost:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -182,10 +184,11 @@ namespace ToursAPI.Controllers
             }
             return Ok();
         }
-
+*/
         /*--------------------------------------------------------------
          *                          Delete
          * -----------------------------------------------------------*/
+/*
         [HttpDelete]
         [Route("DeleteTour/{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -232,3 +235,4 @@ namespace ToursAPI.Controllers
         }
     }
 }
+*/

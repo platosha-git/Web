@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ToursWeb.ModelsDB;
+﻿using ToursWeb.ModelsDB;
 
 namespace ToursWeb.Repositories
 {

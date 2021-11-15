@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 #nullable disable
 
-namespace ToursWeb
+namespace ToursWeb.ModelsDB
 {
     public partial class Hotel
     {

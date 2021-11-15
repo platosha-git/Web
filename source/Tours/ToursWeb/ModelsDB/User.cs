@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#nullable disable
 
-#nullable disable
-
-namespace ToursWeb
+namespace ToursWeb.ModelsDB
 {
     public partial class User
     {

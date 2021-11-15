@@ -1,4 +1,4 @@
-﻿
+﻿using ToursWeb.ModelsDB;
 namespace ToursWeb.Repositories
 {
     public interface IUsersRepository : CrudRepository<User, int>

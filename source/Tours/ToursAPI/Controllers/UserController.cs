@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +18,11 @@ namespace ToursAPI.Controllers
         {
             _userController = userController;
         }
-        
+*/        
         /*--------------------------------------------------------------
          *                          Tours
          * -----------------------------------------------------------*/
-        
+/*        
         [HttpGet]
         [Route("Tours")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Tour>))]
@@ -83,11 +83,11 @@ namespace ToursAPI.Controllers
             }
             return Ok(tours);
         }
-
+*/
         /*--------------------------------------------------------------
          *                          Hotels
          * -----------------------------------------------------------*/
-        [HttpGet]
+ /*       [HttpGet]
         [Route("Hotels")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Hotel>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -184,11 +184,11 @@ namespace ToursAPI.Controllers
             }
             return Ok(hotels);
         }
-
+*/
         /*--------------------------------------------------------------
          *                          Food
          * -----------------------------------------------------------*/
-        [HttpGet]
+  /*      [HttpGet]
         [Route("Food")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Food>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -231,3 +231,4 @@ namespace ToursAPI.Controllers
         }
     }
 }
+*/

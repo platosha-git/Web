@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ToursWeb;
+using ToursWeb.ModelsDB;
 using ToursWeb.Controllers;
 
 namespace ToursAPI.Controllers
 {
     [ApiController]
-    [Route("[api/v1/tours]")]
+    [Route("[controller]")]
 
     public class ApiTourController : ControllerBase
     {
@@ -93,8 +93,7 @@ namespace ToursAPI.Controllers
         {
             DateTime beg = Convert.ToDateTime(dBegin);
             DateTime end = Convert.ToDateTime(dEnd);
-            Tour nTour = new Tour
-                {Tourid = 31, Food = 4, Hotel = 7, Transfer = 3, Cost = cost, Datebegin = beg, Dateend = end};
+            Tour nTour = new Tour {Tourid = 31, Food = 4, Hotel = 7, Transfer = 3, Cost = cost, Datebegin = beg, Dateend = end};
 
             _tourController.AddTour(nTour);
             if (_tourController.GetTourByID(nTour.Tourid) == null)

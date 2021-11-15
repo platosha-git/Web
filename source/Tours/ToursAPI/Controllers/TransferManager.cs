@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,11 +32,12 @@ namespace ToursAPI.Controllers
             }
             return Ok(transfer);
         }
-
+*/
         /*--------------------------------------------------------------
          *                          Add
          * -----------------------------------------------------------*/
-        [HttpPost]
+/*
+    [HttpPost]
         [Route("AddTransfer/{PlaneTID:int}/{TrainTID:int}/{BusTID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -115,10 +116,11 @@ namespace ToursAPI.Controllers
             }
             return Ok();
         }
-
+*/
         /*--------------------------------------------------------------
          *                          Update
          * -----------------------------------------------------------*/
+/*
         [HttpPost]
         [Route("UpdateTransfer/{TransferID:int}/{Bus:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -214,10 +216,11 @@ namespace ToursAPI.Controllers
             }
             return Ok();
         }
-
+*/
         /*--------------------------------------------------------------
          *                          Delete
          * -----------------------------------------------------------*/
+/*
         [HttpDelete]
         [Route("DeleteTransfer/{TransferID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -279,3 +282,4 @@ namespace ToursAPI.Controllers
         }
     }
 }
+*/
