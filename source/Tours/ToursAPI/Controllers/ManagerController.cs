@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ToursWeb;
 using ToursWeb.ComponentsBL;
-using ToursWeb.ModelsDB;
 
 namespace ToursAPI.Controllers
 {
