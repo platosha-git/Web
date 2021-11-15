@@ -13,7 +13,7 @@ namespace ToursWeb.ModelsDB
         public int Cost { get; set; }
         public DateTime Datebegin { get; set; }
         public DateTime Dateend { get; set; }
-
+        
         public virtual Food FoodNavigation { get; set; }
         public virtual Hotel HotelNavigation { get; set; }
         public virtual Transfer TransferNavigation { get; set; }

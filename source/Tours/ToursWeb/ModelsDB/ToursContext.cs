@@ -185,8 +185,8 @@ namespace ToursWeb.ModelsDB
                 entity.Property(e => e.Hotel).HasColumnName("hotel");
 
                 entity.Property(e => e.Transfer).HasColumnName("transfer");
-
-                entity.HasOne(d => d.FoodNavigation)
+                
+                 entity.HasOne(d => d.FoodNavigation)
                     .WithMany(p => p.Tours)
                     .HasForeignKey(d => d.Food)
                     .OnDelete(DeleteBehavior.ClientSetNull)

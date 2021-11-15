@@ -16,34 +16,10 @@
   <component name="ChangeListManager">
     <list default="true" id="7b08addc-33cb-4e41-86c2-2b90f7f80639" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/ManagerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/ManagerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/TourController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/TourController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/TouristController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/TouristController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/TransferManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/TransferManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/ComponentsBL/ManagerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ComponentsBL/ManagerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/ComponentsBL/TouristController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ComponentsBL/TouristController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/ComponentsBL/TransferManagerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ComponentsBL/TransferManagerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Busticket.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ModelsDB/Busticket.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/City.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ModelsDB/City.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Food.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ModelsDB/Food.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/FullUserTour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ModelsDB/FullUserTour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Hotel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ModelsDB/Hotel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Planeticket.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ModelsDB/Planeticket.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Tour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Tour.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Tour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ModelsDB/Tour.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/ToursContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ModelsDB/ToursContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Trainticket.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ModelsDB/Trainticket.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Transfer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ModelsDB/Transfer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ModelsDB/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/IBusRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/IBusRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/IFoodRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/IFoodRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/IFunctionsRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/IFunctionsRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/IHotelRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/IHotelRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/IPlaneRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/IPlaneRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/ITourRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/ITourRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/ITrainRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/ITrainRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/ITransferRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/ITransferRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/IUsersRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/IUsersRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,7 +227,8 @@
       <workItem from="1636538267215" duration="3460000" />
       <workItem from="1636815596453" duration="2835000" />
       <workItem from="1636979943298" duration="8050000" />
-      <workItem from="1636992557329" duration="7800000" />
+      <workItem from="1636992557329" duration="10039000" />
+      <workItem from="1637007851949" duration="5677000" />
     </task>
     <servers />
   </component>

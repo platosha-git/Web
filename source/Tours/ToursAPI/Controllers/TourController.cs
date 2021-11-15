@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ToursWeb.ModelsDB;
 using ToursWeb.Controllers;
+using ToursAPI.ModelsDTO;
 
 namespace ToursAPI.Controllers
 {
@@ -19,8 +20,19 @@ namespace ToursAPI.Controllers
             _tourController = tourController;
         }
 
+        private List<TourDTO> ListTourDTO(List<Tour> lTours)
+        {
+            List<TourDTO> lToursDTO = new List<TourDTO>();
+            foreach (var tour in lTours)
+            {
+                TourDTO tourDTO = new TourDTO(tour);
+                lToursDTO.Add(tourDTO);
+            }
+            return lToursDTO;
+        }
+
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Tour>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TourDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllTours()
         {
@@ -30,12 +42,13 @@ namespace ToursAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(tours);
+            List<TourDTO> lToursDTO = ListTourDTO(tours);
+            return Ok(lToursDTO);
         }
-
+        
         [HttpGet]
         [Route("{TourID:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Tour))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTourByID([FromRoute(Name = "TourID")] int tourID)
         {
@@ -45,12 +58,13 @@ namespace ToursAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(tour);
+            TourDTO tourDTO = new TourDTO(tour);
+            return Ok(tourDTO);
         }
 
         [HttpGet]
         [Route("{DateBegin}/{DateEnd}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Tour>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TourDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetToursByDate([FromRoute(Name = "DateBegin")] string dBegin,
             [FromRoute(Name = "DateEnd")] string dEnd)
@@ -65,12 +79,13 @@ namespace ToursAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(tours);
+            List<TourDTO> lToursDTO = ListTourDTO(tours);
+            return Ok(lToursDTO);
         }
 
         [HttpGet]
         [Route("{City}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Tour>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TourDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetToursByCity([FromRoute(Name = "City")] string city)
         {
@@ -80,69 +95,62 @@ namespace ToursAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(tours);
+            List<TourDTO> lToursDTO = ListTourDTO(tours);
+            return Ok(lToursDTO);
         }
 
         [HttpPost]
-        [Route("{Cost:int}/{DateBegin}/{DateEnd}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Tour))]
+        [Route("AddTour")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult AddTour([FromRoute(Name = "Cost")] int cost,
-            [FromRoute(Name = "DateBegin")] string dBegin,
-            [FromRoute(Name = "DateEnd")] string dEnd)
+        public IActionResult AddTour([FromBody] TourDTO tourDTO)
         {
-            DateTime beg = Convert.ToDateTime(dBegin);
-            DateTime end = Convert.ToDateTime(dEnd);
-            Tour nTour = new Tour {Tourid = 31, Food = 4, Hotel = 7, Transfer = 3, Cost = cost, Datebegin = beg, Dateend = end};
+            Tour aTour = tourDTO.GetTour();
+            _tourController.AddTour(aTour);
 
-            _tourController.AddTour(nTour);
-            if (_tourController.GetTourByID(nTour.Tourid) == null)
+            Tour tour = _tourController.GetTourByID(aTour.Tourid); 
+            if (tour == null) 
             {
                 return BadRequest();
             }
 
-            return Ok(nTour);
+            TourDTO addedTour = new TourDTO(tour);
+            return Ok(addedTour);
         }
 
         [HttpPut]
-        [Route("{TourID:int}/{Cost:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Tour))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult UpdateTour([FromRoute(Name = "TourID")] int tourID,
-            [FromRoute(Name = "Cost")] int cost)
+        public IActionResult UpdateTour([FromBody] TourDTO tourDTO)
         {
-            Tour tour = _tourController.GetTourByID(tourID);
+            Tour uTour = tourDTO.GetTour();
+            _tourController.UpdateTour(uTour);
 
-            if (tour == null)
+            Tour tour = _tourController.GetTourByID(tourDTO.Tourid); 
+            if (!tourDTO.AreEqual(tour))
             {
                 return NotFound();
             }
 
-            tour.Cost = cost;
-            _tourController.UpdateTour(tour);
-
-            if (_tourController.GetTourByID(tourID).Cost != cost)
-            {
-                return NotFound();
-            }
-
-            return Ok(tour);
+            TourDTO updatedTour = new TourDTO(tour);
+            return Ok(updatedTour);
         }
 
         [HttpDelete]
         [Route("{TourID:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteTour([FromRoute(Name = "TourID")] int tourID)
         {
-            _tourController.DeleteTourByID(tourID);
-
-            if (_tourController.GetTourByID(tourID) != null)
+            Tour delTour = _tourController.GetTourByID(tourID);
+            if (delTour == null)
             {
                 return NotFound();
             }
-
-            return Ok();
+            
+            _tourController.DeleteTourByID(tourID);
+            TourDTO tour = new TourDTO(delTour);
+            return Ok(tour);
         }
     }
 }
