@@ -100,7 +100,6 @@ namespace ToursAPI.Controllers
         }
 
         [HttpPost]
-        [Route("AddTour")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult AddTour([FromBody] TourDTO tourDTO)
