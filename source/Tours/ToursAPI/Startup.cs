@@ -100,6 +100,7 @@ namespace ToursAPI
             services.AddScoped<HotelRepository>();
             services.AddScoped<FoodController>();
             services.AddScoped<HotelController>();
+            services.AddScoped<ToursWeb.Controllers.UserController>();
             services.AddScoped<FullUserTourController>();
         }
     }
