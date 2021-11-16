@@ -113,6 +113,7 @@ namespace ToursAPI
             services.AddScoped<ToursWeb.Controllers.UserController>();
             services.AddScoped<FullUserTourController>();
             services.AddScoped<TransferController>();
+            services.AddScoped<BusController>();
         }
     }
 }
