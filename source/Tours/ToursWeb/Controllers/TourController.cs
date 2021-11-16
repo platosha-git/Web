@@ -16,6 +16,11 @@ namespace ToursWeb.Controllers
             _hotelRepository = hotelRepository;
         }
 
+        public bool ChangeCost(int id, int diff)
+        {
+            return _tourRepository.ChangeCost(id, diff);
+        }
+
         public List<Tour> GetAllTours()
         {
             return _tourRepository.FindAll();

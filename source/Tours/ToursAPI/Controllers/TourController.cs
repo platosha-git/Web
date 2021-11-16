@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ToursWeb.ModelsDB;
@@ -162,6 +163,35 @@ namespace ToursAPI.Controllers
             }
 
             TourDTO updatedTour = new TourDTO(tour);
+            return Ok(updatedTour);
+        }
+        
+        /// <summary>
+        /// Обновление стоимости тура
+        /// </summary>
+        /// <param name="tourID">ИД тура</param>
+        /// <returns>Результат обновления</returns>
+        [HttpPatch]
+        [Route("{TourID:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult UpdateTourCost([FromRoute(Name = "TourID")] int tourID,
+            [FromQuery, Required] int diff)
+        {
+            Tour uTour = _tourController.GetTourByID(tourID);
+            if (uTour == null)
+            {
+                return NotFound();
+            }
+            
+            bool isUpdated = _tourController.ChangeCost(tourID, diff);
+            if (!isUpdated)
+            {
+                return BadRequest();
+            }
+            
+            TourDTO updatedTour = new TourDTO(uTour);
             return Ok(updatedTour);
         }
 

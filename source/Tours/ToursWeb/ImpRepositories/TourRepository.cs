@@ -63,6 +63,26 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
+        public bool ChangeCost(int id, int diff)
+        {
+            try
+            {
+                Tour uTour = FindByID(id);
+                uTour.Cost += diff;
+                
+                _db.Tours.Update(uTour);
+                _db.SaveChanges();
+                _logger.LogInformation("+TourRep : Cost tours {Number} was updated at Tours", id);
+
+                return true;
+            }
+            catch (Exception err)
+            {
+                _logger.LogError(err, "+TourRep : Error trying to update tour cost at Tours");
+                return false;
+            }
+        }
+
         public void DeleteAll()
         {
             try
