@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Reflection;
 using Serilog;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Builder;
@@ -29,7 +32,14 @@ namespace ToursAPI
         {
             services.AddControllers();
             
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "ToursAPI", Version = "v1"}); });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "ToursAPI", Version = "v1"});
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+
 
             IConfiguration config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")

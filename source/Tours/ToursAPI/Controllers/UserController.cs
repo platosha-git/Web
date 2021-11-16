@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +30,10 @@ namespace ToursAPI.Controllers
             return lUsersDTO;
         }
         
+        /// <summary>
+        /// Список всех пользователей
+        /// </summary>
+        /// <returns>Информация о всех пользователях</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -46,6 +49,11 @@ namespace ToursAPI.Controllers
             return Ok(lUsersDTO);
         }
         
+        /// <summary>
+        /// Пользователь по ключу
+        /// </summary>
+        /// <param name="userID">ИД пользователя</param>
+        /// <returns>Информация о пользователе по ключу</returns>
         [HttpGet]
         [Route("{UserID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDTO))]

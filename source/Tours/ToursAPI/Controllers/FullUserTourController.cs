@@ -20,6 +20,11 @@ namespace ToursAPI.Controllers
             _futController = futController;
         }
         
+        /// <summary>
+        /// Тур для пользователя по ключу
+        /// </summary>
+        /// <param name="tourID">ИД тура</param>
+        /// <returns>Информация о туре для пользователя</returns>
         [HttpGet]
         [Route("{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FullUserTourDTO))]

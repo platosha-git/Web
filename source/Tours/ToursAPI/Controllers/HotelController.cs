@@ -29,7 +29,11 @@ namespace ToursAPI.Controllers
             }
             return lHotelDTO;
         }
-
+        
+        /// <summary>
+        /// Список всех отелей
+        /// </summary>
+        /// <returns>Информация о всех отелях</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<HotelDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -45,6 +49,11 @@ namespace ToursAPI.Controllers
             return Ok(lHotelsDTO);
         }
         
+        /// <summary>
+        /// Отель по ключу
+        /// </summary>
+        /// <param name="hotelID">ИД отеля</param>
+        /// <returns>Информация об отеле по ключу</returns>
         [HttpGet]
         [Route("HotelID/{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
@@ -61,8 +70,13 @@ namespace ToursAPI.Controllers
             return Ok(hotelDTO);
         }
 
+        /// <summary>
+        /// Список отелей в зависимости от города
+        /// </summary>
+        /// <param name="city">Город отеля</param>
+        /// <returns>Информация об отелях в зависимости от города</returns>
         [HttpGet]
-        [Route("City/{City}")]
+        [Route("{City}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<HotelDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetHotelsByCity([FromRoute(Name = "City")] string city)
@@ -77,8 +91,13 @@ namespace ToursAPI.Controllers
             return Ok(lHotelsDTO);
         }
 
+        /// <summary>
+        /// Список отелей в зависимости от класса
+        /// </summary>
+        /// <param name="cls">Класс отеля</param>
+        /// <returns>Информация об отелях в зависимости от класса</returns>
         [HttpGet]
-        [Route("Class/{Class:int}")]
+        [Route("{Class:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<HotelDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetHotelsByClass([FromRoute(Name = "Class")] int cls)
@@ -93,6 +112,11 @@ namespace ToursAPI.Controllers
             return Ok(lHotelsDTO);
         }
 
+        /// <summary>
+        /// Добавление отлея
+        /// </summary>
+        /// <param name="hotelDTO">Добавлемый отель</param>
+        /// <returns>Результат добавления</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -111,6 +135,11 @@ namespace ToursAPI.Controllers
             return Ok(addedHotel);
         }
 
+        /// <summary>
+        /// Обновление отеля
+        /// </summary>
+        /// <param name="hotelDTO">Обновляемый отель</param>
+        /// <returns>Результат обновления</returns>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -129,6 +158,11 @@ namespace ToursAPI.Controllers
             return Ok(updatedHotel);
         }
 
+        /// <summary>
+        /// Удаление отеля по ключу
+        /// </summary>
+        /// <param name="hotelID">ИД отеля</param>
+        /// <returns>Результат удаления</returns>
         [HttpDelete]
         [Route("{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]

@@ -29,7 +29,11 @@ namespace ToursAPI.Controllers
             }
             return lFoodDTO;
         }
-
+        
+        /// <summary>
+        /// Список всего питания
+        /// </summary>
+        /// <returns>Информация обо всем питании</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -45,6 +49,11 @@ namespace ToursAPI.Controllers
             return Ok(lFoodDTO);
         }
         
+        /// <summary>
+        /// Питание по ключу
+        /// </summary>
+        /// <param name="foodID">ИД питания</param>
+        /// <returns>Информация о питании по ключу</returns>
         [HttpGet]
         [Route("{FoodID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FoodDTO))]
@@ -61,6 +70,11 @@ namespace ToursAPI.Controllers
             return Ok(foodDTO);
         }
 
+        /// <summary>
+        /// Список питания в зависимости от меню
+        /// </summary>
+        /// <param name="vegMenu">Наличие вегетарианского меню</param>
+        /// <returns>Информация о питании в зависимости от меню</returns>
         [HttpGet]
         [Route("VegMenu/{VegMenu:bool}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodDTO>))]
@@ -77,6 +91,11 @@ namespace ToursAPI.Controllers
             return Ok(lFoodDTO);
         }
 
+        /// <summary>
+        /// Список питания в зависимости от бара
+        /// </summary>
+        /// <param name="bar">Наличие бара</param>
+        /// <returns>Информация о питании в зависимости от бара</returns>
         [HttpGet]
         [Route("Bar/{Bar:bool}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodDTO>))]
@@ -93,6 +112,11 @@ namespace ToursAPI.Controllers
             return Ok(lFoodDTO);
         }
 
+        /// <summary>
+        /// Добавление питания
+        /// </summary>
+        /// <param name="foodDTO">Добавляемое питание</param>
+        /// <returns>Результат добавления</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FoodDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -111,6 +135,11 @@ namespace ToursAPI.Controllers
             return Ok(addedFood);
         }
 
+        /// <summary>
+        /// Обновление питания
+        /// </summary>
+        /// <param name="foodDTO">Обновляемый элемент</param>
+        /// <returns>Результат обновления</returns>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FoodDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -129,6 +158,11 @@ namespace ToursAPI.Controllers
             return Ok(updatedFood);
         }
 
+        /// <summary>
+        /// Удаление питания по ключу
+        /// </summary>
+        /// <param name="foodID">ИД питания для удаления</param>
+        /// <returns>Результат удаления</returns>
         [HttpDelete]
         [Route("{FoodID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FoodDTO))]

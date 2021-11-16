@@ -31,6 +31,10 @@ namespace ToursAPI.Controllers
             return lToursDTO;
         }
 
+        /// <summary>
+        /// Список всех туров
+        /// </summary>
+        /// <returns>Информация о всех турах</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TourDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -46,6 +50,11 @@ namespace ToursAPI.Controllers
             return Ok(lToursDTO);
         }
         
+        /// <summary>
+        /// Тур по ключу
+        /// </summary>
+        /// <param name="tourID">ИД тура</param>
+        /// <returns>Информация о туре по ключу</returns>
         [HttpGet]
         [Route("{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
@@ -62,6 +71,12 @@ namespace ToursAPI.Controllers
             return Ok(tourDTO);
         }
 
+        /// <summary>
+        /// Список туров в зависимости от даты
+        /// </summary>
+        /// <param name="dBegin">Дата начала тура</param>
+        /// <param name="dEnd">Дата окончания тура</param>
+        /// <returns>Информация о турах в зависимости от даты</returns>
         [HttpGet]
         [Route("{DateBegin}/{DateEnd}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TourDTO>))]
@@ -83,6 +98,11 @@ namespace ToursAPI.Controllers
             return Ok(lToursDTO);
         }
 
+        /// <summary>
+        /// Список туров в зависимости от города
+        /// </summary>
+        /// <param name="city">Город тура</param>
+        /// <returns>Информация о турах в зависимости от города</returns>
         [HttpGet]
         [Route("{City}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TourDTO>))]
@@ -99,6 +119,11 @@ namespace ToursAPI.Controllers
             return Ok(lToursDTO);
         }
 
+        /// <summary>
+        /// Добавление тура
+        /// </summary>
+        /// <param name="tourDTO">Добавляемый тур</param>
+        /// <returns>Результат добавления</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -117,6 +142,11 @@ namespace ToursAPI.Controllers
             return Ok(addedTour);
         }
 
+        /// <summary>
+        /// Обновление тура
+        /// </summary>
+        /// <param name="tourDTO">Обновляемый тур</param>
+        /// <returns>Результат обновления</returns>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -135,6 +165,11 @@ namespace ToursAPI.Controllers
             return Ok(updatedTour);
         }
 
+        /// <summary>
+        /// Удаление тура по ключу
+        /// </summary>
+        /// <param name="tourID">ИД тура</param>
+        /// <returns>Результат удаления</returns>
         [HttpDelete]
         [Route("{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
