@@ -17,6 +17,7 @@
     <list default="true" id="7b08addc-33cb-4e41-86c2-2b90f7f80639" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Controllers/PlaneController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Controllers/PlaneController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +226,7 @@
       <workItem from="1636979943298" duration="8050000" />
       <workItem from="1636992557329" duration="10039000" />
       <workItem from="1637007851949" duration="12576000" />
-      <workItem from="1637055124897" duration="13454000" />
+      <workItem from="1637055124897" duration="16281000" />
     </task>
     <servers />
   </component>
