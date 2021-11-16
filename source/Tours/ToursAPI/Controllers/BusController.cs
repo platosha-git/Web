@@ -59,7 +59,7 @@ namespace ToursAPI.Controllers
         [Route("{BusID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BusticketDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetTourByID([FromRoute(Name = "BusID")] int busID)
+        public IActionResult GetBusByID([FromRoute(Name = "BusID")] int busID)
         {
             var bus = _busController.GetBusByID(busID);
             if (bus == null)
@@ -120,7 +120,7 @@ namespace ToursAPI.Controllers
         /// <summary>
         /// Удаление автобуса по ключу
         /// </summary>
-        /// <param name="tourID">ИД автобуса</param>
+        /// <param name="busID">ИД автобуса</param>
         /// <returns>Результат удаления</returns>
         [HttpDelete]
         [Route("{BusID:int}")]
