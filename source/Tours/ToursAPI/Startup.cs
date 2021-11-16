@@ -114,6 +114,7 @@ namespace ToursAPI
             services.AddScoped<FullUserTourController>();
             services.AddScoped<TransferController>();
             services.AddScoped<BusController>();
+            services.AddScoped<PlaneController>();
         }
     }
 }
