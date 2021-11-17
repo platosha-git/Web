@@ -73,15 +73,15 @@ namespace ToursAPI.Controllers
         /// <summary>
         /// Список питания в зависимости от меню
         /// </summary>
-        /// <param name="vegMenu">Наличие вегетарианского меню</param>
+        /// <param name="menu">Наличие вегетарианского меню</param>
         /// <returns>Информация о питании в зависимости от меню</returns>
         [HttpGet]
-        [Route("VegMenu/{VegMenu:bool}")]
+        [Route("VegMenu/{Menu}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetFoodByVegMenu([FromRoute(Name = "VegMenu")] bool vegMenu)
+        public IActionResult GetFoodByVegMenu([FromRoute(Name = "Menu")] string menu)
         {
-            var food = _foodController.GetFoodByVegMenu(vegMenu);
+            var food = _foodController.GetFoodByMenu(menu);
             if (food == null)
             {
                 return NotFound();

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
@@ -7,10 +6,8 @@ namespace ToursWeb.ModelsDB
 {
     public partial class ToursContext : DbContext
     {
-        private string ConnectionString { get; set; }
-        public ToursContext(string conn)
+        public ToursContext()
         {
-            ConnectionString = conn;
         }
 
         public ToursContext(DbContextOptions<ToursContext> options)
@@ -18,17 +15,11 @@ namespace ToursWeb.ModelsDB
         {
         }
 
-        public virtual DbSet<Busticket> Bustickets { get; set; }
         public virtual DbSet<Food> Foods { get; set; }
         public virtual DbSet<Hotel> Hotels { get; set; }
-        public virtual DbSet<Planeticket> Planetickets { get; set; }
         public virtual DbSet<Tour> Tours { get; set; }
-        public virtual DbSet<Trainticket> Traintickets { get; set; }
         public virtual DbSet<Transfer> Transfers { get; set; }
         public virtual DbSet<User> Users { get; set; }
-
-        public IQueryable<FullUserTour> fulltour(int TID) => FromExpression(() => fulltour(TID));
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -41,41 +32,7 @@ namespace ToursWeb.ModelsDB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDbFunction(() => fulltour(default));
-
-            modelBuilder.HasAnnotation("Relational:Collation", "Russian_Russia.1251");
-
-            modelBuilder.Entity<Busticket>(entity =>
-            {
-                entity.HasKey(e => e.Bustid)
-                    .HasName("busticket_pkey");
-
-                entity.ToTable("busticket");
-
-                entity.Property(e => e.Bustid)
-                    .ValueGeneratedNever()
-                    .HasColumnName("bustid");
-
-                entity.Property(e => e.Arrivaltime).HasColumnName("arrivaltime");
-
-                entity.Property(e => e.Bus).HasColumnName("bus");
-
-                entity.Property(e => e.Cityfrom)
-                    .HasMaxLength(30)
-                    .HasColumnName("cityfrom");
-
-                entity.Property(e => e.Cityto)
-                    .HasMaxLength(30)
-                    .HasColumnName("cityto");
-
-                entity.Property(e => e.Cost).HasColumnName("cost");
-
-                entity.Property(e => e.Departuretime).HasColumnName("departuretime");
-
-                entity.Property(e => e.Luggage).HasColumnName("luggage");
-
-                entity.Property(e => e.Seat).HasColumnName("seat");
-            });
+            modelBuilder.HasAnnotation("Relational:Collation", "ru_RU.UTF-8");
 
             modelBuilder.Entity<Food>(entity =>
             {
@@ -89,14 +46,14 @@ namespace ToursWeb.ModelsDB
 
                 entity.Property(e => e.Category)
                     .IsRequired()
-                    .HasMaxLength(40)
+                    .HasMaxLength(30)
                     .HasColumnName("category");
-
-                entity.Property(e => e.Childrenmenu).HasColumnName("childrenmenu");
 
                 entity.Property(e => e.Cost).HasColumnName("cost");
 
-                entity.Property(e => e.Vegmenu).HasColumnName("vegmenu");
+                entity.Property(e => e.Menu)
+                    .HasMaxLength(30)
+                    .HasColumnName("menu");
             });
 
             modelBuilder.Entity<Hotel>(entity =>
@@ -126,40 +83,8 @@ namespace ToursWeb.ModelsDB
                 entity.Property(e => e.Swimpool).HasColumnName("swimpool");
 
                 entity.Property(e => e.Type)
-                    .HasMaxLength(30)
+                    .HasMaxLength(40)
                     .HasColumnName("type");
-            });
-
-            modelBuilder.Entity<Planeticket>(entity =>
-            {
-                entity.HasKey(e => e.Planetid)
-                    .HasName("planeticket_pkey");
-
-                entity.ToTable("planeticket");
-
-                entity.Property(e => e.Planetid)
-                    .ValueGeneratedNever()
-                    .HasColumnName("planetid");
-
-                entity.Property(e => e.Cityfrom)
-                    .HasMaxLength(30)
-                    .HasColumnName("cityfrom");
-
-                entity.Property(e => e.Cityto)
-                    .HasMaxLength(30)
-                    .HasColumnName("cityto");
-
-                entity.Property(e => e.Class).HasColumnName("class");
-
-                entity.Property(e => e.Cost).HasColumnName("cost");
-
-                entity.Property(e => e.Departuretime).HasColumnName("departuretime");
-
-                entity.Property(e => e.Luggage).HasColumnName("luggage");
-
-                entity.Property(e => e.Plane).HasColumnName("plane");
-
-                entity.Property(e => e.Seat).HasColumnName("seat");
             });
 
             modelBuilder.Entity<Tour>(entity =>
@@ -185,8 +110,8 @@ namespace ToursWeb.ModelsDB
                 entity.Property(e => e.Hotel).HasColumnName("hotel");
 
                 entity.Property(e => e.Transfer).HasColumnName("transfer");
-                
-                 entity.HasOne(d => d.FoodNavigation)
+
+                entity.HasOne(d => d.FoodNavigation)
                     .WithMany(p => p.Tours)
                     .HasForeignKey(d => d.Food)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -205,18 +130,13 @@ namespace ToursWeb.ModelsDB
                     .HasConstraintName("fk_tt");
             });
 
-            modelBuilder.Entity<Trainticket>(entity =>
+            modelBuilder.Entity<Transfer>(entity =>
             {
-                entity.HasKey(e => e.Traintid)
-                    .HasName("trainticket_pkey");
+                entity.ToTable("transfer");
 
-                entity.ToTable("trainticket");
-
-                entity.Property(e => e.Traintid)
+                entity.Property(e => e.Transferid)
                     .ValueGeneratedNever()
-                    .HasColumnName("traintid");
-
-                entity.Property(e => e.Arrivaltime).HasColumnName("arrivaltime");
+                    .HasColumnName("transferid");
 
                 entity.Property(e => e.Cityfrom)
                     .HasMaxLength(30)
@@ -226,47 +146,14 @@ namespace ToursWeb.ModelsDB
                     .HasMaxLength(30)
                     .HasColumnName("cityto");
 
-                entity.Property(e => e.Coach).HasColumnName("coach");
-
                 entity.Property(e => e.Cost).HasColumnName("cost");
 
                 entity.Property(e => e.Departuretime).HasColumnName("departuretime");
 
-                entity.Property(e => e.Linens).HasColumnName("linens");
-
-                entity.Property(e => e.Seat).HasColumnName("seat");
-
-                entity.Property(e => e.Train).HasColumnName("train");
-            });
-
-            modelBuilder.Entity<Transfer>(entity =>
-            {
-                entity.ToTable("transfer");
-
-                entity.Property(e => e.Transferid)
-                    .ValueGeneratedNever()
-                    .HasColumnName("transferid");
-
-                entity.Property(e => e.Busticket).HasColumnName("busticket");
-
-                entity.Property(e => e.Planeticket).HasColumnName("planeticket");
-
-                entity.Property(e => e.Trainticket).HasColumnName("trainticket");
-
-                entity.HasOne(d => d.BusticketNavigation)
-                    .WithMany(p => p.Transfers)
-                    .HasForeignKey(d => d.Busticket)
-                    .HasConstraintName("fk_tb");
-
-                entity.HasOne(d => d.PlaneticketNavigation)
-                    .WithMany(p => p.Transfers)
-                    .HasForeignKey(d => d.Planeticket)
-                    .HasConstraintName("fk_tp");
-
-                entity.HasOne(d => d.TrainticketNavigation)
-                    .WithMany(p => p.Transfers)
-                    .HasForeignKey(d => d.Trainticket)
-                    .HasConstraintName("fk_tt");
+                entity.Property(e => e.Type)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .HasColumnName("type");
             });
 
             modelBuilder.Entity<User>(entity =>

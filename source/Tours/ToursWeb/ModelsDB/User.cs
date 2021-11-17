@@ -1,4 +1,5 @@
-﻿#nullable disable
+﻿
+#nullable disable
 
 namespace ToursWeb.ModelsDB
 {

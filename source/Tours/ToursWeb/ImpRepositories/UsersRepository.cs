@@ -46,21 +46,6 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public void DeleteAll()
-        {
-            try
-            {
-                List<User> allBookings = FindAll();
-                _db.Users.RemoveRange(allBookings);
-                _db.SaveChanges();
-                _logger.LogInformation("+BookingRep : All bookings were deleted from Bookings");
-            }
-            catch (Exception err)
-            {
-                _logger.LogError(err, "+BookingRep : Error trying to delete all bookings from Bookings");
-            }
-        }
-
         public void DeleteByID(int id)
         {
         }

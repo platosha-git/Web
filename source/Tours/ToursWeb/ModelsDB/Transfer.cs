@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 #nullable disable
 
@@ -12,13 +13,12 @@ namespace ToursWeb.ModelsDB
         }
 
         public int Transferid { get; set; }
-        public int? Planeticket { get; set; }
-        public int? Trainticket { get; set; }
-        public int? Busticket { get; set; }
+        public string Type { get; set; }
+        public string Cityfrom { get; set; }
+        public string Cityto { get; set; }
+        public DateTime? Departuretime { get; set; }
+        public int? Cost { get; set; }
 
-        public virtual Busticket BusticketNavigation { get; set; }
-        public virtual Planeticket PlaneticketNavigation { get; set; }
-        public virtual Trainticket TrainticketNavigation { get; set; }
         public virtual ICollection<Tour> Tours { get; set; }
     }
 }

@@ -13,8 +13,7 @@ namespace ToursWeb.ModelsDB
 
         public int Foodid { get; set; }
         public string Category { get; set; }
-        public bool? Vegmenu { get; set; }
-        public bool? Childrenmenu { get; set; }
+        public string Menu { get; set; }
         public bool? Bar { get; set; }
         public int Cost { get; set; }
 

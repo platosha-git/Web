@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using ToursWeb.ModelsDB;
-using ToursWeb.ComponentsBL;
 using ToursWeb.Controllers;
 using ToursWeb.Repositories;
 using ToursWeb.ImpRepositories;
@@ -97,10 +96,6 @@ namespace ToursAPI
             services.AddScoped<IHotelRepository, HotelRepository>();
             services.AddScoped<IFoodRepository, FoodRepository>();
             services.AddScoped<ITransferRepository, TransferRepository>();
-            services.AddScoped<IBusRepository, BusRepository>();
-            services.AddScoped<IPlaneRepository, PlaneRepository>();
-            services.AddScoped<ITrainRepository, TrainRepository>();
-            services.AddScoped<IFunctionsRepository, FunctionsRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
         }
 
@@ -110,12 +105,8 @@ namespace ToursAPI
             services.AddScoped<HotelRepository>();
             services.AddScoped<FoodController>();
             services.AddScoped<HotelController>();
-            services.AddScoped<ToursWeb.Controllers.UserController>();
-            services.AddScoped<FullUserTourController>();
+            services.AddScoped<UserController>();
             services.AddScoped<TransferController>();
-            services.AddScoped<BusController>();
-            services.AddScoped<PlaneController>();
-            services.AddScoped<TrainController>();
         }
     }
 }

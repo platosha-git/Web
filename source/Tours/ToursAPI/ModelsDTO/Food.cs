@@ -6,8 +6,7 @@ namespace ToursAPI.ModelsDTO
     {
         public int Foodid { get; set; }
         public string Category { get; set; }
-        public bool? Vegmenu { get; set; }
-        public bool? Childrenmenu { get; set; }
+        public string Menu { get; set; }
         public bool? Bar { get; set; }
         public int Cost { get; set; }
 
@@ -19,8 +18,7 @@ namespace ToursAPI.ModelsDTO
         {
             Foodid = food.Foodid;
             Category = food.Category;
-            Vegmenu = food.Vegmenu;
-            Childrenmenu = food.Childrenmenu;
+            Menu = food.Menu;
             Bar = food.Bar;
             Cost = food.Cost;
         }
@@ -31,8 +29,7 @@ namespace ToursAPI.ModelsDTO
             {
                 Foodid = Foodid,
                 Category = Category,
-                Vegmenu = Vegmenu,
-                Childrenmenu = Childrenmenu,
+                Menu = Menu,
                 Bar = Bar,
                 Cost = Cost
             };
@@ -44,8 +41,7 @@ namespace ToursAPI.ModelsDTO
         {
             if (Foodid == food.Foodid &&
                 Category == food.Category &&
-                Vegmenu == food.Vegmenu &&
-                Childrenmenu == food.Childrenmenu &&
+                Menu == food.Menu &&
                 Bar == food.Bar &&
                 Cost == food.Cost)
                 return true;

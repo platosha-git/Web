@@ -48,8 +48,9 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 Food uFood = FindByID(obj.Foodid);
-                uFood.Category = obj.Category; uFood.Vegmenu = obj.Vegmenu; 
-                uFood.Childrenmenu = obj.Childrenmenu; uFood.Bar = obj.Bar; 
+                uFood.Category = obj.Category; 
+                uFood.Menu = obj.Menu; 
+                uFood.Bar = obj.Bar; 
                 uFood.Cost = obj.Cost;
 
                 _db.Foods.Update(uFood);
@@ -59,21 +60,6 @@ namespace ToursWeb.ImpRepositories
             catch (Exception err)
             {
                 _logger.LogError(err, "+FoodRep : Error trying to update food to Food");
-            }
-        }
-
-        public void DeleteAll()
-        {
-            try
-            {
-                List<Food> allFoods = FindAll();
-                _db.Foods.RemoveRange(allFoods);
-                _db.SaveChanges();
-                _logger.LogInformation("+FoodRep : All food were deleted from Food");
-            }
-            catch (Exception err)
-            {
-                _logger.LogError(err, "+FoodRep : Error trying to delete all food from Food");
             }
         }
 
@@ -98,38 +84,15 @@ namespace ToursWeb.ImpRepositories
             return foods.ToList();
         }
 
-        public List<Food> FindFoodByVegMenu(bool vm)
+        public List<Food> FindFoodByMenu(string menu)
         {
-            IQueryable<Food> foods = _db.Foods.Where(needed => needed.Vegmenu == vm);
-            return foods.ToList();
-        }
-
-        public List<Food> FindFoodByChildMenu(bool cm)
-        {
-            IQueryable<Food> foods = _db.Foods.Where(needed => needed.Childrenmenu == cm);
+            IQueryable<Food> foods = _db.Foods.Where(needed => needed.Menu.Equals(menu));
             return foods.ToList();
         }
 
         public List<Food> FindFoodByBar(bool bar)
         {
             IQueryable<Food> foods = _db.Foods.Where(needed => needed.Bar == bar);
-            return foods.ToList();
-        }
-
-        public List<Food> FindFoodByParams(string cat, bool vm, bool cm, bool bar)
-        {
-            IQueryable<Food> foods = _db.Foods.Where(needed => needed.Category == cat &&
-                                                              needed.Vegmenu == vm &&
-                                                              needed.Childrenmenu == cm &&
-                                                              needed.Bar == bar);
-            return foods.ToList();
-        }
-
-        public List<Food> FindFoodByParams(bool vm, bool cm, bool bar)
-        {
-            IQueryable<Food> foods = _db.Foods.Where(needed => needed.Vegmenu == vm &&
-                                                              needed.Childrenmenu == cm &&
-                                                              needed.Bar == bar);
             return foods.ToList();
         }
 

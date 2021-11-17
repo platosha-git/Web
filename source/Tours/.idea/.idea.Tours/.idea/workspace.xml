@@ -15,11 +15,66 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b08addc-33cb-4e41-86c2-2b90f7f80639" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/create.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/create.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/function.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/insert.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/restricts.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/restricts.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/TourController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/TourController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/BusController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/FoodController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/FoodController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/FullUserTourController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/PlaneController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/TrainController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Busticket.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Food.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Food.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/ModelsDTO/FullUserTour.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Planeticket.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Trainticket.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Transfer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Transfer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/ToursAPI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/ToursAPI.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ComponentsBL/GuestController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ComponentsBL/ManagerController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ComponentsBL/TouristController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ComponentsBL/TransferManagerController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ComponentsBL/UserController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Controllers/BusController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Controllers/FoodController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Controllers/FoodController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Controllers/FullUserTourController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Controllers/PlaneController.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursWeb/Controllers/TourController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Controllers/TourController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Controllers/TrainController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Controllers/TransferController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Controllers/TransferController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ImpRepositories/BusRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ImpRepositories/FoodRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ImpRepositories/FoodRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ImpRepositories/FunctionsRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ImpRepositories/HotelRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ImpRepositories/HotelRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ImpRepositories/PlaneRepository.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursWeb/ImpRepositories/TourRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ImpRepositories/TourRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ImpRepositories/TrainRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ImpRepositories/TransferRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ImpRepositories/TransferRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ImpRepositories/UsersRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ImpRepositories/UsersRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Busticket.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Food.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/FullUserTour.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Hotel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Planeticket.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Tour.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/ToursContext.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Trainticket.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Transfer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/User.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/CrudRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/CrudRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/IBusRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/IFoodRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/IFoodRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/IFunctionsRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/IHotelRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/IHotelRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/IPlaneRepository.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/ITourRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/ITourRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/ITrainRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/ITransferRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/ITransferRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ToursWeb.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ToursWeb.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,18 +85,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/ToursWeb/ComponentsBL/TransferManagerController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ToursWeb/ComponentsBL/GuestController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ToursWeb/ComponentsBL/UserController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ToursWeb/ComponentsBL/TouristController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ToursWeb/ComponentsBL/ManagerController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ToursWeb/ModelsDB/ToursContext.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ToursWeb/ModelsDB/Busticket.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ToursWeb/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ToursAPI/Startup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ToursWeb/ImpRepositories/FoodRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ToursAPI/Program.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ToursWeb/ImpRepositories/BusRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ToursWeb/Repositories/CrudRepository.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1zgLU1aO970WhBhfmH4Kuey3cRB" />
@@ -229,7 +276,9 @@
       <workItem from="1636992557329" duration="10039000" />
       <workItem from="1637007851949" duration="12576000" />
       <workItem from="1637055124897" duration="16692000" />
-      <workItem from="1637077814866" duration="1342000" />
+      <workItem from="1637077814866" duration="3624000" />
+      <workItem from="1637163538676" duration="1931000" />
+      <workItem from="1637167703787" duration="4484000" />
     </task>
     <servers />
   </component>

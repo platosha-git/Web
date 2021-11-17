@@ -83,21 +83,6 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public void DeleteAll()
-        {
-            try
-            {
-                List<Tour> allTours = FindAll();
-                _db.Tours.RemoveRange(allTours);
-                _db.SaveChanges();
-                _logger.LogInformation("+TourRep : All tours were deleted from Tours");
-            }
-            catch (Exception err)
-            {
-                _logger.LogError(err, "+TourRep : Error trying to delete all tours from Tours");
-            }
-        }
-
         public void DeleteByID(int id)
         {
             try
@@ -113,7 +98,7 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public List<Tour> FindTourByDate(DateTime b, DateTime e)
+        public List<Tour> FindToursByDate(DateTime b, DateTime e)
         {
             IQueryable<Tour> tours = _db.Tours.Where(needed => needed.Datebegin >= b && needed.Dateend <= e);
             return tours.ToList();
@@ -122,6 +107,12 @@ namespace ToursWeb.ImpRepositories
         public List<Tour> FindToursByHotel(int hotelID)
         {
             IQueryable<Tour> tours = _db.Tours.Where(needed => needed.Hotel == hotelID);
+            return tours.ToList();
+        }
+        
+        public List<Tour> FindToursByFood(int foodID)
+        {
+            IQueryable<Tour> tours = _db.Tours.Where(needed => needed.Food == foodID);
             return tours.ToList();
         }
 

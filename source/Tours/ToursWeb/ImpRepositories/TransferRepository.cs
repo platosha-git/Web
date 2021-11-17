@@ -57,21 +57,6 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public void DeleteAll()
-        {
-            try
-            {
-                List<Transfer> allTransfers = FindAll();
-                _db.Transfers.RemoveRange(allTransfers);
-                _db.SaveChanges();
-                _logger.LogInformation("+TransferRep : All transfers were deleted from Transfer");
-            }
-            catch (Exception err)
-            {
-                _logger.LogError(err, "+TransferRep : Error trying to delete all transfers from Transfer");
-            }
-        }
-
         public void DeleteByID(int id)
         {
             try
@@ -85,6 +70,24 @@ namespace ToursWeb.ImpRepositories
             {
                 _logger.LogError(err, "+TransferRep : Error trying to delete transfer from Transfer");
             }
+        }
+        
+        public List<Transfer> FindTransferByCityFrom(string city)
+        {
+            IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Cityfrom.Equals(city));
+            return transfers.ToList();
+        }
+
+        public List<Transfer> FindTransferByCityTo(string city)
+        {
+            IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Cityto.Equals(city));
+            return transfers.ToList();
+        }
+
+        public List<Transfer> FindTransferByDate(DateTime date)
+        {
+            IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Departuretime == date);
+            return transfers.ToList();
         }
 
         public void Dispose()

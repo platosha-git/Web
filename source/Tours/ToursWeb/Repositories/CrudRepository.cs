@@ -8,7 +8,6 @@ namespace ToursWeb.Repositories
         T FindByID(ID id);
         void Add(T obj);
         void Update(T obj);
-        void DeleteAll();
         void DeleteByID(ID id);
     }
 }

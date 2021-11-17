@@ -61,21 +61,6 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public void DeleteAll()
-        {
-            try
-            {
-                List<Hotel> allHotels = FindAll();
-                _db.Hotels.RemoveRange(allHotels);
-                _db.SaveChanges();
-                _logger.LogInformation("+HotelRep : All hotels were deleted from Hotels");
-            }
-            catch (Exception err)
-            {
-                _logger.LogError(err, "+HotelRep : Error trying to delete all hotels from Hotels");
-            }
-}
-
         public void DeleteByID(int id)
         {
             try
@@ -118,12 +103,6 @@ namespace ToursWeb.ImpRepositories
         public List<Hotel> FindHotelBySwimPool(bool sp)
         {
             IQueryable<Hotel> hotels = _db.Hotels.Where(needed => needed.Swimpool == sp);
-            return hotels.ToList();
-        }
-
-        public List<Hotel> FindHotelByLowCost(int cost)
-        {
-            IQueryable<Hotel> hotels = _db.Hotels.Where(needed => needed.Cost <= cost);
             return hotels.ToList();
         }
 

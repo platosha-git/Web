@@ -9,7 +9,7 @@ namespace ToursWeb.Controllers
     {
         private readonly ITourRepository _tourRepository;
         private readonly IHotelRepository _hotelRepository;
-        
+
         public TourController(ITourRepository tourRepository, IHotelRepository hotelRepository)
         {
             _tourRepository = tourRepository;
@@ -33,7 +33,7 @@ namespace ToursWeb.Controllers
         
         public List<Tour> GetToursByDate(DateTime beg, DateTime end)
         {
-            return _tourRepository.FindTourByDate(beg, end);
+            return _tourRepository.FindToursByDate(beg, end);
         }
         
         public List<Tour> GetToursByCity(string city)

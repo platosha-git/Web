@@ -28,14 +28,9 @@ namespace ToursWeb.Controllers
             return _foodRepository.FindFoodByCategory(cat);
         }
 
-        public List<Food> GetFoodByVegMenu(bool vm)
+        public List<Food> GetFoodByMenu(string menu)
         {
-            return _foodRepository.FindFoodByVegMenu(vm);
-        }
-
-        public List<Food> GetFoodByChildMenu(bool cm)
-        {
-            return _foodRepository.FindFoodByChildMenu(cm);
+            return _foodRepository.FindFoodByMenu(menu);
         }
 
         public List<Food> GetFoodByBar(bool bar)

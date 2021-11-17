@@ -6,9 +6,11 @@ namespace ToursAPI.ModelsDTO
     public class TransferDTO
     {
         public int Transferid { get; set; }
-        public int? Planeticket { get; set; }
-        public int? Trainticket { get; set; }
-        public int? Busticket { get; set; }
+        public string Type { get; set; }
+        public string Cityfrom { get; set; }
+        public string Cityto { get; set; }
+        public DateTime? Departuretime { get; set; }
+        public int? Cost { get; set; }
 
         public TransferDTO()
         {
@@ -17,9 +19,11 @@ namespace ToursAPI.ModelsDTO
         public TransferDTO(Transfer transfer)
         {
             Transferid = transfer.Transferid;
-            Planeticket = transfer.Planeticket;
-            Trainticket = transfer.Trainticket;
-            Busticket = transfer.Busticket;
+            Type = transfer.Type;
+            Cityfrom = transfer.Cityfrom;
+            Cityto = transfer.Cityto;
+            Departuretime = transfer.Departuretime;
+            Cost = transfer.Cost;
         }
         
         public Transfer GetTransfer()
@@ -27,9 +31,11 @@ namespace ToursAPI.ModelsDTO
             Transfer transfer = new Transfer ()
             {
                 Transferid = Transferid,
-                Planeticket = Planeticket,
-                Trainticket = Trainticket,
-                Busticket = Busticket
+                Type = Type,
+                Cityfrom = Cityfrom,
+                Cityto = Cityto,
+                Departuretime = Departuretime,
+                Cost = Cost
             };
             return transfer;
         }
@@ -37,9 +43,11 @@ namespace ToursAPI.ModelsDTO
         public bool AreEqual(Transfer transfer)
         {
             if (Transferid == transfer.Transferid &&
-                Planeticket == transfer.Planeticket &&
-                Trainticket == transfer.Trainticket &&
-                Busticket == transfer.Busticket)
+                Type == transfer.Type &&
+                Cityfrom == transfer.Cityfrom &&
+                Cityto == transfer.Cityto &&
+                Departuretime == transfer.Departuretime &&
+                Cost == transfer.Cost)
                 return true;
             return false;
         }
