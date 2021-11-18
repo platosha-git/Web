@@ -50,7 +50,7 @@ namespace ToursWeb.ImpRepositories
         {
         }
 
-        public User GetUserByLP(string login, string password)
+        public User FindUserByLP(string login, string password)
         {
             IQueryable<User> users = _db.Users.Where(needed => needed.Login.Equals(login) &&
                                                                    needed.Password.Equals(password));
@@ -60,8 +60,8 @@ namespace ToursWeb.ImpRepositories
             }
             return null;
         }
-
-        public int[] GetBookToursByID(int id)
+        
+        public int[] FindBookedTours(int id)
         {
             return FindByID(id).Toursid;
         }

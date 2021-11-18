@@ -22,5 +22,15 @@ namespace ToursWeb.Controllers
         {
             return _userRepository.FindByID(userID);
         }
+
+        public User GetUserByLP(string login, string password)
+        {
+            return _userRepository.FindUserByLP(login, password);
+        }
+
+        public int[] GetBookedTours(int id)
+        {
+            return _userRepository.FindBookedTours(id);
+        }
     }
 }
