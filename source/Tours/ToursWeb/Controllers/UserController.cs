@@ -48,5 +48,28 @@ namespace ToursWeb.Controllers
             
             return _userRepository.UpdateTours(user, newTours);
         }
+
+        public bool CancelTour(int userID, int tourID)
+        {
+            User user = _userRepository.FindByID(userID);
+            int[] oldTours = user.Toursid;
+            int size = oldTours.Length;
+
+            int[] newTours = new int[size - 1];
+            int i = 0, j = 0;
+            while (i < size)
+            {
+                int curTour = oldTours[i];
+                if (curTour == tourID)
+                {
+                    i++;
+                    continue;
+                }
+                newTours[j] = oldTours[i];
+                i++; j++;
+            }
+
+            return _userRepository.UpdateTours(user, newTours);
+        }
     }
 }

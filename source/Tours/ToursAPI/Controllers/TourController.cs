@@ -140,34 +140,6 @@ namespace ToursAPI.Controllers
             TourDTO updatedTour = new TourDTO(tour);
             return Ok(updatedTour);
         }
-        
-        /// <summary>Updating tour cost</summary>
-        /// <returns>Updated tour</returns>
-        /// <response code="200">Tour cost updated</response>
-        /// <response code="400">Update error</response>
-        [HttpPatch]
-        [Route("{TourID:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult UpdateTourCost([FromRoute(Name = "TourID")] int tourID,
-            [FromBody] int diff)
-        {
-            Tour uTour = _tourController.GetTourByID(tourID);
-            if (uTour == null)
-            {
-                return NotFound();
-            }
-            
-            bool isUpdated = _tourController.ChangeCost(tourID, diff);
-            if (!isUpdated)
-            {
-                return BadRequest();
-            }
-            
-            TourDTO updatedTour = new TourDTO(uTour);
-            return Ok(updatedTour);
-        }
 
         /// <summary>Removing transfer by ID</summary>
         /// <returns>Removed transfer</returns>

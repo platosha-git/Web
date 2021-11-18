@@ -120,14 +120,14 @@ namespace ToursAPI.Controllers
         }
 
         /// <summary>Book tours</summary>
-        /// <returns>Tour information</returns>
+        /// <returns>Tours information</returns>
         /// <response code="200">Tour booked</response>
         /// <response code="404">No tour</response>
         [HttpPatch]
-        [Route("{UserID:int}")]
+        [Route("{UserID:int}/Book")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetAllBookings([FromRoute(Name = "UserID")] int userID,
+        public IActionResult BookTour([FromRoute(Name = "UserID")] int userID,
             [FromQuery(Name = "TourID"), Required] int tourID)
         {
             if (_userController.GetAllUserInfo(userID) == null)
@@ -153,6 +153,49 @@ namespace ToursAPI.Controllers
             }
 
             bool success = _userController.BookTour(userID, tourID);
+            if (!success)
+            {
+                return BadRequest();
+            }
+
+            List<UserTour> lTours = GetAllUserBookings(userID);
+            return Ok(lTours);
+        }
+        
+        /// <summary>Cancel tours</summary>
+        /// <returns>Tours information</returns>
+        /// <response code="200">Tour canceled</response>
+        /// <response code="404">No tour</response>
+        [HttpPatch]
+        [Route("{UserID:int}/Cancel")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult CancelTour([FromRoute(Name = "UserID")] int userID,
+            [FromQuery(Name = "TourID"), Required] int tourID)
+        {
+            if (_userController.GetAllUserInfo(userID) == null)
+            {
+                return BadRequest();
+            }
+
+            int[] toursID = _userController.GetBookedTours(userID);
+            int size = toursID.Length;
+
+            bool isExist = false;
+            for (int i = 0; i < size && !isExist; i++)
+            {
+                if (toursID[i] == tourID)
+                {
+                    isExist = true;
+                }
+            }
+
+            if (!isExist)
+            {
+                return BadRequest();
+            }
+
+            bool success = _userController.CancelTour(userID, tourID);
             if (!success)
             {
                 return BadRequest();

@@ -36,11 +36,6 @@ namespace ToursWeb.Controllers
             }
             return userTours;
         }
-        
-        public bool ChangeCost(int id, int diff)
-        {
-            return _tourRepository.ChangeCost(id, diff);
-        }
 
         public List<Tour> GetAllTours()
         {

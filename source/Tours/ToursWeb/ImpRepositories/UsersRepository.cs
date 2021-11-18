@@ -73,12 +73,12 @@ namespace ToursWeb.ImpRepositories
                 obj.Toursid = toursID;
                 _db.Users.Update(obj);
                 _db.SaveChanges();
-                _logger.LogInformation("+UsersRep : User {Number} was updated at Users", obj.Userid);
+                _logger.LogInformation("+UsersRep : Tours user {Number} was updated at Users", obj.Userid);
                 return true;
             }
             catch (Exception err)
             {
-                _logger.LogError(err, "+UsersRep : Error trying to update user at Users");
+                _logger.LogError(err, "+UsersRep : Error trying to update tours at Users");
                 return false;
             }
         }
