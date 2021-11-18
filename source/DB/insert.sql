@@ -35,7 +35,7 @@ INSERT INTO Food (FoodID, Category, Menu, Bar, Cost) VALUES
 
 INSERT INTO Hotel (HotelID, Name, Type, Class, SwimPool, City, Cost) VALUES 
 (1,'Venezia','Apartment',2,False,'Moscow',6757),
-(2,'MOSS Boutique Hotel','B&B',2,False,'London',18746),
+(2,'MOSS Boutique Hotel','BnB',2,False,'London',18746),
 (3,'Democratia','Hotel',3,False,'Madrid',18322),
 (4,'Scelerisque Scelerisque Limited','Camping',5,True,'Rome',19834),
 (5,'Paradise','Vila',4,True,'London',19805),

@@ -27,7 +27,7 @@ ADD CONSTRAINT HCost_CHK CHECK (Cost > 0),
 ADD CONSTRAINT HClass_CHK CHECK (Class >= 0 AND Class <= 5),
 ADD CONSTRAINT HType_CHK CHECK (Type = 'Hotel' OR Type = 'Apartment' OR Type = 'Hostel' OR 
 								Type = 'Guest house' OR Type = 'Motel' OR Type = 'Vila' OR 
-								Type = 'Camping' OR Type = 'B&B');
+								Type = 'Camping' OR Type = 'BnB');
 
 ALTER TABLE Transfer
 ADD CONSTRAINT TCost_CHK CHECK (Cost > 0),

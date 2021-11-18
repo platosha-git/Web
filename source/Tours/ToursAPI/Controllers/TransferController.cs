@@ -32,18 +32,16 @@ namespace ToursAPI.Controllers
             return lTransfersDTO;
         }
 
-        /// <summary>
-        /// Список трафнсферов в соответствии с параметрами
-        /// </summary>
-        /// <returns>Информация о всех трансферах</returns>
-        /// <response code="200">Трфнсфер найден</response>
-        /// <response code="404">Трансфер отсутсвует</response>
+        /// <summary>Transfers by parameters</summary>
+        /// <returns>Transfers information</returns>
+        /// <response code="200">Transfers found</response>
+        /// <response code="404">No transfers</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TransferDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllTransfer([FromQuery(Name = "Type")] TType? type = null,
-            [FromQuery(Name = "City from")] string? cityFrom = null, [FromQuery(Name = "City to")] string cityTo = null,
-            [FromQuery(Name = "Departure date")] DateTime? date = null)
+            [FromQuery(Name = "City from")] string cityFrom = null, [FromQuery(Name = "City to")] string cityTo = null,
+            [FromQuery(Name = "dd-mm-yyyy")] string date = null)
         {
             List<Transfer> transfers = _transferController.GetAllTransfer();
             if (transfers != null)
@@ -62,14 +60,14 @@ namespace ToursAPI.Controllers
 
                 if (date != null)
                 {
-                    List<Transfer> transfersDate = _transferController.GetTransfersByDate((DateTime)date);
+                    DateTime dateTr = Convert.ToDateTime(date);
+                    List<Transfer> transfersDate = _transferController.GetTransfersByDate(dateTr);
                     List<Transfer> res2 = transfers.Intersect(transfersDate).ToList();
                     transfers = res2;
                 }
-                
             }
 
-            if (transfers == null)
+            if (transfers == null || transfers.Count == 0)
             {
                 return NotFound();
             }
@@ -78,13 +76,10 @@ namespace ToursAPI.Controllers
             return Ok(lTtransfersDTO);
         }
 
-        /// <summary>
-        /// Трансфер по ключу
-        /// </summary>
-        /// <param name="transferID">ИД трансфера</param>
-        /// <returns>Информация о трансфере по ключу</returns>
+        /// <summary>Transfer by ID</summary>
+        /// <returns>Transfer information</returns>
         /// <response code="200">Transfer found</response>
-        /// <response code="404">No transfers</response>
+        /// <response code="404">No transfer</response>
         [HttpGet]
         [Route("{TransferID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferDTO))]
@@ -101,11 +96,9 @@ namespace ToursAPI.Controllers
             return Ok(transferDTO);
         }
 
-        /// <summary>
-        /// Добавление трансфера
-        /// </summary>
-        /// <param name="transferDTO">Добавляемый трансфер</param>
-        /// <returns>Результат добавления</returns>
+        /// <summary>Adding transfer</summary>
+        /// <param name="transferDTO">Transfer to add</param>
+        /// <returns>Added transfer</returns>
         /// <response code="200">Transfer added</response>
         /// <response code="400">Add error</response>
         [HttpPost]
@@ -126,11 +119,9 @@ namespace ToursAPI.Controllers
             return Ok(addedTransfer);
         }
 
-        /// <summary>
-        /// Обновление трансфера
-        /// </summary>
-        /// <param name="transferDTO">Обновляемый трансфер</param>
-        /// <returns>Результат обновления</returns>
+        /// <summary>Updating transfer</summary>
+        /// <param name="hotelDTO">Transfer to update</param>
+        /// <returns>Updated transfer</returns>
         /// <response code="200">Transfer updated</response>
         /// <response code="400">Update error</response>
         [HttpPut]
@@ -151,12 +142,9 @@ namespace ToursAPI.Controllers
             return Ok(updatedTransfer);
         }
 
-        /// <summary>
-        /// Удаление трансфера по ключу
-        /// </summary>
-        /// <param name="transferID">ИД трансфера</param>
-        /// <returns>Результат удаления</returns>
-        /// <response code="200">Transfer deleted</response>
+        /// <summary>Removing transfer by ID</summary>
+        /// <returns>Removed transfer</returns>
+        /// <response code="200">Transfer removed</response>
         /// <response code="404">No transfer</response>
         [HttpDelete]
         [Route("{TransferID:int}")]

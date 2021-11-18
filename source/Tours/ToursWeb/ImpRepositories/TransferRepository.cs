@@ -87,7 +87,11 @@ namespace ToursWeb.ImpRepositories
 
         public List<Transfer> FindTransfersByDate(DateTime date)
         {
-            IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Departuretime == date);
+            DateTime dateBegin = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0);
+            DateTime dateEnd = new DateTime(date.Year, date.Month, date.Day, 23, 59, 59);
+            
+            IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Departuretime >= dateBegin &&
+                                                                           needed.Departuretime <= dateEnd);
             return transfers.ToList();
         }
 
