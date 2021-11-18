@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using ToursWeb.ModelsDB;
 using ToursWeb.Controllers;
 using ToursWeb.Repositories;
@@ -33,10 +34,7 @@ namespace ToursAPI
             //services.AddControllers();
             services.AddControllers().AddNewtonsoftJson(o =>
             {
-                o.SerializerSettings.Converters.Add(new StringEnumConverter
-                {
-                    CamelCaseText = true
-                });
+                o.SerializerSettings.Converters.Add(new StringEnumConverter{});
             });
             
             services.AddSwaggerGen(c =>
