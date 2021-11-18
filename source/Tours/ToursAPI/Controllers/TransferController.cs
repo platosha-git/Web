@@ -40,8 +40,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TransferDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllTransfer([FromQuery(Name = "Type")] TType? type = null,
-            [FromQuery(Name = "City from")] string cityFrom = null, [FromQuery(Name = "City to")] string cityTo = null,
-            [FromQuery(Name = "dd-mm-yyyy")] string date = null)
+            [FromQuery(Name = "City from")] string cityFrom = null, [FromQuery(Name = "dd-mm-yyyy")] string date = null)
         {
             List<Transfer> transfers = _transferController.GetAllTransfer();
             if (transfers != null)
@@ -51,9 +50,9 @@ namespace ToursAPI.Controllers
                     transfers = _transferController.GetTransferByType(type.ToString());
                 }
 
-                if (cityFrom != null && cityTo != null)
+                if (cityFrom != null)
                 {
-                    List<Transfer> transfersCities = _transferController.GetTransfersByCities(cityFrom, cityTo);
+                    List<Transfer> transfersCities = _transferController.GetTransfersByCity(cityFrom);
                     List<Transfer> res1 = transfers.Intersect(transfersCities).ToList();
                     transfers = res1;
                 }
@@ -120,7 +119,7 @@ namespace ToursAPI.Controllers
         }
 
         /// <summary>Updating transfer</summary>
-        /// <param name="hotelDTO">Transfer to update</param>
+        /// <param name="transferDTO">Transfer to update</param>
         /// <returns>Updated transfer</returns>
         /// <response code="200">Transfer updated</response>
         /// <response code="400">Update error</response>

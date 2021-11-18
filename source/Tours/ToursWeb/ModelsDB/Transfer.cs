@@ -11,7 +11,6 @@ namespace ToursWeb.ModelsDB
         Train,
         Plane
     }
-    
     public partial class Transfer
     {
         public Transfer()
@@ -22,7 +21,6 @@ namespace ToursWeb.ModelsDB
         public int Transferid { get; set; }
         public string Type { get; set; }
         public string Cityfrom { get; set; }
-        public string Cityto { get; set; }
         public DateTime? Departuretime { get; set; }
         public int? Cost { get; set; }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ToursWeb.ModelsDB;
 using ToursWeb.Repositories;
 
@@ -27,11 +28,6 @@ namespace ToursWeb.Controllers
         public List<Hotel> GetHotelsByCity(string city)
         {
             return _hotelRepository.FindHotelsByCity(city);
-        }
-
-        public Hotel GetHotelByName(string name)
-        {
-            return _hotelRepository.FindHotelByName(name);
         }
 
         public List<Hotel> GetHotelsByType(string type)

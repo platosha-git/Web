@@ -7,7 +7,7 @@ namespace ToursWeb.Repositories
     public interface ITransferRepository : CrudRepository<Transfer, int>
     {
         List<Transfer> FindTransferByType(string type);
-        List<Transfer> FindTransfersByCities(string cityFrom, string cityTo);
+        List<Transfer> FindTransfersByCity(string cityFrom);
         List<Transfer> FindTransfersByDate(DateTime date);
     }
 

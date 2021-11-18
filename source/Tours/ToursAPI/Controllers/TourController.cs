@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ToursWeb.ModelsDB;
@@ -10,52 +10,97 @@ using ToursAPI.ModelsDTO;
 namespace ToursAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/v1/Tours")]
 
     public class ApiTourController : ControllerBase
     {
         private readonly TourController _tourController;
+        private readonly HotelController _hotelController;
+        private readonly FoodController _foodController;
+        private readonly TransferController _transferController;
 
-        public ApiTourController(TourController tourController)
+        public ApiTourController(TourController tourController, HotelController hotelController, 
+            FoodController foodController, TransferController transferController)
         {
             _tourController = tourController;
+            _hotelController = hotelController;
+            _foodController = foodController;
+            _transferController = transferController;
         }
 
-        private List<TourDTO> ListTourDTO(List<Tour> lTours)
+        private List<UserTourDTO> ListUserTourDTO(List<Tour> lTours)
         {
-            List<TourDTO> lToursDTO = new List<TourDTO>();
+            List<UserTourDTO> lUserToursDTO = new List<UserTourDTO>();
             foreach (var tour in lTours)
             {
-                TourDTO tourDTO = new TourDTO(tour);
-                lToursDTO.Add(tourDTO);
+                Hotel hotel = _hotelController.GetHotelByID(tour.Hotel); 
+                Food food = _foodController.GetFoodByID(tour.Food);
+                Transfer transfer = _transferController.GetTransferByID(tour.Transfer);
+                
+                UserTourDTO userTourDTO = new UserTourDTO(tour, hotel, food, transfer);
+                lUserToursDTO.Add(userTourDTO);
             }
-            return lToursDTO;
+            return lUserToursDTO;
         }
 
-        /// <summary>
-        /// Список всех туров
-        /// </summary>
-        /// <returns>Информация о всех турах</returns>
+        /// <summary>Tours by parameters</summary>
+        /// <returns>Tours information</returns>
+        /// <param name="city"></param>
+        /// <param name="name"></param>
+        /// <param name="dBegin">Format: dd-mm-yyyy</param>
+        /// <param name="dEnd">Format: dd-mm-yyyy</param>
+        /// <response code="200">Tours found</response>
+        /// <response code="404">No tours</response>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TourDTO>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTourDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetAllTours()
+        public IActionResult GetAllTours([FromQuery(Name = "City")] string city = null,
+            [FromQuery(Name = "Hotel name")] string name = null,
+            [FromQuery(Name = "DateBegin")] string dBegin = null, [FromQuery(Name = "DateEnd")] string dEnd = null)
         {
-            var tours = _tourController.GetAllTours();
-            if (tours == null)
+            List<Tour> tours = _tourController.GetAllTours();
+            if (tours != null)
+            {
+                if (city != null)
+                {
+                    if (name != null)
+                    {
+                        List<Tour> toursCN = _tourController.GetToursByCityName(city, name);
+                        List<Tour> res1 = tours.Intersect(toursCN).ToList();
+                        tours = res1;
+                    }
+                    else
+                    {
+                        List<Tour> toursC = _tourController.GetToursByCity(city);
+                        List<Tour> res2 = tours.Intersect(toursC).ToList();
+                        tours = res2;
+                    }
+                }
+
+                if (dBegin != null && dEnd != null)
+                {
+                    DateTime beg = Convert.ToDateTime(dBegin);
+                    DateTime end = Convert.ToDateTime(dEnd);
+
+                    List<Tour> toursDate = _tourController.GetToursByDate(beg, end);
+                    List<Tour> res1 = tours.Intersect(toursDate).ToList();
+                    tours = res1;
+                }
+            }
+            
+            if (tours == null || tours.Count == 0)
             {
                 return NotFound();
             }
 
-            List<TourDTO> lToursDTO = ListTourDTO(tours);
-            return Ok(lToursDTO);
+            List<UserTourDTO> lUserToursDTO = ListUserTourDTO(tours);
+            return Ok(lUserToursDTO);
         }
         
-        /// <summary>
-        /// Тур по ключу
-        /// </summary>
-        /// <param name="tourID">ИД тура</param>
-        /// <returns>Информация о туре по ключу</returns>
+        /// <summary>Tour by ID</summary>
+        /// <returns>Tour information</returns>
+        /// <response code="200">Tour found</response>
+        /// <response code="404">No tour</response>
         [HttpGet]
         [Route("{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
@@ -72,59 +117,11 @@ namespace ToursAPI.Controllers
             return Ok(tourDTO);
         }
 
-        /// <summary>
-        /// Список туров в зависимости от даты
-        /// </summary>
-        /// <param name="dBegin">Дата начала тура</param>
-        /// <param name="dEnd">Дата окончания тура</param>
-        /// <returns>Информация о турах в зависимости от даты</returns>
-        [HttpGet]
-        [Route("{DateBegin}/{DateEnd}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TourDTO>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetToursByDate([FromRoute(Name = "DateBegin")] string dBegin,
-            [FromRoute(Name = "DateEnd")] string dEnd)
-        {
-            //01-12-2020    01-12-2021
-            DateTime beg = Convert.ToDateTime(dBegin);
-            DateTime end = Convert.ToDateTime(dEnd);
-
-            var tours = _tourController.GetToursByDate(beg, end);
-            if (tours == null)
-            {
-                return NotFound();
-            }
-
-            List<TourDTO> lToursDTO = ListTourDTO(tours);
-            return Ok(lToursDTO);
-        }
-
-        /// <summary>
-        /// Список туров в зависимости от города
-        /// </summary>
-        /// <param name="city">Город тура</param>
-        /// <returns>Информация о турах в зависимости от города</returns>
-        [HttpGet]
-        [Route("{City}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TourDTO>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetToursByCity([FromRoute(Name = "City")] string city)
-        {
-            var tours = _tourController.GetToursByCity(city);
-            if (tours == null)
-            {
-                return NotFound();
-            }
-
-            List<TourDTO> lToursDTO = ListTourDTO(tours);
-            return Ok(lToursDTO);
-        }
-
-        /// <summary>
-        /// Добавление тура
-        /// </summary>
-        /// <param name="tourDTO">Добавляемый тур</param>
-        /// <returns>Результат добавления</returns>
+        /// <summary>Adding tour</summary>
+        /// <param name="tourDTO">Tour to add</param>
+        /// <returns>Added tour</returns>
+        /// <response code="200">Tour added</response>
+        /// <response code="400">Add error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -143,11 +140,11 @@ namespace ToursAPI.Controllers
             return Ok(addedTour);
         }
 
-        /// <summary>
-        /// Обновление тура
-        /// </summary>
-        /// <param name="tourDTO">Обновляемый тур</param>
-        /// <returns>Результат обновления</returns>
+        /// <summary>Updating tour</summary>
+        /// <param name="tourDTO">Tour to update</param>
+        /// <returns>Updated tour</returns>
+        /// <response code="200">Tour updated</response>
+        /// <response code="400">Update error</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -166,18 +163,17 @@ namespace ToursAPI.Controllers
             return Ok(updatedTour);
         }
         
-        /// <summary>
-        /// Обновление стоимости тура
-        /// </summary>
-        /// <param name="tourID">ИД тура</param>
-        /// <returns>Результат обновления</returns>
+        /// <summary>Updating tour cost</summary>
+        /// <returns>Updated tour</returns>
+        /// <response code="200">Tour cost updated</response>
+        /// <response code="400">Update error</response>
         [HttpPatch]
         [Route("{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult UpdateTourCost([FromRoute(Name = "TourID")] int tourID,
-            [FromQuery, Required] int diff)
+            [FromBody] int diff)
         {
             Tour uTour = _tourController.GetTourByID(tourID);
             if (uTour == null)
@@ -195,11 +191,10 @@ namespace ToursAPI.Controllers
             return Ok(updatedTour);
         }
 
-        /// <summary>
-        /// Удаление тура по ключу
-        /// </summary>
-        /// <param name="tourID">ИД тура</param>
-        /// <returns>Результат удаления</returns>
+        /// <summary>Removing transfer by ID</summary>
+        /// <returns>Removed transfer</returns>
+        /// <response code="200">Transfer removed</response>
+        /// <response code="404">No transfer</response>
         [HttpDelete]
         [Route("{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]

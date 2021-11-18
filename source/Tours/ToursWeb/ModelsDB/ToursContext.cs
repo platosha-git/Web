@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -141,10 +143,6 @@ namespace ToursWeb.ModelsDB
                 entity.Property(e => e.Cityfrom)
                     .HasMaxLength(30)
                     .HasColumnName("cityfrom");
-
-                entity.Property(e => e.Cityto)
-                    .HasMaxLength(30)
-                    .HasColumnName("cityto");
 
                 entity.Property(e => e.Cost).HasColumnName("cost");
 

@@ -29,9 +29,9 @@ namespace ToursWeb.Controllers
             return _transferRepository.FindTransferByType(type);
         }
         
-        public List<Transfer> GetTransfersByCities(string cityFrom, string cityTo)
+        public List<Transfer> GetTransfersByCity(string cityFrom)
         {
-            return _transferRepository.FindTransfersByCities(cityFrom, cityTo);
+            return _transferRepository.FindTransfersByCity(cityFrom);
         }
 
         public List<Transfer> GetTransfersByDate(DateTime date)

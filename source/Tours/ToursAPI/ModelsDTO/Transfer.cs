@@ -21,7 +21,6 @@ namespace ToursAPI.ModelsDTO
             Transferid = transfer.Transferid;
             Type = transfer.Type;
             Cityfrom = transfer.Cityfrom;
-            Cityto = transfer.Cityto;
             Departuretime = transfer.Departuretime;
             Cost = transfer.Cost;
         }
@@ -33,7 +32,6 @@ namespace ToursAPI.ModelsDTO
                 Transferid = Transferid,
                 Type = Type,
                 Cityfrom = Cityfrom,
-                Cityto = Cityto,
                 Departuretime = Departuretime,
                 Cost = Cost
             };
@@ -45,7 +43,6 @@ namespace ToursAPI.ModelsDTO
             if (Transferid == transfer.Transferid &&
                 Type == transfer.Type &&
                 Cityfrom == transfer.Cityfrom &&
-                Cityto == transfer.Cityto &&
                 Departuretime == transfer.Departuretime &&
                 Cost == transfer.Cost)
                 return true;

@@ -78,10 +78,9 @@ namespace ToursWeb.ImpRepositories
             return transfers.ToList();
         }
 
-        public List<Transfer> FindTransfersByCities(string cityFrom, string cityTo)
+        public List<Transfer> FindTransfersByCity(string cityFrom)
         {
-            IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Cityfrom.Equals(cityFrom) &&
-                                                                           needed.Cityto.Equals(cityTo));
+            IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Cityfrom.Equals(cityFrom));
             return transfers.ToList();
         }
 

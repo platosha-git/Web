@@ -47,16 +47,16 @@ INSERT INTO Hotel (HotelID, Name, Type, Class, SwimPool, City, Cost) VALUES
 
 
 INSERT INTO Transfer (TransferID, Type, CityFrom, CityTo, DepartureTime, Cost) VALUES
-(1,'Bus','Moscow','London','2022-03-09 03:22:04',9838),
-(2,'Plane','Berlin','Madrid','2022-10-14 14:25:51',5138),
-(3,'Train','Rome','Paris','2021-03-17 15:16:38',1658),
-(4,'Bus','Vena','Paris','2022-06-02 12:08:54',2616),
-(5,'Plane','Madrid','Rome','2021-07-24 16:05:25',1629),
-(6,'Train','London','Berlin','2022-08-30 05:04:29',14678),
-(7,'Bus','Moscow','Vena','2021-08-30 17:06:53',2573),
-(8,'Plane','London','Rome','2021-03-18 03:53:46',6770),
-(9,'Train','Berlin','Vena','2021-02-17 04:09:37',2858),
-(10,'Bus','Madrid','Moscow','2021-10-14 17:31:13',11699);
+(1,'Bus','Moscow','2022-03-09 03:22:04',9838),
+(2,'Plane','Berlin','2022-10-14 14:25:51',5138),
+(3,'Train','Rome','2021-03-17 15:16:38',1658),
+(4,'Bus','Vena','2022-06-02 12:08:54',2616),
+(5,'Plane','Madrid','2021-07-24 16:05:25',1629),
+(6,'Train','London','2022-08-30 05:04:29',14678),
+(7,'Bus','Moscow','2021-08-30 17:06:53',2573),
+(8,'Plane','London','2021-03-18 03:53:46',6770),
+(9,'Train','Berlin','2021-02-17 04:09:37',2858),
+(10,'Bus','Madrid','2021-10-14 17:31:13',11699);
 
 
 INSERT INTO Tour (TourID, Food, Hotel, Transfer, Cost, DateBegin, DateEnd) VALUES

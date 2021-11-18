@@ -82,10 +82,10 @@ namespace ToursWeb.ImpRepositories
             return hotels.ToList();
         }
 
-        public Hotel FindHotelByName(string name)
+        public List<Hotel> FindHotelsByName(string name)
         {
             IQueryable<Hotel> hotel = _db.Hotels.Where(needed => needed.Name == name);
-            return hotel.First();
+            return hotel.ToList();
         }
 
         public List<Hotel> FindHotelByType(string type)
