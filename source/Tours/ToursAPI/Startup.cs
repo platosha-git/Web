@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using Newtonsoft.Json.Converters;
 using ToursWeb.ModelsDB;
 using ToursWeb.Controllers;
 using ToursWeb.Repositories;
@@ -29,7 +30,14 @@ namespace ToursAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            //services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(o =>
+            {
+                o.SerializerSettings.Converters.Add(new StringEnumConverter
+                {
+                    CamelCaseText = true
+                });
+            });
             
             services.AddSwaggerGen(c =>
             {
@@ -37,8 +45,9 @@ namespace ToursAPI
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+                
             });
-
+            services.AddSwaggerGenNewtonsoftSupport();
 
             IConfiguration config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ToursWeb.ModelsDB;
@@ -8,7 +9,7 @@ using ToursAPI.ModelsDTO;
 namespace ToursAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/v1/Food")]
 
     public class ApiFoodController : ControllerBase
     {
@@ -27,25 +28,49 @@ namespace ToursAPI.Controllers
                 FoodDTO foodDTO = new FoodDTO(food);
                 lFoodDTO.Add(foodDTO);
             }
+
             return lFoodDTO;
         }
         
         /// <summary>
-        /// Список всего питания
+        /// Список питания в соответсвии с параметрами
         /// </summary>
-        /// <returns>Информация обо всем питании</returns>
+        /// <param name="category">Тип питания</param>
+        /// <param name="menu">Специальное меню</param>
+        /// <param name="bar">Наличие бара</param>
+        /// <returns>Информация о питании</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetAllFood()
+        public IActionResult GetAllFood([FromQuery] string? category = null,
+            [FromQuery] FMenu? menu = null, [FromQuery] bool? bar = null)
         {
-            var food = _foodController.GetAllFood();
-            if (food == null)
+            List<Food> foods = _foodController.GetAllFood();
+
+            if (category != null && foods != null)
+            {
+                foods = _foodController.GetFoodByCategory(category);
+            }
+            
+            if (menu != null && foods != null)
+            {
+                List<Food> foodMenu = _foodController.GetFoodByMenu(menu.ToString());
+                List<Food> res1 = foods.Intersect(foodMenu).ToList();
+                foods = res1;
+            }
+            
+            if (bar != null && foods != null)
+            {
+                List<Food> foodsBar = _foodController.GetFoodByBar((bool)bar);
+                List<Food> res2 = foods.Intersect(foodsBar).ToList();
+                foods = res2;
+            }
+            
+            if (foods == null)
             {
                 return NotFound();
             }
-
-            List<FoodDTO> lFoodDTO = ListFoodDTO(food);
+            List<FoodDTO> lFoodDTO = ListFoodDTO(foods);
             return Ok(lFoodDTO);
         }
         
@@ -68,48 +93,6 @@ namespace ToursAPI.Controllers
 
             FoodDTO foodDTO = new FoodDTO(food);
             return Ok(foodDTO);
-        }
-
-        /// <summary>
-        /// Список питания в зависимости от меню
-        /// </summary>
-        /// <param name="menu">Наличие вегетарианского меню</param>
-        /// <returns>Информация о питании в зависимости от меню</returns>
-        [HttpGet]
-        [Route("VegMenu/{Menu}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodDTO>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetFoodByVegMenu([FromRoute(Name = "Menu")] string menu)
-        {
-            var food = _foodController.GetFoodByMenu(menu);
-            if (food == null)
-            {
-                return NotFound();
-            }
-
-            List<FoodDTO> lFoodDTO = ListFoodDTO(food);
-            return Ok(lFoodDTO);
-        }
-
-        /// <summary>
-        /// Список питания в зависимости от бара
-        /// </summary>
-        /// <param name="bar">Наличие бара</param>
-        /// <returns>Информация о питании в зависимости от бара</returns>
-        [HttpGet]
-        [Route("Bar/{Bar:bool}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodDTO>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetFoodByBar([FromRoute(Name = "Bar")] bool bar)
-        {
-            var food = _foodController.GetFoodByBar(bar);
-            if (food == null)
-            {
-                return NotFound();
-            }
-
-            List<FoodDTO> lFoodDTO = ListFoodDTO(food);
-            return Ok(lFoodDTO);
         }
 
         /// <summary>

@@ -80,7 +80,7 @@ namespace ToursWeb.ImpRepositories
 
         public List<Food> FindFoodByCategory(string cat)
         {
-            IQueryable<Food> foods = _db.Foods.Where(needed => needed.Category == cat);
+            IQueryable<Food> foods = _db.Foods.Where(needed => needed.Category.Equals(cat));
             return foods.ToList();
         }
 

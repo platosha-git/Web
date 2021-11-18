@@ -1,9 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 #nullable disable
 
 namespace ToursWeb.ModelsDB
 {
+    public enum FMenu
+    {
+        Vegeterian,
+        Children,
+        Dietary
+    };
+    
     public partial class Food
     {
         public Food()
