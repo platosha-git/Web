@@ -32,13 +32,13 @@ namespace ToursAPI.Controllers
             return lFoodDTO;
         }
         
-        /// <summary>Food by parameters</summary>
-        /// <param name="category">Type food (Breakfast, Half board, Full board,
-        /// All inclusive, Continental breakfast, American breakfast)</param>
-        /// <param name="menu">Special menu</param>
-        /// <param name="bar">Bar</param>
-        /// <returns>Food information</returns>
-        /// <response code="200">Food found</response>
+        /// <summary>Foods by parameters</summary>
+        /// <param name="category">Breakfast, Half board, Full board,
+        /// All inclusive, Continental breakfast, American breakfast</param>
+        /// <param name="menu"></param>
+        /// <param name="bar"></param>
+        /// <returns>Foods information</returns>
+        /// <response code="200">Foods found</response>
         /// <response code="404">No food</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodDTO>))]
@@ -78,7 +78,6 @@ namespace ToursAPI.Controllers
         }
         
         /// <summary>Food by ID</summary>
-        /// <param name="foodID">Food ID</param>
         /// <returns>Food information</returns>
         /// <response code="200">Food found</response>
         /// <response code="404">No food</response>
@@ -145,7 +144,6 @@ namespace ToursAPI.Controllers
         }
 
         /// <summary>Removing food by ID</summary>
-        /// <param name="foodID">FoodID to remove</param>
         /// <returns>Removed food</returns>
         /// <response code="200">Food removed</response>
         /// <response code="404">No food</response>

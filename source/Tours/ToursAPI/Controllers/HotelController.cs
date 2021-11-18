@@ -31,17 +31,19 @@ namespace ToursAPI.Controllers
             return lHotelDTO;
         }
         
-        /// <summary>
-        /// Список отелей в соответствии с параметрами
-        /// </summary>
-        /// <returns>Информация о всех отелях</returns>
-        /// <response code="200">Отели найдены</response>
-        /// <response code="404">Отели отсутсвуют</response>
+        /// <summary>Hotels by parameters</summary>
+        /// <param name="city"></param>
+        /// <param name="cls">Class (0 - 5)</param>
+        /// <param name="type">Hotel, Apartment, Hostel, Guest house, Motel, Vila, Camping, BnB</param>
+        /// <param name="sp"></param>
+        /// <returns>Hotels information</returns>
+        /// <response code="200">Hotels found</response>
+        /// <response code="404">No hotels</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<HotelDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetAllHotels([FromQuery(Name = "City")] string? city = null,
-            [FromQuery(Name = "Class")] int? cls = null, [FromQuery(Name = "Type")] HType? type = null,
+        public IActionResult GetAllHotels([FromQuery(Name = "City")] string city = null,
+            [FromQuery(Name = "Class")] int? cls = null, [FromQuery(Name = "Type")] string type = null,
             [FromQuery(Name = "Swimming pool")] bool? sp = null)
         {
             List<Hotel> hotels = _hotelController.GetAllHotels();
@@ -61,7 +63,7 @@ namespace ToursAPI.Controllers
 
                 if (type != null)
                 {
-                    List<Hotel> hotelsType = _hotelController.GetHotelsByType(type.ToString());
+                    List<Hotel> hotelsType = _hotelController.GetHotelsByType(type);
                     List<Hotel> res2 = hotels.Intersect(hotelsType).ToList();
                     hotels = res2;
                 }
@@ -83,13 +85,10 @@ namespace ToursAPI.Controllers
             return Ok(lHotelsDTO);
         }
         
-        /// <summary>
-        /// Отель по ключу
-        /// </summary>
-        /// <param name="hotelID">ИД отеля</param>
-        /// <returns>Информация об отеле по ключу</returns>
-        /// <response code="200">Отель найден</response>
-        /// <response code="404">Отель отсутсвует</response>
+        /// <summary>Hotel by ID</summary>
+        /// <returns>Hotel information</returns>
+        /// <response code="200">Hotel found</response>
+        /// <response code="404">No hotel</response>
         [HttpGet]
         [Route("HotelID/{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
@@ -106,13 +105,11 @@ namespace ToursAPI.Controllers
             return Ok(hotelDTO);
         }
 
-        /// <summary>
-        /// Добавление отлея
-        /// </summary>
-        /// <param name="hotelDTO">Добавлемый отель</param>
-        /// <returns>Результат добавления</returns>
-        /// <response code="200">Отель добавлен</response>
-        /// <response code="400">Ошибка добавления</response>
+        /// <summary>Adding hotel</summary>
+        /// <param name="hotelDTO">Hotel to add</param>
+        /// <returns>Added hotel</returns>
+        /// <response code="200">Hotel added</response>
+        /// <response code="400">Add error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -131,13 +128,11 @@ namespace ToursAPI.Controllers
             return Ok(addedHotel);
         }
 
-        /// <summary>
-        /// Обновление отеля
-        /// </summary>
-        /// <param name="hotelDTO">Обновляемый отель</param>
-        /// <returns>Результат обновления</returns>
-        /// <response code="200">Отель обновлен</response>
-        /// <response code="400">Ошибка обновления</response>
+        /// <summary>Updating hotel</summary>
+        /// <param name="hotelDTO">Hotel to update</param>
+        /// <returns>Updated hotel</returns>
+        /// <response code="200">Hotel updated</response>
+        /// <response code="400">Update error</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -156,13 +151,10 @@ namespace ToursAPI.Controllers
             return Ok(updatedHotel);
         }
 
-        /// <summary>
-        /// Удаление отеля по ключу
-        /// </summary>
-        /// <param name="hotelID">ИД отеля</param>
-        /// <returns>Результат удаления</returns>
-        /// <response code="200">Отель удален</response>
-        /// <response code="404">Отель отсутсвует</response>
+        /// <summary>Removing hotel by ID</summary>
+        /// <returns>Removed hotel</returns>
+        /// <response code="200">Hotel removed</response>
+        /// <response code="404">No hotel</response>
         [HttpDelete]
         [Route("{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
