@@ -9,7 +9,7 @@ using ToursAPI.ModelsDTO;
 namespace ToursAPI.Controllers
 {
     [ApiController]
-    [Route("/api/v1/Hotel")]
+    [Route("/api/v1/Hotels")]
 
     public class ApiHotelController : ControllerBase
     {

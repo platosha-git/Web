@@ -71,20 +71,21 @@ namespace ToursWeb.ImpRepositories
                 _logger.LogError(err, "+TransferRep : Error trying to delete transfer from Transfer");
             }
         }
-        
-        public List<Transfer> FindTransferByCityFrom(string city)
+
+        public List<Transfer> FindTransferByType(string type)
         {
-            IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Cityfrom.Equals(city));
+            IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Type.Equals(type));
             return transfers.ToList();
         }
 
-        public List<Transfer> FindTransferByCityTo(string city)
+        public List<Transfer> FindTransfersByCities(string cityFrom, string cityTo)
         {
-            IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Cityto.Equals(city));
+            IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Cityfrom.Equals(cityFrom) &&
+                                                                           needed.Cityto.Equals(cityTo));
             return transfers.ToList();
         }
 
-        public List<Transfer> FindTransferByDate(DateTime date)
+        public List<Transfer> FindTransfersByDate(DateTime date)
         {
             IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Departuretime == date);
             return transfers.ToList();

@@ -18,7 +18,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/FoodController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/FoodController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/HotelController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/HotelController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Hotel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ModelsDB/Hotel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/TransferController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/TransferController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Controllers/TransferController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Controllers/TransferController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ImpRepositories/TransferRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ImpRepositories/TransferRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/ModelsDB/Transfer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/ModelsDB/Transfer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToursWeb/Repositories/ITransferRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursWeb/Repositories/ITransferRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +228,7 @@
       <workItem from="1637163538676" duration="1931000" />
       <workItem from="1637167703787" duration="9074000" />
       <workItem from="1637189048499" duration="5039000" />
-      <workItem from="1637228094553" duration="4200000" />
+      <workItem from="1637228094553" duration="6108000" />
     </task>
     <servers />
   </component>

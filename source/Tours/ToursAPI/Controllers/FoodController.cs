@@ -11,7 +11,7 @@ using ToursAPI.ModelsDTO;
 namespace ToursAPI.Controllers
 {
     [ApiController]
-    [Route("/api/v1/Food")]
+    [Route("/api/v1/Foods")]
 
     public class ApiFoodController : ControllerBase
     {

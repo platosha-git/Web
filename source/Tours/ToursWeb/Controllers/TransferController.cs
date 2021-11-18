@@ -24,19 +24,19 @@ namespace ToursWeb.Controllers
             return _transferRepository.FindByID(transfID);
         }
         
-        public List<Transfer> GetTransferByCityFrom(string city)
+        public List<Transfer> GetTransferByType(string type)
         {
-            return _transferRepository.FindTransferByCityFrom(city);
+            return _transferRepository.FindTransferByType(type);
+        }
+        
+        public List<Transfer> GetTransfersByCities(string cityFrom, string cityTo)
+        {
+            return _transferRepository.FindTransfersByCities(cityFrom, cityTo);
         }
 
-        public List<Transfer> GetTransferByCityTo(string city)
+        public List<Transfer> GetTransfersByDate(DateTime date)
         {
-            return _transferRepository.FindTransferByCityTo(city);
-        }
-
-        public List<Transfer> GetTransferByDate(DateTime date)
-        {
-            return _transferRepository.FindTransferByDate(date);
+            return _transferRepository.FindTransfersByDate(date);
         }
         
         public void AddTransfer(Transfer ntran)

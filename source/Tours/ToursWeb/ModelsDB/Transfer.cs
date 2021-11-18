@@ -5,6 +5,13 @@ using System.Collections.Generic;
 
 namespace ToursWeb.ModelsDB
 {
+    public enum TType
+    {
+        Bus,
+        Train,
+        Plane
+    }
+    
     public partial class Transfer
     {
         public Transfer()
