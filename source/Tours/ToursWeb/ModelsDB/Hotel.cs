@@ -4,6 +4,15 @@
 
 namespace ToursWeb.ModelsDB
 {
+    public enum HType
+    {
+        Hotel,
+        Apartment,
+        Hostel, 
+        Motel,
+        Vila, 
+        Camping
+    }
     public partial class Hotel
     {
         public Hotel()

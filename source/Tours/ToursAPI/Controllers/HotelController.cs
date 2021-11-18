@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ToursWeb.ModelsDB;
@@ -8,7 +9,7 @@ using ToursAPI.ModelsDTO;
 namespace ToursAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/v1/Hotel")]
 
     public class ApiHotelController : ControllerBase
     {
@@ -31,16 +32,49 @@ namespace ToursAPI.Controllers
         }
         
         /// <summary>
-        /// Список всех отелей
+        /// Список отелей в соответствии с параметрами
         /// </summary>
         /// <returns>Информация о всех отелях</returns>
+        /// <response code="200">Отели найдены</response>
+        /// <response code="404">Отели отсутсвуют</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<HotelDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetAllHotels()
+        public IActionResult GetAllHotels([FromQuery(Name = "City")] string? city = null,
+            [FromQuery(Name = "Class")] int? cls = null, [FromQuery(Name = "Type")] HType? type = null,
+            [FromQuery(Name = "Swimming pool")] bool? sp = null)
         {
-            var hotels = _hotelController.GetAllHotels();
-            if (hotels == null)
+            List<Hotel> hotels = _hotelController.GetAllHotels();
+            if (hotels != null)
+            {
+                if (city != null)
+                {
+                    hotels = _hotelController.GetHotelsByCity(city);
+                }
+
+                if (cls != null)
+                {
+                    List<Hotel> hotelsCls = _hotelController.GetHotelsByClass((int)cls);
+                    List<Hotel> res1 = hotels.Intersect(hotelsCls).ToList();
+                    hotels = res1;
+                }
+
+                if (type != null)
+                {
+                    List<Hotel> hotelsType = _hotelController.GetHotelsByType(type.ToString());
+                    List<Hotel> res2 = hotels.Intersect(hotelsType).ToList();
+                    hotels = res2;
+                }
+                
+                if (sp != null)
+                {
+                    List<Hotel> hotelsSP = _hotelController.GetHotelsBySwimPool((bool)sp);
+                    List<Hotel> res3 = hotels.Intersect(hotelsSP).ToList();
+                    hotels = res3;
+                }
+            }
+            
+            if (hotels == null || hotels.Count == 0)
             {
                 return NotFound();
             }
@@ -54,6 +88,8 @@ namespace ToursAPI.Controllers
         /// </summary>
         /// <param name="hotelID">ИД отеля</param>
         /// <returns>Информация об отеле по ключу</returns>
+        /// <response code="200">Отель найден</response>
+        /// <response code="404">Отель отсутсвует</response>
         [HttpGet]
         [Route("HotelID/{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
@@ -71,52 +107,12 @@ namespace ToursAPI.Controllers
         }
 
         /// <summary>
-        /// Список отелей в зависимости от города
-        /// </summary>
-        /// <param name="city">Город отеля</param>
-        /// <returns>Информация об отелях в зависимости от города</returns>
-        [HttpGet]
-        [Route("{City}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<HotelDTO>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetHotelsByCity([FromRoute(Name = "City")] string city)
-        {
-            var hotels = _hotelController.GetHotelsByCity(city);
-            if (hotels == null)
-            {
-                return NotFound();
-            }
-
-            List<HotelDTO> lHotelsDTO = ListHotelDTO(hotels);
-            return Ok(lHotelsDTO);
-        }
-
-        /// <summary>
-        /// Список отелей в зависимости от класса
-        /// </summary>
-        /// <param name="cls">Класс отеля</param>
-        /// <returns>Информация об отелях в зависимости от класса</returns>
-        [HttpGet]
-        [Route("{Class:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<HotelDTO>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetHotelsByClass([FromRoute(Name = "Class")] int cls)
-        {
-            var hotels = _hotelController.GetHotelsByClass(cls);
-            if (hotels == null)
-            {
-                return NotFound();
-            }
-
-            List<HotelDTO> lHotelsDTO = ListHotelDTO(hotels);
-            return Ok(lHotelsDTO);
-        }
-
-        /// <summary>
         /// Добавление отлея
         /// </summary>
         /// <param name="hotelDTO">Добавлемый отель</param>
         /// <returns>Результат добавления</returns>
+        /// <response code="200">Отель добавлен</response>
+        /// <response code="400">Ошибка добавления</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -140,6 +136,8 @@ namespace ToursAPI.Controllers
         /// </summary>
         /// <param name="hotelDTO">Обновляемый отель</param>
         /// <returns>Результат обновления</returns>
+        /// <response code="200">Отель обновлен</response>
+        /// <response code="400">Ошибка обновления</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -163,6 +161,8 @@ namespace ToursAPI.Controllers
         /// </summary>
         /// <param name="hotelID">ИД отеля</param>
         /// <returns>Результат удаления</returns>
+        /// <response code="200">Отель удален</response>
+        /// <response code="404">Отель отсутсвует</response>
         [HttpDelete]
         [Route("{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]

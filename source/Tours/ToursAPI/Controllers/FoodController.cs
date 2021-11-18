@@ -46,8 +46,8 @@ namespace ToursAPI.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetAllFood([FromQuery] string? category = null,
-            [FromQuery] FMenu? menu = null, [FromQuery] bool? bar = null)
+        public IActionResult GetAllFood([FromQuery(Name = "Category")] string? category = null,
+            [FromQuery(Name = "Menu")] FMenu? menu = null, [FromQuery(Name = "Bar")] bool? bar = null)
         {
             List<Food> foods = _foodController.GetAllFood();
             if (foods != null)
