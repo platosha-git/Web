@@ -10,13 +10,33 @@ namespace ToursWeb.Controllers
     {
         private readonly ITourRepository _tourRepository;
         private readonly IHotelRepository _hotelRepository;
+        private readonly IFoodRepository _foodRepository;
+        private readonly ITransferRepository _transferRepository;
 
-        public TourController(ITourRepository tourRepository, IHotelRepository hotelRepository)
+        public TourController(ITourRepository tourRepository, IHotelRepository hotelRepository,
+            IFoodRepository foodRepository, ITransferRepository transferRepository)
         {
             _tourRepository = tourRepository;
             _hotelRepository = hotelRepository;
+            _foodRepository = foodRepository;
+            _transferRepository = transferRepository;
         }
 
+        public List<UserTour> ToUserTour(List<Tour> tours)
+        {
+            List<UserTour> userTours = new List<UserTour>();
+            foreach (var tour in tours)
+            {
+                Hotel hotel = _hotelRepository.FindByID(tour.Hotel); 
+                Food food = _foodRepository.FindByID(tour.Food);
+                Transfer transfer = _transferRepository.FindByID(tour.Transfer);
+                
+                UserTour userTourDTO = new UserTour(tour, hotel, food, transfer);
+                userTours.Add(userTourDTO);
+            }
+            return userTours;
+        }
+        
         public bool ChangeCost(int id, int diff)
         {
             return _tourRepository.ChangeCost(id, diff);

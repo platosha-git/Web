@@ -38,11 +38,11 @@ namespace ToursWeb.ImpRepositories
             {
                 _db.Users.Update(obj);
                 _db.SaveChanges();
-                _logger.LogInformation("+BookingRep : Booking {Number} was updated at Bookings", obj.Userid);
+                _logger.LogInformation("+UsersRep : User {Number} was updated at Users", obj.Userid);
             }
             catch (Exception err)
             {
-                _logger.LogError(err, "+BookingRep : Error trying to update booking at Bookings");
+                _logger.LogError(err, "+UsersRep : Error trying to update user at Users");
             }
         }
 
@@ -64,6 +64,23 @@ namespace ToursWeb.ImpRepositories
         public int[] FindBookedTours(int id)
         {
             return FindByID(id).Toursid;
+        }
+        
+        public bool UpdateTours(User obj, int[] toursID)
+        {
+            try
+            {
+                obj.Toursid = toursID;
+                _db.Users.Update(obj);
+                _db.SaveChanges();
+                _logger.LogInformation("+UsersRep : User {Number} was updated at Users", obj.Userid);
+                return true;
+            }
+            catch (Exception err)
+            {
+                _logger.LogError(err, "+UsersRep : Error trying to update user at Users");
+                return false;
+            }
         }
 
         public void Dispose()

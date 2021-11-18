@@ -32,5 +32,21 @@ namespace ToursWeb.Controllers
         {
             return _userRepository.FindBookedTours(id);
         }
+
+        public bool BookTour(int userID, int tourID)
+        {
+            User user = _userRepository.FindByID(userID);
+            int[] oldTours = user.Toursid;
+            int size = oldTours.Length;
+                
+            int[] newTours = new int[size + 1];
+            for (int i = 0; i < size; i++)
+            {
+                newTours[i] = oldTours[i];
+            }
+            newTours[size] = tourID;
+            
+            return _userRepository.UpdateTours(user, newTours);
+        }
     }
 }

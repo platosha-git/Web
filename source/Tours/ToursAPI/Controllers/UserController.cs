@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ToursWeb.ModelsDB;
@@ -59,7 +60,7 @@ namespace ToursAPI.Controllers
             return Ok(lUsersDTO);
         }
         
-        /// <summary>User by params</summary>
+        /// <summary>User by ID</summary>
         /// <returns>User information</returns>
         /// <response code="200">User found</response>
         /// <response code="404">No user</response>
@@ -78,17 +79,13 @@ namespace ToursAPI.Controllers
             UserDTO userDTO = new UserDTO(user);
             return Ok(userDTO);
         }
-        
-        /*[HttpGet]
-        [Route("Tours/{UserID:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTourDTO>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetAllBookings([FromRoute(Name = "UserID")] int userID)
+
+        private List<UserTour> GetAllUserBookings(int userID)
         {
             int[] toursID = _userController.GetBookedTours(userID);
-            if (toursID == null)
+            if (toursID == null || toursID.Length == 0)
             {
-                return NotFound();
+                return null;
             }
             
             List<Tour> tours = new List<Tour>();
@@ -98,9 +95,71 @@ namespace ToursAPI.Controllers
                 tours.Add(curTour);
             }
 
-            List<UserTourDTO> lTours = null;//ListUserTours(tours);
+            List<UserTour> lTours = _tourController.ToUserTour(tours);
+            return lTours;
+        }
+        
+        /// <summary>User tours</summary>
+        /// <returns>Tours information</returns>
+        /// <response code="200">Tours found</response>
+        /// <response code="404">No tours</response>
+        [HttpGet]
+        [Route("{UserID:int}/Tour")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetAllBookings([FromRoute(Name = "UserID")] int userID)
+        {
+            List<UserTour> lTours = GetAllUserBookings(userID);
+            if (lTours == null)
+            {
+                return NotFound();
+            }
+            
             return Ok(lTours);
         }
-        */
+
+        /// <summary>Book tours</summary>
+        /// <returns>Tour information</returns>
+        /// <response code="200">Tour booked</response>
+        /// <response code="404">No tour</response>
+        [HttpPatch]
+        [Route("{UserID:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetAllBookings([FromRoute(Name = "UserID")] int userID,
+            [FromQuery(Name = "TourID"), Required] int tourID)
+        {
+            if (_userController.GetAllUserInfo(userID) == null)
+            {
+                return BadRequest();
+            }
+
+            int[] toursID = _userController.GetBookedTours(userID);
+            int size = toursID.Length;
+
+            bool isAlreadyExist = false;
+            for (int i = 0; i < size && !isAlreadyExist; i++)
+            {
+                if (toursID[i] == tourID)
+                {
+                    isAlreadyExist = true;
+                }
+            }
+
+            if (isAlreadyExist)
+            {
+                return BadRequest();
+            }
+
+            bool success = _userController.BookTour(userID, tourID);
+            if (!success)
+            {
+                return BadRequest();
+            }
+
+            List<UserTour> lTours = GetAllUserBookings(userID);
+            return Ok(lTours);
+        }
     }
 }

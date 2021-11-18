@@ -15,32 +15,10 @@ namespace ToursAPI.Controllers
     public class ApiTourController : ControllerBase
     {
         private readonly TourController _tourController;
-        private readonly HotelController _hotelController;
-        private readonly FoodController _foodController;
-        private readonly TransferController _transferController;
 
-        public ApiTourController(TourController tourController, HotelController hotelController, 
-            FoodController foodController, TransferController transferController)
+        public ApiTourController(TourController tourController)
         {
             _tourController = tourController;
-            _hotelController = hotelController;
-            _foodController = foodController;
-            _transferController = transferController;
-        }
-
-        private List<UserTourDTO> ListUserTourDTO(List<Tour> lTours)
-        {
-            List<UserTourDTO> lUserToursDTO = new List<UserTourDTO>();
-            foreach (var tour in lTours)
-            {
-                Hotel hotel = _hotelController.GetHotelByID(tour.Hotel); 
-                Food food = _foodController.GetFoodByID(tour.Food);
-                Transfer transfer = _transferController.GetTransferByID(tour.Transfer);
-                
-                UserTourDTO userTourDTO = new UserTourDTO(tour, hotel, food, transfer);
-                lUserToursDTO.Add(userTourDTO);
-            }
-            return lUserToursDTO;
         }
 
         /// <summary>Tours by parameters</summary>
@@ -52,7 +30,7 @@ namespace ToursAPI.Controllers
         /// <response code="200">Tours found</response>
         /// <response code="404">No tours</response>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTourDTO>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllTours([FromQuery(Name = "City")] string city = null,
             [FromQuery(Name = "Hotel name")] string name = null,
@@ -93,7 +71,7 @@ namespace ToursAPI.Controllers
                 return NotFound();
             }
 
-            List<UserTourDTO> lUserToursDTO = ListUserTourDTO(tours);
+            List<UserTour> lUserToursDTO = _tourController.ToUserTour(tours);
             return Ok(lUserToursDTO);
         }
         

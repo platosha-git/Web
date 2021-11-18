@@ -5,5 +5,6 @@ namespace ToursWeb.Repositories
     {
         User FindUserByLP(string login, string password);
         int[] FindBookedTours(int id);
+        bool UpdateTours(User obj, int[] toursID);
     }
 }
