@@ -106,7 +106,6 @@ namespace ToursAPI.Controllers
         [HttpGet]
         [Route("{UserID:int}/Tour")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllBookings([FromRoute(Name = "UserID")] int userID)
         {
@@ -122,7 +121,7 @@ namespace ToursAPI.Controllers
         /// <summary>Book tours</summary>
         /// <returns>Tours information</returns>
         /// <response code="200">Tour booked</response>
-        /// <response code="404">No tour</response>
+        /// <response code="400">Error book</response>
         [HttpPatch]
         [Route("{UserID:int}/Book")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
@@ -165,7 +164,7 @@ namespace ToursAPI.Controllers
         /// <summary>Cancel tours</summary>
         /// <returns>Tours information</returns>
         /// <response code="200">Tour canceled</response>
-        /// <response code="404">No tour</response>
+        /// <response code="400">Error cancel</response>
         [HttpPatch]
         [Route("{UserID:int}/Cancel")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
