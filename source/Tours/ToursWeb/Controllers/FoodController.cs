@@ -39,9 +39,9 @@ namespace ToursWeb.Controllers
             return _foodRepository.FindFoodByBar(bar);
         }
         
-        public void AddFood(Food nfood)
+        public ExitCode AddFood(Food nfood)
         {
-            _foodRepository.Add(nfood);
+            return _foodRepository.Add(nfood);
         }
         
         public void UpdateFood(Food nfood)

@@ -28,8 +28,9 @@ namespace ToursWeb.ImpRepositories
             return _db.Users.Find(id);
         }
 
-        public void Add(User obj)
+        public ExitCode Add(User obj)
         {
+            return ExitCode.Success;
         }
 
         public void Update(User obj)

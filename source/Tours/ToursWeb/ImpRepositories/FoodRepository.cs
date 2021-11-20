@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using ToursWeb.Repositories;
 using Microsoft.Extensions.Logging;
+using Npgsql;
 using ToursWeb.ModelsDB;
 
 namespace ToursWeb.ImpRepositories
@@ -28,18 +31,25 @@ namespace ToursWeb.ImpRepositories
             return _db.Foods.Find(id);
         }
 
-        public void Add(Food obj)
+        public ExitCode Add(Food obj)
         {
-            try 
+            try
             {
                 obj.Foodid = _db.Foods.Count() + 1;
                 _db.Foods.Add(obj);
                 _db.SaveChanges();
                 _logger.LogInformation("+FoodRep : Food {Number} was added to Food", obj.Foodid);
+                return ExitCode.Success;
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException err)
+            {
+                _logger.LogError(err, "+FoodRep : Sql violation when trying to add food to Food");
+                return ExitCode.Constraint;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+FoodRep : Error trying to add food to Food");
+                return ExitCode.Error;
             }
         }
 

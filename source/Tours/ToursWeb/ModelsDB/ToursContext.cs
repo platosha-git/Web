@@ -6,6 +6,12 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ToursWeb.ModelsDB
 {
+    public enum ExitCode
+    {
+        Success,
+        Constraint,
+        Error
+    }
     public partial class ToursContext : DbContext
     {
         public ToursContext()

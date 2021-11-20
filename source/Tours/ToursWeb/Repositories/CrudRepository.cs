@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ToursWeb.ModelsDB;
 
 namespace ToursWeb.Repositories
 {
@@ -6,7 +7,7 @@ namespace ToursWeb.Repositories
     {
         List<T> FindAll();
         T FindByID(ID id);
-        void Add(T obj);
+        ExitCode Add(T obj);
         void Update(T obj);
         void DeleteByID(ID id);
     }

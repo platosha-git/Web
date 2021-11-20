@@ -28,7 +28,7 @@ namespace ToursWeb.ImpRepositories
             return _db.Transfers.Find(id);
         }
 
-        public void Add(Transfer obj)
+        public ExitCode Add(Transfer obj)
         {
             try
             {
@@ -36,10 +36,12 @@ namespace ToursWeb.ImpRepositories
                 _db.Transfers.Add(obj);
                 _db.SaveChanges();
                 _logger.LogInformation("+TransferRep : Transfer {Number} was added to Transfers", obj.Transferid);
+                return ExitCode.Success;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+TransferRep : Error trying to add transfer to Transfers");
+                return ExitCode.Error;
             }
         }
 
@@ -50,6 +52,7 @@ namespace ToursWeb.ImpRepositories
                 _db.Transfers.Update(obj);
                 _db.SaveChanges();
                 _logger.LogInformation("+TransferRep : Transfer {Number} was updated at Transfers", obj.Transferid);
+                
             }
             catch (Exception err)
             {

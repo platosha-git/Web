@@ -28,7 +28,7 @@ namespace ToursWeb.ImpRepositories
             return _db.Tours.Find(id);
         }
 
-        public void Add(Tour obj)
+        public ExitCode Add(Tour obj)
         {
             try
             {
@@ -36,10 +36,12 @@ namespace ToursWeb.ImpRepositories
                 _db.Tours.Add(obj);
                 _db.SaveChanges();
                 _logger.LogInformation("+TourRep : Tour {Number} was added to Tours", obj.Tourid);
+                return ExitCode.Success;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+TourRep : Error trying to add tour to Tours");
+                return ExitCode.Error;
             }
         }
 

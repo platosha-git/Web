@@ -102,21 +102,27 @@ namespace ToursAPI.Controllers
         /// <returns>Added food</returns>
         /// <response code="200">Food added</response>
         /// <response code="400">Add error</response>
+        /// <response code="409">Constraint error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FoodDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult AddFood([FromBody] FoodUserDTO foodDTO)
         {
             Food aFood = foodDTO.GetFood();
-            _foodController.AddFood(aFood);
+            ExitCode result = _foodController.AddFood(aFood);
+            
+            if (result == ExitCode.Constraint) 
+            {
+                return Conflict();
+            }
 
-            Food food = _foodController.GetFoodByID(aFood.Foodid); 
-            if (food == null) 
+            if (result == ExitCode.Error)
             {
                 return BadRequest();
             }
-
-            FoodDTO addedFood = new FoodDTO(food);
+            
+            FoodDTO addedFood = new FoodDTO(aFood);
             return Ok(addedFood);
         }
 

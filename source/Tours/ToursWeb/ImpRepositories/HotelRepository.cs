@@ -28,7 +28,7 @@ namespace ToursWeb.ImpRepositories
             return _db.Hotels.Find(id);
         }
 
-        public void Add(Hotel obj)
+        public ExitCode Add(Hotel obj)
         {
             try
             {
@@ -36,10 +36,12 @@ namespace ToursWeb.ImpRepositories
                 _db.Hotels.Add(obj);
                 _db.SaveChanges();
                 _logger.LogInformation("+HotelRep : Hotel {Number} was added to Hotels", obj.Hotelid);
+                return ExitCode.Success;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+HotelRep : Error trying to add hotel to Hotels");
+                return ExitCode.Error;
             }
         }
 
