@@ -16,33 +16,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7b08addc-33cb-4e41-86c2-2b90f7f80639" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tours/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/FoodController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/FoodController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/HotelController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/HotelController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/TourController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/TourController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToursAPI/Controllers/TransferController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/Controllers/TransferController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Food.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Food.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Hotel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Hotel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Tour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Tour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Transfer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/ModelsDTO/Transfer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToursAPI/ModelsDTO/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToursAPI/ModelsDTO/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/fastcgi.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/fastcgi_params" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/koi-utf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/koi-win" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/mime.types" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/modules-enabled/50-mod-http-image-filter.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/modules-enabled/50-mod-http-xslt-filter.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/modules-enabled/50-mod-mail.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/modules-enabled/50-mod-stream.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/../nginx/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/proxy_params" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/scgi_params" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/sites-available/default" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/sites-enabled/default" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/snippets/fastcgi-php.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/snippets/snakeoil.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/uwsgi_params" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/win-utf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,7 +226,7 @@
       <workItem from="1637228094553" duration="17108000" />
       <workItem from="1637251735741" duration="15722000" />
       <workItem from="1637322021357" duration="2380000" />
-      <workItem from="1637418187494" duration="7961000" />
+      <workItem from="1637418187494" duration="9339000" />
     </task>
     <servers />
   </component>

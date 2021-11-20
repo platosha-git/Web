@@ -34,13 +34,16 @@ namespace ToursAPI.Controllers
 
         /// <summary>Transfers by parameters</summary>
         /// <returns>Transfers information</returns>
+        /// <param name="type"></param>
+        /// <param name="cityFrom"></param>
+        /// <param name="date">Format: dd-mm-yyyy</param>
         /// <response code="200">Transfers found</response>
         /// <response code="404">No transfers</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TransferDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllTransfer([FromQuery(Name = "Type")] TType? type = null,
-            [FromQuery(Name = "City from")] string cityFrom = null, [FromQuery(Name = "dd-mm-yyyy")] string date = null)
+            [FromQuery(Name = "CityFrom")] string cityFrom = null, [FromQuery(Name = "Date")] string date = null)
         {
             List<Transfer> transfers = _transferController.GetAllTransfer();
             if (transfers != null)

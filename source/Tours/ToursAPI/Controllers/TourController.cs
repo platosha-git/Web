@@ -33,7 +33,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllTours([FromQuery(Name = "City")] string city = null,
-            [FromQuery(Name = "Hotel name")] string name = null,
+            [FromQuery(Name = "HotelName")] string name = null,
             [FromQuery(Name = "DateBegin")] string dBegin = null, [FromQuery(Name = "DateEnd")] string dEnd = null)
         {
             List<Tour> tours = _tourController.GetAllTours();
