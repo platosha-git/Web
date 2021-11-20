@@ -103,7 +103,7 @@ namespace ToursAPI.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult AddTransfer([FromBody] TransferDTO transferDTO)
+        public IActionResult AddTransfer([FromBody] TransferUserDTO transferDTO)
         {
             Transfer aTransfer = transferDTO.GetTransfer();
             _transferController.AddTransfer(aTransfer);
@@ -128,7 +128,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult UpdateTransfer([FromBody] TransferDTO transferDTO)
         {
-            Transfer uTransfer = transferDTO.GetTransfer();
+            Transfer uTransfer = transferDTO.GetTransfer(transferDTO.Transferid);
             _transferController.UpdateTransfer(uTransfer);
 
             Transfer transfer = _transferController.GetTransferByID(transferDTO.Transferid); 

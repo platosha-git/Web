@@ -96,14 +96,14 @@ namespace ToursAPI.Controllers
         }
 
         /// <summary>Adding tour</summary>
-        /// <param name="tourDTO">Tour to add</param>
+        /// <param name="tourUserDTO">Tour to add</param>
         /// <returns>Added tour</returns>
         /// <response code="200">Tour added</response>
         /// <response code="400">Add error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult AddTour([FromBody] TourDTO tourDTO)
+        public IActionResult AddTour([FromBody] TourUserDTO tourDTO)
         {
             Tour aTour = tourDTO.GetTour();
             _tourController.AddTour(aTour);
@@ -128,7 +128,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult UpdateTour([FromBody] TourDTO tourDTO)
         {
-            Tour uTour = tourDTO.GetTour();
+            Tour uTour = tourDTO.GetTour(tourDTO.Tourid);
             _tourController.UpdateTour(uTour);
 
             Tour tour = _tourController.GetTourByID(tourDTO.Tourid); 

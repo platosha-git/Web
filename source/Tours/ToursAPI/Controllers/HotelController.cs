@@ -90,7 +90,7 @@ namespace ToursAPI.Controllers
         /// <response code="200">Hotel found</response>
         /// <response code="404">No hotel</response>
         [HttpGet]
-        [Route("HotelID/{HotelID:int}")]
+        [Route("{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetHotelByID([FromRoute(Name = "HotelID")] int hotelID)
@@ -106,16 +106,16 @@ namespace ToursAPI.Controllers
         }
 
         /// <summary>Adding hotel</summary>
-        /// <param name="hotelDTO">Hotel to add</param>
+        /// <param name="hotelUserDTO">Hotel to add</param>
         /// <returns>Added hotel</returns>
         /// <response code="200">Hotel added</response>
         /// <response code="400">Add error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult AddHotel([FromBody] HotelDTO hotelDTO)
+        public IActionResult AddHotel([FromBody] HotelUserDTO hotelUserDTO)
         {
-            Hotel aHotel = hotelDTO.GetHotel();
+            Hotel aHotel = hotelUserDTO.GetHotel();
             _hotelController.AddHotel(aHotel);
 
             Hotel hotel = _hotelController.GetHotelByID(aHotel.Hotelid); 
@@ -138,7 +138,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult UpdateHotel([FromBody] HotelDTO hotelDTO)
         {
-            Hotel uHotel = hotelDTO.GetHotel();
+            Hotel uHotel = hotelDTO.GetHotel(hotelDTO.Hotelid);
             _hotelController.UpdateHotel(uHotel);
 
             Hotel hotel = _hotelController.GetHotelByID(hotelDTO.Hotelid); 

@@ -105,7 +105,7 @@ namespace ToursAPI.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FoodDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult AddFood([FromBody] FoodDTO foodDTO)
+        public IActionResult AddFood([FromBody] FoodUserDTO foodDTO)
         {
             Food aFood = foodDTO.GetFood();
             _foodController.AddFood(aFood);
@@ -130,9 +130,9 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult UpdateFood([FromBody] FoodDTO foodDTO)
         {
-            Food uFood = foodDTO.GetFood();
+            Food uFood = foodDTO.GetFood(foodDTO.Foodid);
             _foodController.UpdateFood(uFood);
-
+            
             Food food = _foodController.GetFoodByID(foodDTO.Foodid); 
             if (!foodDTO.AreEqual(food))
             {

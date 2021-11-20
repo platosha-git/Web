@@ -3,9 +3,8 @@ using ToursWeb.ModelsDB;
 
 namespace ToursAPI.ModelsDTO
 {
-    public class TourDTO
+    public class TourUserDTO
     {
-        public int Tourid { get; set; }
         public int Food { get; set; }
         public int Hotel { get; set; }
         public int Transfer { get; set; }
@@ -13,9 +12,30 @@ namespace ToursAPI.ModelsDTO
         public DateTime Datebegin { get; set; }
         public DateTime Dateend { get; set; }
 
-        public TourDTO()
+        public TourUserDTO() {}
+        
+        public Tour GetTour(int tourID = 0)
         {
+            Tour tour = new Tour ()
+            {
+                Tourid = tourID,
+                Food = Food,
+                Hotel = Hotel,
+                Transfer = Transfer,
+                Cost = Cost,
+                Datebegin = Datebegin,
+                Dateend = Dateend
+            };
+            
+            return tour;
         }
+    }
+
+    public class TourDTO : TourUserDTO
+    {
+        public int Tourid { get; set; }
+
+        public TourDTO() {}
 
         public TourDTO(Tour tour)
         {
@@ -26,21 +46,6 @@ namespace ToursAPI.ModelsDTO
             Cost = tour.Cost;
             Datebegin = tour.Datebegin;
             Dateend = tour.Dateend;
-        }
-
-        public Tour GetTour()
-        {
-            Tour tour = new Tour ()
-            {
-                Tourid = Tourid,
-                Food = Food,
-                Hotel = Hotel,
-                Transfer = Transfer,
-                Cost = Cost,
-                Datebegin = Datebegin,
-                Dateend = Dateend
-            };
-            return tour;
         }
         
         public bool AreEqual(Tour tour)

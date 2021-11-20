@@ -3,19 +3,36 @@ using ToursWeb.ModelsDB;
 
 namespace ToursAPI.ModelsDTO
 {
-    public class TransferDTO
+    public class TransferUserDTO
     {
-        public int Transferid { get; set; }
         public string Type { get; set; }
         public string Cityfrom { get; set; }
-        public string Cityto { get; set; }
         public DateTime? Departuretime { get; set; }
         public int? Cost { get; set; }
 
-        public TransferDTO()
-        {
-        }
+        public TransferUserDTO() {}
 
+        public Transfer GetTransfer(int transferID = 0)
+        {
+            Transfer transfer = new Transfer ()
+            {
+                Transferid = transferID,
+                Type = Type,
+                Cityfrom = Cityfrom,
+                Departuretime = Departuretime,
+                Cost = Cost
+            };
+            
+            return transfer;
+        }
+    }
+
+    public class TransferDTO : TransferUserDTO
+    {
+        public int Transferid { get; set; }
+        
+        public TransferDTO() {}
+        
         public TransferDTO(Transfer transfer)
         {
             Transferid = transfer.Transferid;
@@ -23,19 +40,6 @@ namespace ToursAPI.ModelsDTO
             Cityfrom = transfer.Cityfrom;
             Departuretime = transfer.Departuretime;
             Cost = transfer.Cost;
-        }
-        
-        public Transfer GetTransfer()
-        {
-            Transfer transfer = new Transfer ()
-            {
-                Transferid = Transferid,
-                Type = Type,
-                Cityfrom = Cityfrom,
-                Departuretime = Departuretime,
-                Cost = Cost
-            };
-            return transfer;
         }
         
         public bool AreEqual(Transfer transfer)

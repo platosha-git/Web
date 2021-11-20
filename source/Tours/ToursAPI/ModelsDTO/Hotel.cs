@@ -1,11 +1,9 @@
-using System;
 using ToursWeb.ModelsDB;
 
 namespace ToursAPI.ModelsDTO
 {
-    public class HotelDTO
+    public class HotelUserDTO
     {
-        public int Hotelid { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public int? Class { get; set; }
@@ -13,9 +11,30 @@ namespace ToursAPI.ModelsDTO
         public string City { get; set; }
         public int Cost { get; set; }
 
-        public HotelDTO()
+        public HotelUserDTO() {}
+
+        public Hotel GetHotel(int hotelID = 0)
         {
+            Hotel hotel = new Hotel ()
+            {
+                Hotelid = hotelID,
+                Name = Name,
+                Type = Type,
+                Class = Class,
+                Swimpool = Swimpool,
+                City = City,
+                Cost = Cost
+            };
+            
+            return hotel;
         }
+    }
+
+    public class HotelDTO : HotelUserDTO
+    {
+        public int Hotelid { get; set; }
+        
+        public HotelDTO() {}
         
         public HotelDTO(Hotel hotel)
         {
@@ -28,21 +47,6 @@ namespace ToursAPI.ModelsDTO
             Cost = hotel.Cost;
         }
         
-        public Hotel GetHotel()
-        {
-            Hotel hotel = new Hotel ()
-            {
-                Hotelid = Hotelid,
-                Name = Name,
-                Type = Type,
-                Class = Class,
-                Swimpool = Swimpool,
-                City = City,
-                Cost = Cost
-            };
-            return hotel;
-        }
-
         public bool AreEqual(Hotel hotel)
         {
             if (Hotelid == hotel.Hotelid &&
