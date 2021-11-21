@@ -33,6 +33,25 @@ namespace ToursAPI.Controllers
             return lUsersDTO;
         }
         
+        private List<UserTour> GetAllUserBookings(int userID)
+        {
+            int[] toursID = _userController.GetBookedTours(userID);
+            if (toursID.Length == 0)
+            {
+                return null;
+            }
+            
+            List<Tour> tours = new List<Tour>();
+            foreach (int tour in toursID)
+            {
+                Tour curTour = _tourController.GetTourByID(tour);
+                tours.Add(curTour);
+            }
+
+            List<UserTour> lTours = _tourController.ToUserTour(tours);
+            return lTours;
+        }
+        
         /// <summary>Users by params</summary>
         /// <returns>Users information</returns>
         /// <response code="200">Users found</response>
@@ -80,25 +99,6 @@ namespace ToursAPI.Controllers
             return Ok(userDTO);
         }
 
-        private List<UserTour> GetAllUserBookings(int userID)
-        {
-            int[] toursID = _userController.GetBookedTours(userID);
-            if (toursID == null || toursID.Length == 0)
-            {
-                return null;
-            }
-            
-            List<Tour> tours = new List<Tour>();
-            foreach (int tour in toursID)
-            {
-                Tour curTour = _tourController.GetTourByID(tour);
-                tours.Add(curTour);
-            }
-
-            List<UserTour> lTours = _tourController.ToUserTour(tours);
-            return lTours;
-        }
-        
         /// <summary>User tours</summary>
         /// <returns>Tours information</returns>
         /// <response code="200">Tours found</response>
@@ -118,92 +118,62 @@ namespace ToursAPI.Controllers
             return Ok(lTours);
         }
 
-        /// <summary>Book tours</summary>
-        /// <returns>Tours information</returns>
-        /// <response code="200">Tour booked</response>
-        /// <response code="400">Error book</response>
-        /// <response code="409">Constraint error</response>
-        [HttpPatch]
-        [Route("{UserID:int}/Book")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public IActionResult BookTour([FromRoute(Name = "UserID")] int userID,
-            [FromQuery(Name = "TourID"), Required] int tourID)
+        public enum Action
         {
-            if (_userController.GetAllUserInfo(userID) == null)
-            {
-                return BadRequest();
-            }
-
-            int[] toursID = _userController.GetBookedTours(userID);
-            int size = toursID.Length;
-
-            bool isAlreadyExist = false;
-            for (int i = 0; i < size && !isAlreadyExist; i++)
-            {
-                if (toursID[i] == tourID)
-                {
-                    isAlreadyExist = true;
-                }
-            }
-
-            if (isAlreadyExist)
-            {
-                return BadRequest();
-            }
-
-            ExitCode result = _userController.BookTour(userID, tourID);
-            if (result == ExitCode.Constraint) 
-            {
-                return Conflict();
-            }
-
-            if (result == ExitCode.Error)
-            {
-                return BadRequest();
-            }
-
-            List<UserTour> lTours = GetAllUserBookings(userID);
-            return Ok(lTours);
+            Book,
+            Cancel
         }
-        
-        /// <summary>Cancel tours</summary>
+
+        /// <summary>Manage tours</summary>
         /// <returns>Tours information</returns>
-        /// <response code="200">Tour canceled</response>
-        /// <response code="400">Error cancel</response>
+        /// <response code="200">Tours updated</response>
+        /// <response code="204">No booked tours</response>
+        /// <response code="400">Error manage</response>
         /// <response code="409">Constraint error</response>
         [HttpPatch]
-        [Route("{UserID:int}/Cancel")]
+        [Route("{UserID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public IActionResult CancelTour([FromRoute(Name = "UserID")] int userID,
-            [FromQuery(Name = "TourID"), Required] int tourID)
+        public IActionResult ManageTours([FromQuery(Name = "Action"), Required] Action action, 
+            [FromRoute(Name = "UserID")] int userID, [FromQuery(Name = "TourID"), Required] int tourID)
         {
             if (_userController.GetAllUserInfo(userID) == null)
             {
                 return BadRequest();
             }
-
+            
             int[] toursID = _userController.GetBookedTours(userID);
             int size = toursID.Length;
 
-            bool isExist = false;
-            for (int i = 0; i < size && !isExist; i++)
+            bool isExists = false;
+            for (int i = 0; i < size && !isExists; i++)
             {
                 if (toursID[i] == tourID)
                 {
-                    isExist = true;
+                    isExists = true;
                 }
             }
 
-            if (!isExist)
+            ExitCode result = ExitCode.Success;
+            if (action == Action.Book)
             {
-                return BadRequest();
+                if (isExists)
+                {
+                    return BadRequest();
+                }
+                result = _userController.BookTour(userID, tourID);
             }
-
-            ExitCode result = _userController.CancelTour(userID, tourID);
+            else
+            {
+                if (!isExists)
+                {
+                    return BadRequest();
+                }
+                result = _userController.CancelTour(userID, tourID);
+            }
+            
             if (result == ExitCode.Constraint) 
             {
                 return Conflict();
@@ -215,6 +185,10 @@ namespace ToursAPI.Controllers
             }
 
             List<UserTour> lTours = GetAllUserBookings(userID);
+            if (lTours == null)
+            {
+                return NoContent();
+            }
             return Ok(lTours);
         }
     }

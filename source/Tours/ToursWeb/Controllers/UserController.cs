@@ -38,14 +38,24 @@ namespace ToursWeb.Controllers
             User user = _userRepository.FindByID(userID);
             int[] oldTours = user.Toursid;
             int size = oldTours.Length;
-                
-            int[] newTours = new int[size + 1];
-            for (int i = 0; i < size; i++)
-            {
-                newTours[i] = oldTours[i];
-            }
-            newTours[size] = tourID;
+            int[] newTours;
             
+            if (size == 0)
+            {
+                newTours = new int[1];
+                newTours[0] = tourID;
+            }
+            else 
+            {
+                newTours = new int[size + 1];
+                for (int i = 0; i < size; i++)
+                {
+                    newTours[i] = oldTours[i];
+                }
+
+                newTours[size] = tourID;
+            }
+
             return _userRepository.UpdateTours(user, newTours);
         }
 
@@ -53,20 +63,30 @@ namespace ToursWeb.Controllers
         {
             User user = _userRepository.FindByID(userID);
             int[] oldTours = user.Toursid;
-            int size = oldTours.Length;
+            int[] newTours = new int[0];
 
-            int[] newTours = new int[size - 1];
-            int i = 0, j = 0;
-            while (i < size)
+            if (oldTours != null)
             {
-                int curTour = oldTours[i];
-                if (curTour == tourID)
+                int size = oldTours.Length;
+                if (size > 1)
                 {
-                    i++;
-                    continue;
+                    newTours = new int[size - 1];
+
+                    int i = 0, j = 0;
+                    while (i < size)
+                    {
+                        int curTour = oldTours[i];
+                        if (curTour == tourID)
+                        {
+                            i++;
+                            continue;
+                        }
+
+                        newTours[j] = oldTours[i];
+                        i++;
+                        j++;
+                    }
                 }
-                newTours[j] = oldTours[i];
-                i++; j++;
             }
 
             return _userRepository.UpdateTours(user, newTours);

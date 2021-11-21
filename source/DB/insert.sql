@@ -9,16 +9,16 @@ INSERT INTO Users (UserID, ToursID, Login, Password, AccessLevel) VALUES
 (8, '{}', 'test2', '123', 2),
 (9, '{9, 2}', 'test3', '123', 1),
 (10, '{}', 'test4', '123', 2),
-(11,'{3, 16}','Cairo','LYC22PMF7DW',1),
+(11,'{3, 6}','Cairo','LYC22PMF7DW',1),
 (12,'{7}','Kylynn','ESB83OOK0IB',1),
-(13,'{26}','Herman','KRX78NWR7PU',1),
+(13,'{6}','Herman','KRX78NWR7PU',1),
 (14,'{}','Piper','JXH48GEV4IU',2),
 (15,'{}','Jenna','KSI96IIQ8AO',2),
 (16,'{}','Jasmine','MJV61MZY1SB',2),
-(17,'{4, 24}','Olga','AOA46RIW4IT',1),
-(18,'{6, 22}','Zephania','AFI68AEU8VK',1),
-(19,'{17, 4, 28}','Ivory','ZYB55PNJ6ZJ',1),
-(20,'{19}','Ava','TMU41BXZ7QF',1);
+(17,'{4, 2}','Olga','AOA46RIW4IT',1),
+(18,'{6, 2}','Zephania','AFI68AEU8VK',1),
+(19,'{7, 4, 8}','Ivory','ZYB55PNJ6ZJ',1),
+(20,'{9}','Ava','TMU41BXZ7QF',1);
 
 INSERT INTO Food (FoodID, Category, Menu, Bar, Cost) VALUES 
 (1,'All inclusive','',True,4061),
