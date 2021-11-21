@@ -33,8 +33,7 @@ namespace ToursAPI.Controllers
         }
         
         /// <summary>Foods by parameters</summary>
-        /// <param name="category">Breakfast, Half board, Full board,
-        /// All inclusive, Continental breakfast, American breakfast</param>
+        /// <param name="category">Breakfast, Half board, Full board, All inclusive, Continental breakfast, American breakfast</param>
         /// <param name="menu"></param>
         /// <param name="bar"></param>
         /// <returns>Foods information</returns>
