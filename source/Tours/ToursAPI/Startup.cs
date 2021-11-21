@@ -7,11 +7,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
+
 using ToursWeb.ModelsDB;
 using ToursWeb.Controllers;
 using ToursWeb.Repositories;
@@ -31,7 +30,6 @@ namespace ToursAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddControllers();
             services.AddControllers().AddNewtonsoftJson(o =>
             {
                 o.SerializerSettings.Converters.Add(new StringEnumConverter{});
@@ -84,7 +82,7 @@ namespace ToursAPI
 
         private static void AddDbContext(IServiceCollection services, IConfiguration config)
         {
-            services.AddDbContext<ToursContext>(option => option.UseNpgsql(config["Connections:Manager"]));
+            services.AddDbContext<ToursContext>(option => option.UseNpgsql(config["Connections:Current"]));
         }
         
         private static void AddLogging(IServiceCollection services, IConfiguration config)
