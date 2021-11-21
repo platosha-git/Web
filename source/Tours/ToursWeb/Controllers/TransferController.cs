@@ -39,19 +39,19 @@ namespace ToursWeb.Controllers
             return _transferRepository.FindTransfersByDate(date);
         }
         
-        public void AddTransfer(Transfer ntran)
+        public ExitCode AddTransfer(Transfer ntran)
         {
-            _transferRepository.Add(ntran);
+            return _transferRepository.Add(ntran);
         }
         
-        public void UpdateTransfer(Transfer ntran)
+        public ExitCode UpdateTransfer(Transfer ntran)
         {
-            _transferRepository.Update(ntran);
+            return _transferRepository.Update(ntran);
         }
         
-        public void DeleteTransferByID(int tranID)
+        public ExitCode DeleteTransferByID(int tranID)
         {
-            _transferRepository.DeleteByID(tranID);
+            return _transferRepository.DeleteByID(tranID);
         }
     }
 }

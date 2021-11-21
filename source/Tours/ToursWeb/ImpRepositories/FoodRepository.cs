@@ -43,7 +43,7 @@ namespace ToursWeb.ImpRepositories
             }
             catch (Microsoft.EntityFrameworkCore.DbUpdateException err)
             {
-                _logger.LogError(err, "+FoodRep : Sql violation when trying to add food to Food");
+                _logger.LogError(err, "+FoodRep : Constraint violation when trying to add food to Food");
                 return ExitCode.Constraint;
             }
             catch (Exception err)
@@ -53,7 +53,7 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public void Update(Food obj)
+        public ExitCode Update(Food obj)
         {
             try
             {
@@ -66,14 +66,21 @@ namespace ToursWeb.ImpRepositories
                 _db.Foods.Update(uFood);
                 _db.SaveChanges();
                 _logger.LogInformation("+FoodRep : Food {Number} was updated at Food", obj.Foodid);
+                return ExitCode.Success;
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException err)
+            {
+                _logger.LogError(err, "+FoodRep : Constraint violation when trying to update food to Food");
+                return ExitCode.Constraint;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+FoodRep : Error trying to update food to Food");
+                return ExitCode.Error;
             }
         }
 
-        public void DeleteByID(int id)
+        public ExitCode DeleteByID(int id)
         {
             try
             {
@@ -81,10 +88,12 @@ namespace ToursWeb.ImpRepositories
                 _db.Foods.Remove(food);
                 _db.SaveChanges();
                 _logger.LogInformation("+FoodRep : Food {Number} was deleted from Food", id);
+                return ExitCode.Success;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+FoodRep : Error trying to delete food {Number} from Food", id);
+                return ExitCode.Error;
             }
         }
 

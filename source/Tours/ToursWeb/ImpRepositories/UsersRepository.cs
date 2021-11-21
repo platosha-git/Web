@@ -30,25 +30,62 @@ namespace ToursWeb.ImpRepositories
 
         public ExitCode Add(User obj)
         {
-            return ExitCode.Success;
+            try
+            {
+                obj.Userid = _db.Users.Count() + 1;
+                _db.Users.Add(obj);
+                _db.SaveChanges();
+                _logger.LogInformation("+UsersRep : User {Number} was added to Users", obj.Userid);
+                return ExitCode.Success;
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException err)
+            {
+                _logger.LogError(err, "+UsersRep : Constraint violation when trying to add user to Users");
+                return ExitCode.Constraint;
+            }
+            catch (Exception err)
+            {
+                _logger.LogError(err, "+UsersRep : Error trying to add user to Users");
+                return ExitCode.Error;
+            }
         }
 
-        public void Update(User obj)
+        public ExitCode Update(User obj)
         {
             try
             {
                 _db.Users.Update(obj);
                 _db.SaveChanges();
                 _logger.LogInformation("+UsersRep : User {Number} was updated at Users", obj.Userid);
+                return ExitCode.Success;
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException err)
+            {
+                _logger.LogError(err, "+UsersRep : Constraint violation when trying to update user to Users");
+                return ExitCode.Constraint;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+UsersRep : Error trying to update user at Users");
+                return ExitCode.Error;
             }
         }
 
-        public void DeleteByID(int id)
+        public ExitCode DeleteByID(int id)
         {
+            try
+            {
+                User user = FindByID(id);
+                _db.Users.Remove(user);
+                _db.SaveChanges();
+                _logger.LogInformation("+UsersRep : User {Number} was deleted from Users", id);
+                return ExitCode.Success;
+            }
+            catch (Exception err)
+            {
+                _logger.LogError(err, "+UsersRep : Error trying to delete user {Number} from Users", id);
+                return ExitCode.Error;
+            }
         }
 
         public User FindUserByLP(string login, string password)
@@ -67,7 +104,7 @@ namespace ToursWeb.ImpRepositories
             return FindByID(id).Toursid;
         }
         
-        public bool UpdateTours(User obj, int[] toursID)
+        public ExitCode UpdateTours(User obj, int[] toursID)
         {
             try
             {
@@ -75,12 +112,17 @@ namespace ToursWeb.ImpRepositories
                 _db.Users.Update(obj);
                 _db.SaveChanges();
                 _logger.LogInformation("+UsersRep : Tours user {Number} was updated at Users", obj.Userid);
-                return true;
+                return ExitCode.Success;
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException err)
+            {
+                _logger.LogError(err, "+UsersRep : Constraint violation when trying to update user tours to Users");
+                return ExitCode.Constraint;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+UsersRep : Error trying to update tours at Users");
-                return false;
+                return ExitCode.Error;
             }
         }
 

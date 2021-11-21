@@ -42,16 +42,5 @@ namespace ToursAPI.ModelsDTO
             Bar = food.Bar;
             Cost = food.Cost;
         }
-
-        public bool AreEqual(Food food)
-        {
-            if (Foodid == food.Foodid &&
-                Category == food.Category &&
-                Menu == food.Menu &&
-                Bar == food.Bar &&
-                Cost == food.Cost)
-                return true;
-            return false;
-        }
     }
 }

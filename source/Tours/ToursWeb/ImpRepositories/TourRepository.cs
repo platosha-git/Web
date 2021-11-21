@@ -38,6 +38,11 @@ namespace ToursWeb.ImpRepositories
                 _logger.LogInformation("+TourRep : Tour {Number} was added to Tours", obj.Tourid);
                 return ExitCode.Success;
             }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException err)
+            {
+                _logger.LogError(err, "+TourRep : Constraint violation when trying to add tour to Tours");
+                return ExitCode.Constraint;
+            }
             catch (Exception err)
             {
                 _logger.LogError(err, "+TourRep : Error trying to add tour to Tours");
@@ -45,7 +50,7 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public void Update(Tour obj)
+        public ExitCode Update(Tour obj)
         {
             try
             {
@@ -58,34 +63,21 @@ namespace ToursWeb.ImpRepositories
                 _db.Tours.Update(uTour);
                 _db.SaveChanges();
                 _logger.LogInformation("+TourRep : Tours {Number} was updated at Tours", obj.Tourid);
+                return ExitCode.Success;
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException err)
+            {
+                _logger.LogError(err, "+TourRep : Constraint violation when trying to update tour at Tours");
+                return ExitCode.Constraint;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+TourRep : Error trying to update tour at Tours");
+                return ExitCode.Error;
             }
         }
 
-        public bool ChangeCost(int id, int diff)
-        {
-            try
-            {
-                Tour uTour = FindByID(id);
-                uTour.Cost += diff;
-                
-                _db.Tours.Update(uTour);
-                _db.SaveChanges();
-                _logger.LogInformation("+TourRep : Cost tours {Number} was updated at Tours", id);
-
-                return true;
-            }
-            catch (Exception err)
-            {
-                _logger.LogError(err, "+TourRep : Error trying to update tour cost at Tours");
-                return false;
-            }
-        }
-
-        public void DeleteByID(int id)
+        public ExitCode DeleteByID(int id)
         {
             try
             {
@@ -93,10 +85,12 @@ namespace ToursWeb.ImpRepositories
                 _db.Tours.Remove(tour);
                 _db.SaveChanges();
                 _logger.LogInformation("+TourRep : Tours {Number} was deleted from Tours", tour.Tourid);
+                return ExitCode.Success;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+TourRep : Error trying to delete tour from Tours");
+                return ExitCode.Error;
             }
         }
 

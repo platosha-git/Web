@@ -46,18 +46,5 @@ namespace ToursAPI.ModelsDTO
             City = hotel.City;
             Cost = hotel.Cost;
         }
-        
-        public bool AreEqual(Hotel hotel)
-        {
-            if (Hotelid == hotel.Hotelid &&
-                Name == hotel.Name &&
-                Type == hotel.Type &&
-                Class == hotel.Class &&
-                Swimpool == hotel.Swimpool &&
-                City == hotel.City &&
-                Cost == hotel.Cost)
-                return true;
-            return false;
-        }
     }
 }

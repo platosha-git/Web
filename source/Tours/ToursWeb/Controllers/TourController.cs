@@ -84,19 +84,19 @@ namespace ToursWeb.Controllers
             return tours;
         }
 
-        public void AddTour(Tour ntour)
+        public ExitCode AddTour(Tour ntour)
         {
-            _tourRepository.Add(ntour);
+            return _tourRepository.Add(ntour);
         }
         
-        public void UpdateTour(Tour ntour)
+        public ExitCode UpdateTour(Tour ntour)
         {
-            _tourRepository.Update(ntour);
+            return _tourRepository.Update(ntour);
         }
         
-        public void DeleteTourByID(int tourID)
+        public ExitCode DeleteTourByID(int tourID)
         {
-            _tourRepository.DeleteByID(tourID);
+            return _tourRepository.DeleteByID(tourID);
         }
     }
 }

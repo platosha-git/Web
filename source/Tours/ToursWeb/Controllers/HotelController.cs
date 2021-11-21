@@ -45,19 +45,19 @@ namespace ToursWeb.Controllers
             return _hotelRepository.FindHotelBySwimPool(sp);
         }
         
-        public void AddHotel(Hotel nhotel)
+        public ExitCode AddHotel(Hotel nhotel)
         {
-            _hotelRepository.Add(nhotel);
+            return _hotelRepository.Add(nhotel);
         }
         
-        public void UpdateHotel(Hotel nhotel)
+        public ExitCode UpdateHotel(Hotel nhotel)
         {
-            _hotelRepository.Update(nhotel);
+            return _hotelRepository.Update(nhotel);
         }
         
-        public void DeleteHotelByID(int hotelID)
+        public ExitCode DeleteHotelByID(int hotelID)
         {
-            _hotelRepository.DeleteByID(hotelID);
+            return _hotelRepository.DeleteByID(hotelID);
         }
     }
 }

@@ -106,25 +106,31 @@ namespace ToursAPI.Controllers
         }
 
         /// <summary>Adding hotel</summary>
-        /// <param name="hotelUserDTO">Hotel to add</param>
+        /// <param name="hotelDTO">Hotel to add</param>
         /// <returns>Added hotel</returns>
         /// <response code="200">Hotel added</response>
         /// <response code="400">Add error</response>
+        /// <response code="409">Constraint error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult AddHotel([FromBody] HotelUserDTO hotelUserDTO)
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public IActionResult AddHotel([FromBody] HotelUserDTO hotelDTO)
         {
-            Hotel aHotel = hotelUserDTO.GetHotel();
-            _hotelController.AddHotel(aHotel);
+            Hotel aHotel = hotelDTO.GetHotel();
+            ExitCode result = _hotelController.AddHotel(aHotel);
+            
+            if (result == ExitCode.Constraint) 
+            {
+                return Conflict();
+            }
 
-            Hotel hotel = _hotelController.GetHotelByID(aHotel.Hotelid); 
-            if (hotel == null) 
+            if (result == ExitCode.Error)
             {
                 return BadRequest();
             }
 
-            HotelDTO addedHotel = new HotelDTO(hotel);
+            HotelDTO addedHotel = new HotelDTO(aHotel);
             return Ok(addedHotel);
         }
 
@@ -133,31 +139,39 @@ namespace ToursAPI.Controllers
         /// <returns>Updated hotel</returns>
         /// <response code="200">Hotel updated</response>
         /// <response code="400">Update error</response>
+        /// <response code="409">Constraint error</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult UpdateHotel([FromBody] HotelDTO hotelDTO)
         {
             Hotel uHotel = hotelDTO.GetHotel(hotelDTO.Hotelid);
-            _hotelController.UpdateHotel(uHotel);
+            ExitCode result = _hotelController.UpdateHotel(uHotel);
 
-            Hotel hotel = _hotelController.GetHotelByID(hotelDTO.Hotelid); 
-            if (!hotelDTO.AreEqual(hotel))
+            if (result == ExitCode.Constraint) 
             {
-                return NotFound();
+                return Conflict();
             }
 
-            HotelDTO updatedHotel = new HotelDTO(hotel);
+            if (result == ExitCode.Error)
+            {
+                return BadRequest();
+            }
+
+            HotelDTO updatedHotel = new HotelDTO(uHotel);
             return Ok(updatedHotel);
         }
 
         /// <summary>Removing hotel by ID</summary>
         /// <returns>Removed hotel</returns>
         /// <response code="200">Hotel removed</response>
+        /// <response code="400">Remove error</response>
         /// <response code="404">No hotel</response>
         [HttpDelete]
         [Route("{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteHotel([FromRoute(Name = "HotelID")] int hotelID)
         {
@@ -167,7 +181,12 @@ namespace ToursAPI.Controllers
                 return NotFound();
             }
             
-            _hotelController.DeleteHotelByID(hotelID);
+            ExitCode result = _hotelController.DeleteHotelByID(hotelID);
+            if (result == ExitCode.Error)
+            {
+                return BadRequest();
+            }
+            
             HotelDTO hotel = new HotelDTO(delHotel);
             return Ok(hotel);
         }

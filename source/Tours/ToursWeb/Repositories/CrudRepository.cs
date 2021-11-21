@@ -8,7 +8,7 @@ namespace ToursWeb.Repositories
         List<T> FindAll();
         T FindByID(ID id);
         ExitCode Add(T obj);
-        void Update(T obj);
-        void DeleteByID(ID id);
+        ExitCode Update(T obj);
+        ExitCode DeleteByID(ID id);
     }
 }

@@ -41,16 +41,5 @@ namespace ToursAPI.ModelsDTO
             Departuretime = transfer.Departuretime;
             Cost = transfer.Cost;
         }
-        
-        public bool AreEqual(Transfer transfer)
-        {
-            if (Transferid == transfer.Transferid &&
-                Type == transfer.Type &&
-                Cityfrom == transfer.Cityfrom &&
-                Departuretime == transfer.Departuretime &&
-                Cost == transfer.Cost)
-                return true;
-            return false;
-        }
     }
 }

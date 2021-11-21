@@ -33,7 +33,7 @@ namespace ToursWeb.Controllers
             return _userRepository.FindBookedTours(id);
         }
 
-        public bool BookTour(int userID, int tourID)
+        public ExitCode BookTour(int userID, int tourID)
         {
             User user = _userRepository.FindByID(userID);
             int[] oldTours = user.Toursid;
@@ -49,7 +49,7 @@ namespace ToursWeb.Controllers
             return _userRepository.UpdateTours(user, newTours);
         }
 
-        public bool CancelTour(int userID, int tourID)
+        public ExitCode CancelTour(int userID, int tourID)
         {
             User user = _userRepository.FindByID(userID);
             int[] oldTours = user.Toursid;

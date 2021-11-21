@@ -122,10 +122,12 @@ namespace ToursAPI.Controllers
         /// <returns>Tours information</returns>
         /// <response code="200">Tour booked</response>
         /// <response code="400">Error book</response>
+        /// <response code="409">Constraint error</response>
         [HttpPatch]
         [Route("{UserID:int}/Book")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult BookTour([FromRoute(Name = "UserID")] int userID,
             [FromQuery(Name = "TourID"), Required] int tourID)
         {
@@ -151,8 +153,13 @@ namespace ToursAPI.Controllers
                 return BadRequest();
             }
 
-            bool success = _userController.BookTour(userID, tourID);
-            if (!success)
+            ExitCode result = _userController.BookTour(userID, tourID);
+            if (result == ExitCode.Constraint) 
+            {
+                return Conflict();
+            }
+
+            if (result == ExitCode.Error)
             {
                 return BadRequest();
             }
@@ -165,10 +172,12 @@ namespace ToursAPI.Controllers
         /// <returns>Tours information</returns>
         /// <response code="200">Tour canceled</response>
         /// <response code="400">Error cancel</response>
+        /// <response code="409">Constraint error</response>
         [HttpPatch]
         [Route("{UserID:int}/Cancel")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult CancelTour([FromRoute(Name = "UserID")] int userID,
             [FromQuery(Name = "TourID"), Required] int tourID)
         {
@@ -194,8 +203,13 @@ namespace ToursAPI.Controllers
                 return BadRequest();
             }
 
-            bool success = _userController.CancelTour(userID, tourID);
-            if (!success)
+            ExitCode result = _userController.CancelTour(userID, tourID);
+            if (result == ExitCode.Constraint) 
+            {
+                return Conflict();
+            }
+
+            if (result == ExitCode.Error)
             {
                 return BadRequest();
             }

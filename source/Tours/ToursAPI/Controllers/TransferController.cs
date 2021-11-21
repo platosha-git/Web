@@ -103,21 +103,27 @@ namespace ToursAPI.Controllers
         /// <returns>Added transfer</returns>
         /// <response code="200">Transfer added</response>
         /// <response code="400">Add error</response>
+        /// <response code="409">Constraint error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult AddTransfer([FromBody] TransferUserDTO transferDTO)
         {
             Transfer aTransfer = transferDTO.GetTransfer();
-            _transferController.AddTransfer(aTransfer);
+            ExitCode result = _transferController.AddTransfer(aTransfer);
+            
+            if (result == ExitCode.Constraint) 
+            {
+                return Conflict();
+            }
 
-            Transfer transfer = _transferController.GetTransferByID(aTransfer.Transferid); 
-            if (transfer == null) 
+            if (result == ExitCode.Error)
             {
                 return BadRequest();
             }
 
-            TransferDTO addedTransfer = new TransferDTO(transfer);
+            TransferDTO addedTransfer = new TransferDTO(aTransfer);
             return Ok(addedTransfer);
         }
 
@@ -126,31 +132,39 @@ namespace ToursAPI.Controllers
         /// <returns>Updated transfer</returns>
         /// <response code="200">Transfer updated</response>
         /// <response code="400">Update error</response>
+        /// <response code="409">Constraint error</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult UpdateTransfer([FromBody] TransferDTO transferDTO)
         {
             Transfer uTransfer = transferDTO.GetTransfer(transferDTO.Transferid);
-            _transferController.UpdateTransfer(uTransfer);
-
-            Transfer transfer = _transferController.GetTransferByID(transferDTO.Transferid); 
-            if (!transferDTO.AreEqual(transfer))
+            ExitCode result = _transferController.UpdateTransfer(uTransfer);
+            
+            if (result == ExitCode.Constraint) 
             {
-                return NotFound();
+                return Conflict();
             }
 
-            TransferDTO updatedTransfer = new TransferDTO(transfer);
+            if (result == ExitCode.Error)
+            {
+                return BadRequest();
+            }
+
+            TransferDTO updatedTransfer = new TransferDTO(uTransfer);
             return Ok(updatedTransfer);
         }
 
         /// <summary>Removing transfer by ID</summary>
         /// <returns>Removed transfer</returns>
         /// <response code="200">Transfer removed</response>
+        /// <response code="400">Remove error</response>
         /// <response code="404">No transfer</response>
         [HttpDelete]
         [Route("{TransferID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteTransfer([FromRoute(Name = "TransferID")] int transferID)
         {
@@ -160,7 +174,12 @@ namespace ToursAPI.Controllers
                 return NotFound();
             }
             
-            _transferController.DeleteTransferByID(transferID);
+            ExitCode result = _transferController.DeleteTransferByID(transferID);
+            if (result == ExitCode.Error)
+            {
+                return BadRequest();
+            }
+            
             TransferDTO transfer = new TransferDTO(delTransfer);
             return Ok(transfer);
         }

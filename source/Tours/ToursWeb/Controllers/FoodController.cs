@@ -44,14 +44,14 @@ namespace ToursWeb.Controllers
             return _foodRepository.Add(nfood);
         }
         
-        public void UpdateFood(Food nfood)
+        public ExitCode UpdateFood(Food nfood)
         {
-            _foodRepository.Update(nfood);
+            return _foodRepository.Update(nfood);
         }
         
-        public void DeleteFoodByID(int foodID)
+        public ExitCode DeleteFoodByID(int foodID)
         {
-            _foodRepository.DeleteByID(foodID);
+            return _foodRepository.DeleteByID(foodID);
         }
     }
 }

@@ -96,25 +96,31 @@ namespace ToursAPI.Controllers
         }
 
         /// <summary>Adding tour</summary>
-        /// <param name="tourUserDTO">Tour to add</param>
+        /// <param name="tourDTO">Tour to add</param>
         /// <returns>Added tour</returns>
         /// <response code="200">Tour added</response>
         /// <response code="400">Add error</response>
+        /// <response code="409">Constraint error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult AddTour([FromBody] TourUserDTO tourDTO)
         {
             Tour aTour = tourDTO.GetTour();
-            _tourController.AddTour(aTour);
+            ExitCode result = _tourController.AddTour(aTour);
+            
+            if (result == ExitCode.Constraint) 
+            {
+                return Conflict();
+            }
 
-            Tour tour = _tourController.GetTourByID(aTour.Tourid); 
-            if (tour == null) 
+            if (result == ExitCode.Error)
             {
                 return BadRequest();
             }
 
-            TourDTO addedTour = new TourDTO(tour);
+            TourDTO addedTour = new TourDTO(aTour);
             return Ok(addedTour);
         }
 
@@ -123,27 +129,34 @@ namespace ToursAPI.Controllers
         /// <returns>Updated tour</returns>
         /// <response code="200">Tour updated</response>
         /// <response code="400">Update error</response>
+        /// <response code="409">Constraint error</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult UpdateTour([FromBody] TourDTO tourDTO)
         {
             Tour uTour = tourDTO.GetTour(tourDTO.Tourid);
-            _tourController.UpdateTour(uTour);
-
-            Tour tour = _tourController.GetTourByID(tourDTO.Tourid); 
-            if (!tourDTO.AreEqual(tour))
+            ExitCode result = _tourController.UpdateTour(uTour);
+            
+            if (result == ExitCode.Constraint) 
             {
-                return NotFound();
+                return Conflict();
             }
 
-            TourDTO updatedTour = new TourDTO(tour);
+            if (result == ExitCode.Error)
+            {
+                return BadRequest();
+            }
+
+            TourDTO updatedTour = new TourDTO(uTour);
             return Ok(updatedTour);
         }
 
         /// <summary>Removing transfer by ID</summary>
         /// <returns>Removed transfer</returns>
         /// <response code="200">Transfer removed</response>
+        /// <response code="400">Remove error</response>
         /// <response code="404">No transfer</response>
         [HttpDelete]
         [Route("{TourID:int}")]
@@ -157,7 +170,12 @@ namespace ToursAPI.Controllers
                 return NotFound();
             }
             
-            _tourController.DeleteTourByID(tourID);
+            ExitCode result = _tourController.DeleteTourByID(tourID);
+            if (result == ExitCode.Error)
+            {
+                return BadRequest();
+            }
+            
             TourDTO tour = new TourDTO(delTour);
             return Ok(tour);
         }

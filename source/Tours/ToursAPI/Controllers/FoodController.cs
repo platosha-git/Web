@@ -131,31 +131,39 @@ namespace ToursAPI.Controllers
         /// <returns>Updated food</returns>
         /// <response code="200">Food updated</response>
         /// <response code="400">Update error</response>
+        /// <response code="409">Constraint error</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FoodDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult UpdateFood([FromBody] FoodDTO foodDTO)
         {
             Food uFood = foodDTO.GetFood(foodDTO.Foodid);
-            _foodController.UpdateFood(uFood);
+            ExitCode result = _foodController.UpdateFood(uFood);
             
-            Food food = _foodController.GetFoodByID(foodDTO.Foodid); 
-            if (!foodDTO.AreEqual(food))
+            if (result == ExitCode.Constraint) 
+            {
+                return Conflict();
+            }
+
+            if (result == ExitCode.Error)
             {
                 return BadRequest();
             }
 
-            FoodDTO updatedFood = new FoodDTO(food);
+            FoodDTO updatedFood = new FoodDTO(uFood);
             return Ok(updatedFood);
         }
 
         /// <summary>Removing food by ID</summary>
         /// <returns>Removed food</returns>
         /// <response code="200">Food removed</response>
+        /// <response code="400">Remove error</response>
         /// <response code="404">No food</response>
         [HttpDelete]
         [Route("{FoodID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FoodDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteFood([FromRoute(Name = "FoodID")] int foodID)
         {
@@ -165,7 +173,12 @@ namespace ToursAPI.Controllers
                 return NotFound();
             }
             
-            _foodController.DeleteFoodByID(foodID);
+            ExitCode result = _foodController.DeleteFoodByID(foodID);
+            if (result == ExitCode.Error)
+            {
+                return BadRequest();
+            }
+            
             FoodDTO food = new FoodDTO(delFood);
             return Ok(food);
         }

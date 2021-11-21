@@ -38,6 +38,11 @@ namespace ToursWeb.ImpRepositories
                 _logger.LogInformation("+HotelRep : Hotel {Number} was added to Hotels", obj.Hotelid);
                 return ExitCode.Success;
             }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException err)
+            {
+                _logger.LogError(err, "+HotelRep : Constraint violation when trying to add hotel to Hotel");
+                return ExitCode.Constraint;
+            }
             catch (Exception err)
             {
                 _logger.LogError(err, "+HotelRep : Error trying to add hotel to Hotels");
@@ -45,7 +50,7 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public void Update(Hotel obj)
+        public ExitCode Update(Hotel obj)
         {
             try
             {
@@ -56,14 +61,21 @@ namespace ToursWeb.ImpRepositories
                 _db.Hotels.Update(uHotel);
                 _db.SaveChanges();
                 _logger.LogInformation("+HotelRep : Hotel {Number} was updated in Hotels", obj.Hotelid);
+                return ExitCode.Success;
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException err)
+            {
+                _logger.LogError(err, "+HotelRep : Constraint violation when trying to update hotel in Hotel");
+                return ExitCode.Constraint;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+HotelRep : Error trying to update hotel in Hotels");
+                return ExitCode.Error;
             }
         }
 
-        public void DeleteByID(int id)
+        public ExitCode DeleteByID(int id)
         {
             try
             {
@@ -71,10 +83,12 @@ namespace ToursWeb.ImpRepositories
                 _db.Hotels.Remove(hotel);
                 _db.SaveChanges();
                 _logger.LogInformation("+HotelRep : Hotel {Number} was deleted from Hotels", id);
+                return ExitCode.Success;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+HotelRep : Error trying to delete hotel {Number} from Hotels", id);
+                return ExitCode.Error;
             }
         }
         

@@ -47,18 +47,5 @@ namespace ToursAPI.ModelsDTO
             Datebegin = tour.Datebegin;
             Dateend = tour.Dateend;
         }
-        
-        public bool AreEqual(Tour tour)
-        {
-            if (Tourid == tour.Tourid &&
-                Food == tour.Food &&
-                Hotel == tour.Hotel &&
-                Transfer == tour.Transfer &&
-                Cost == tour.Cost &&
-                Datebegin == tour.Datebegin &&
-                Dateend == tour.Dateend)
-                return true;
-            return false;
-        }
     }
 }

@@ -38,6 +38,11 @@ namespace ToursWeb.ImpRepositories
                 _logger.LogInformation("+TransferRep : Transfer {Number} was added to Transfers", obj.Transferid);
                 return ExitCode.Success;
             }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException err)
+            {
+                _logger.LogError(err, "+TransferRep : Constraint violation when trying to add transfer to Transfers");
+                return ExitCode.Constraint;
+            }
             catch (Exception err)
             {
                 _logger.LogError(err, "+TransferRep : Error trying to add transfer to Transfers");
@@ -45,22 +50,29 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public void Update(Transfer obj)
+        public ExitCode Update(Transfer obj)
         {
             try
             {
                 _db.Transfers.Update(obj);
                 _db.SaveChanges();
                 _logger.LogInformation("+TransferRep : Transfer {Number} was updated at Transfers", obj.Transferid);
-                
+                return ExitCode.Success;
+
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException err)
+            {
+                _logger.LogError(err, "+TransferRep : Constraint violation when trying to update transfer at Transfers");
+                return ExitCode.Constraint;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+TransferRep : Error trying to update transfer at Transfers");
+                return ExitCode.Error;
             }
         }
 
-        public void DeleteByID(int id)
+        public ExitCode DeleteByID(int id)
         {
             try
             {
@@ -68,10 +80,12 @@ namespace ToursWeb.ImpRepositories
                 _db.Transfers.Remove(transfer);
                 _db.SaveChanges();
                 _logger.LogInformation("+TransferRep : Transfer {Number} was deleted from Transfers", transfer.Transferid);
+                return ExitCode.Success;
             }
             catch (Exception err)
             {
                 _logger.LogError(err, "+TransferRep : Error trying to delete transfer from Transfer");
+                return ExitCode.Error;
             }
         }
 
