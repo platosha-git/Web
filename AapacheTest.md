@@ -118,11 +118,13 @@ Percentage of the requests served within a certain time (ms)
   99%      1
  100%      1 (longest request)
 ```
-**Тестирование балансировки**
-5 раз выполняется GET-запрос 
+
+# Тестирование балансировки\
+
+5 раз выполняется GET-запрос\ 
 *Лог-файл 1*
-![](https://github.com/platosha-git/Web/blob/main/source/nginx/log1.png)
+![](https://github.com/platosha-git/Web/blob/main/source/nginx/log1.png)\
 *Лог-файл 2*
-![](https://github.com/platosha-git/Web/blob/main/source/nginx/log2.png)
+![](https://github.com/platosha-git/Web/blob/main/source/nginx/log2.png)\
 *Лог-файл 3*
-![](https://github.com/platosha-git/Web/blob/main/source/nginx/log3.png)
+![](https://github.com/platosha-git/Web/blob/main/source/nginx/log3.png)\
