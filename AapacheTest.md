@@ -61,6 +61,7 @@ Percentage of the requests served within a certain time (ms)
 ```  
 
 <br /> 
+
 **Балансировка с тремя инстансами**
 ```
 platosha@platosha-UX310UAK:~$ ab -c 10 -n 1000 http://localhost/api/v1/tours
