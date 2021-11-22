@@ -12,4 +12,4 @@
 ![](https://github.com/platosha-git/Web/blob/main/docs/Use-case.drawio.png)
 
 ## Er-диаграмма
-![](https://github.com/platosha-git/Web/blob/main/docs/ER.png)
+![](https://github.com/platosha-git/Web/blob/main/docs/ER.drawio.png)
