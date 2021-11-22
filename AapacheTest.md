@@ -60,7 +60,7 @@ Percentage of the requests served within a certain time (ms)
  100%     18 (longest request)
 ```  
 
-
+<br /> 
 **Балансировка с тремя инстансами**
 ```
 platosha@platosha-UX310UAK:~$ ab -c 10 -n 1000 http://localhost/api/v1/tours
@@ -122,8 +122,8 @@ Percentage of the requests served within a certain time (ms)
 
 # Тестирование балансировки  
 
-5 раз выполняется GET-запрос 
-&nbsp; &nbsp;
+5 раз выполняется GET-запрос <br /> 
+<br /> 
 *Лог-файл 1*
 ![](https://github.com/platosha-git/Web/blob/main/source/nginx/log1.png)
 *Лог-файл 2*
