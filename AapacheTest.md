@@ -122,7 +122,8 @@ Percentage of the requests served within a certain time (ms)
 
 # Тестирование балансировки  
 
-5 раз выполняется GET-запрос   
+5 раз выполняется GET-запрос 
+&nbsp; &nbsp;
 *Лог-файл 1*
 ![](https://github.com/platosha-git/Web/blob/main/source/nginx/log1.png)
 *Лог-файл 2*
