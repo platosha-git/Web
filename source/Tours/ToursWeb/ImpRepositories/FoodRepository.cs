@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using ToursWeb.Repositories;
 using Microsoft.Extensions.Logging;
-using Npgsql;
 using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
+using ToursWeb.Repositories;
 
 namespace ToursWeb.ImpRepositories
 {
@@ -21,22 +19,39 @@ namespace ToursWeb.ImpRepositories
             _logger = logDB;
         }
 
-        public List<Food> FindAll()
+        List<FoodBL> ListFoodBL(List<Food> foods)
         {
-            return _db.Foods.ToList();
+            List<FoodBL> foodsBL = new List<FoodBL>();
+            foreach (var food in foods)
+            {
+                FoodBL foodBL = new FoodBL(food);
+                foodsBL.Add(foodBL);
+            }
+
+            return foodsBL;
+        }
+        
+        public List<FoodBL> FindAll()
+        {
+            List<Food> foods = _db.Foods.ToList();
+            List<FoodBL> foodsBL = ListFoodBL(foods);
+            return foodsBL;
         }
 
-        public Food FindByID(int id)
+        public FoodBL FindByID(int id)
         {
-            return _db.Foods.Find(id);
+            Food food = _db.Foods.Find(id);
+            FoodBL foodBL = new FoodBL(food);
+            return foodBL;
         }
 
-        public ExitCode Add(Food obj)
+        public ExitCode Add(FoodBL obj)
         {
             try
             {
-                obj.Foodid = _db.Foods.Count() + 1;
-                _db.Foods.Add(obj);
+                Food food = obj.GetFood();
+                food.Foodid = _db.Foods.Count() + 1;
+                _db.Foods.Add(food);
                 _db.SaveChanges();
                 _logger.LogInformation("+FoodRep : Food {Number} was added to Food", obj.Foodid);
                 return ExitCode.Success;
@@ -53,16 +68,11 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public ExitCode Update(Food obj)
+        public ExitCode Update(FoodBL obj)
         {
             try
             {
-                Food uFood = FindByID(obj.Foodid);
-                uFood.Category = obj.Category; 
-                uFood.Menu = obj.Menu; 
-                uFood.Bar = obj.Bar; 
-                uFood.Cost = obj.Cost;
-
+                Food uFood = obj.GetFood();
                 _db.Foods.Update(uFood);
                 _db.SaveChanges();
                 _logger.LogInformation("+FoodRep : Food {Number} was updated at Food", obj.Foodid);
@@ -84,7 +94,8 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                Food food = FindByID(id);
+                FoodBL foodBL = FindByID(id);
+                Food food = foodBL.GetFood();
                 _db.Foods.Remove(food);
                 _db.SaveChanges();
                 _logger.LogInformation("+FoodRep : Food {Number} was deleted from Food", id);
@@ -97,22 +108,28 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public List<Food> FindFoodByCategory(string cat)
+        public List<FoodBL> FindFoodByCategory(string cat)
         {
             IQueryable<Food> foods = _db.Foods.Where(needed => needed.Category.Equals(cat));
-            return foods.ToList();
+            List<Food> lFoods = foods.ToList();
+            List<FoodBL> lFoodsBL = ListFoodBL(lFoods);
+            return lFoodsBL;
         }
 
-        public List<Food> FindFoodByMenu(string menu)
+        public List<FoodBL> FindFoodByMenu(string menu)
         {
             IQueryable<Food> foods = _db.Foods.Where(needed => needed.Menu.Equals(menu));
-            return foods.ToList();
+            List<Food> lFoods = foods.ToList();
+            List<FoodBL> lFoodsBL = ListFoodBL(lFoods);
+            return lFoodsBL;
         }
 
-        public List<Food> FindFoodByBar(bool bar)
+        public List<FoodBL> FindFoodByBar(bool bar)
         {
             IQueryable<Food> foods = _db.Foods.Where(needed => needed.Bar == bar);
-            return foods.ToList();
+            List<Food> lFoods = foods.ToList();
+            List<FoodBL> lFoodsBL = ListFoodBL(lFoods);
+            return lFoodsBL;
         }
 
         public void Dispose()

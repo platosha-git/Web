@@ -4,6 +4,7 @@ using System.Linq;
 using ToursWeb.Repositories;
 using Microsoft.Extensions.Logging;
 using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 
 namespace ToursWeb.ImpRepositories
 {
@@ -18,22 +19,39 @@ namespace ToursWeb.ImpRepositories
             _logger = logDB;
         }
 
-        public List<Transfer> FindAll()
+        List<TransferBL> ListTransferBL(List<Transfer> transfers)
         {
-            return _db.Transfers.ToList();
+            List<TransferBL> transfersBL = new List<TransferBL>();
+            foreach (var transfer in transfers)
+            {
+                TransferBL transferBL = new TransferBL(transfer);
+                transfersBL.Add(transferBL);
+            }
+
+            return transfersBL;
         }
 
-        public Transfer FindByID(int id)
+        public List<TransferBL> FindAll()
         {
-            return _db.Transfers.Find(id);
+            List<Transfer> transfers = _db.Transfers.ToList();
+            List<TransferBL> transfersBL = ListTransferBL(transfers);
+            return transfersBL;
         }
 
-        public ExitCode Add(Transfer obj)
+        public TransferBL FindByID(int id)
+        {
+            Transfer transfer = _db.Transfers.Find(id);
+            TransferBL transferBL = new TransferBL(transfer);
+            return transferBL;
+        }
+
+        public ExitCode Add(TransferBL obj)
         {
             try
             {
-                obj.Transferid = _db.Transfers.Count() + 1;
-                _db.Transfers.Add(obj);
+                Transfer transfer = obj.GetTransfer();
+                transfer.Transferid = _db.Transfers.Count() + 1;
+                _db.Transfers.Add(transfer);
                 _db.SaveChanges();
                 _logger.LogInformation("+TransferRep : Transfer {Number} was added to Transfers", obj.Transferid);
                 return ExitCode.Success;
@@ -50,11 +68,12 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public ExitCode Update(Transfer obj)
+        public ExitCode Update(TransferBL obj)
         {
             try
             {
-                _db.Transfers.Update(obj);
+                Transfer transfer = obj.GetTransfer();
+                _db.Transfers.Update(transfer);
                 _db.SaveChanges();
                 _logger.LogInformation("+TransferRep : Transfer {Number} was updated at Transfers", obj.Transferid);
                 return ExitCode.Success;
@@ -76,7 +95,8 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                Transfer transfer = FindByID(id);
+                TransferBL transferBL = FindByID(id);
+                Transfer transfer = transferBL.GetTransfer();
                 _db.Transfers.Remove(transfer);
                 _db.SaveChanges();
                 _logger.LogInformation("+TransferRep : Transfer {Number} was deleted from Transfers", transfer.Transferid);
@@ -89,26 +109,32 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public List<Transfer> FindTransferByType(string type)
+        public List<TransferBL> FindTransferByType(string type)
         {
             IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Type.Equals(type));
-            return transfers.ToList();
+            List<Transfer> lTransfers = transfers.ToList();
+            List<TransferBL> lTransfersBL = ListTransferBL(lTransfers);
+            return lTransfersBL;
         }
 
-        public List<Transfer> FindTransfersByCity(string cityFrom)
+        public List<TransferBL> FindTransfersByCity(string cityFrom)
         {
             IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Cityfrom.Equals(cityFrom));
-            return transfers.ToList();
+            List<Transfer> lTransfers = transfers.ToList();
+            List<TransferBL> lTransfersBL = ListTransferBL(lTransfers);
+            return lTransfersBL;
         }
 
-        public List<Transfer> FindTransfersByDate(DateTime date)
+        public List<TransferBL> FindTransfersByDate(DateTime date)
         {
             DateTime dateBegin = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0);
             DateTime dateEnd = new DateTime(date.Year, date.Month, date.Day, 23, 59, 59);
             
             IQueryable<Transfer> transfers = _db.Transfers.Where(needed => needed.Departuretime >= dateBegin &&
                                                                            needed.Departuretime <= dateEnd);
-            return transfers.ToList();
+            List<Transfer> lTransfers = transfers.ToList();
+            List<TransferBL> lTransfersBL = ListTransferBL(lTransfers);
+            return lTransfersBL;
         }
 
         public void Dispose()

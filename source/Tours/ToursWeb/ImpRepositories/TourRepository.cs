@@ -4,6 +4,7 @@ using System.Linq;
 using ToursWeb.Repositories;
 using Microsoft.Extensions.Logging;
 using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 
 namespace ToursWeb.ImpRepositories
 {
@@ -18,22 +19,39 @@ namespace ToursWeb.ImpRepositories
             _logger = logDB;
         }
 
-        public List<Tour> FindAll()
+        List<TourBL> ListTourBL(List<Tour> tours)
         {
-            return _db.Tours.ToList();
+            List<TourBL> toursBL = new List<TourBL>();
+            foreach (var tour in tours)
+            {
+                TourBL tourBL = new TourBL(tour);
+                toursBL.Add(tourBL);
+            }
+
+            return toursBL;
+        }
+        
+        public List<TourBL> FindAll()
+        {
+            List<Tour> tours = _db.Tours.ToList();
+            List<TourBL> toursBL = ListTourBL(tours);
+            return toursBL;
         }
 
-        public Tour FindByID(int id)
+        public TourBL FindByID(int id)
         {
-            return _db.Tours.Find(id);
+            Tour tour = _db.Tours.Find(id);
+            TourBL tourBL = new TourBL(tour);
+            return tourBL;
         }
 
-        public ExitCode Add(Tour obj)
+        public ExitCode Add(TourBL obj)
         {
             try
             {
-                obj.Tourid = _db.Tours.Count() + 1;
-                _db.Tours.Add(obj);
+                Tour tour = obj.GetTour();
+                tour.Tourid = _db.Tours.Count() + 1;
+                _db.Tours.Add(tour);
                 _db.SaveChanges();
                 _logger.LogInformation("+TourRep : Tour {Number} was added to Tours", obj.Tourid);
                 return ExitCode.Success;
@@ -50,16 +68,11 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public ExitCode Update(Tour obj)
+        public ExitCode Update(TourBL obj)
         {
             try
             {
-                Tour uTour = FindByID(obj.Tourid);
-                uTour.Food = obj.Food; uTour.Hotel = obj.Hotel; uTour.Transfer = obj.Transfer;
-                uTour.Cost = obj.Cost;
-                uTour.Datebegin = obj.Datebegin;
-                uTour.Dateend = obj.Dateend;
-
+                Tour uTour = obj.GetTour();
                 _db.Tours.Update(uTour);
                 _db.SaveChanges();
                 _logger.LogInformation("+TourRep : Tours {Number} was updated at Tours", obj.Tourid);
@@ -81,7 +94,8 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                Tour tour = FindByID(id);
+                TourBL tourBL = FindByID(id);
+                Tour tour = tourBL.GetTour();
                 _db.Tours.Remove(tour);
                 _db.SaveChanges();
                 _logger.LogInformation("+TourRep : Tours {Number} was deleted from Tours", tour.Tourid);
@@ -94,22 +108,20 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public List<Tour> FindToursByDate(DateTime b, DateTime e)
+        public List<TourBL> FindToursByDate(DateTime b, DateTime e)
         {
             IQueryable<Tour> tours = _db.Tours.Where(needed => needed.Datebegin >= b && needed.Dateend <= e);
-            return tours.ToList();
+            List<Tour> lTours = tours.ToList();
+            List<TourBL> lToursBL = ListTourBL(lTours);
+            return lToursBL;
         }
 
-        public List<Tour> FindToursByHotel(int hotelID)
+        public List<TourBL> FindToursByHotel(int hotelID)
         {
             IQueryable<Tour> tours = _db.Tours.Where(needed => needed.Hotel == hotelID);
-            return tours.ToList();
-        }
-        
-        public List<Tour> FindToursByFood(int foodID)
-        {
-            IQueryable<Tour> tours = _db.Tours.Where(needed => needed.Food == foodID);
-            return tours.ToList();
+            List<Tour> lTours = tours.ToList();
+            List<TourBL> lToursBL = ListTourBL(lTours);
+            return lToursBL;
         }
 
         public void Dispose()

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 using ToursWeb.Repositories;
 
 namespace ToursWeb.Controllers
@@ -13,56 +15,50 @@ namespace ToursWeb.Controllers
             _userRepository = userRepository;
         }
         
-        public List<User> GetAllUsers()
+        public List<UserBL> GetAllUsers()
         {
             return _userRepository.FindAll();
         }
         
-        public User GetAllUserInfo(int userID)
+        public UserBL GetAllUserInfo(int userID)
         {
             return _userRepository.FindByID(userID);
         }
 
-        public User GetUserByLP(string login, string password)
+        public UserBL GetUserByLP(string login, string password)
         {
             return _userRepository.FindUserByLP(login, password);
         }
 
-        public int[] GetBookedTours(int id)
+        public List<int> GetBookedTours(int id)
         {
             return _userRepository.FindBookedTours(id);
         }
 
         public ExitCode BookTour(int userID, int tourID)
         {
-            User user = _userRepository.FindByID(userID);
-            int[] oldTours = user.Toursid;
-            int size = oldTours.Length;
-            int[] newTours;
+            UserBL user = _userRepository.FindByID(userID);
+            List<int> oldTours = user.Toursid;
+            List<int> newTours = new List<int>();
+            int size = oldTours.Count;
             
-            if (size == 0)
+            if (size > 0)
             {
-                newTours = new int[1];
-                newTours[0] = tourID;
-            }
-            else 
-            {
-                newTours = new int[size + 1];
-                for (int i = 0; i < size; i++)
+                foreach (int tour in oldTours)
                 {
-                    newTours[i] = oldTours[i];
+                    newTours.Add(tour);
                 }
-
-                newTours[size] = tourID;
             }
+            newTours.Add(tourID);
 
             return _userRepository.UpdateTours(user, newTours);
         }
 
         public ExitCode CancelTour(int userID, int tourID)
         {
-            User user = _userRepository.FindByID(userID);
-            int[] oldTours = user.Toursid;
+            UserBL user = _userRepository.FindByID(userID);
+            List<int> oldTours = user.Toursid;
+            List<int> newTours = new List<int>();
             int[] newTours = new int[0];
 
             if (oldTours != null)

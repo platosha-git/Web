@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 
 namespace ToursWeb.Repositories
 {
-    public interface ITransferRepository : CrudRepository<Transfer, int>
+    public interface ITransferRepository : CrudRepository<TransferBL, int>
     {
-        List<Transfer> FindTransferByType(string type);
-        List<Transfer> FindTransfersByCity(string cityFrom);
-        List<Transfer> FindTransfersByDate(DateTime date);
+        List<TransferBL> FindTransferByType(string type);
+        List<TransferBL> FindTransfersByCity(string cityFrom);
+        List<TransferBL> FindTransfersByDate(DateTime date);
     }
 
 }

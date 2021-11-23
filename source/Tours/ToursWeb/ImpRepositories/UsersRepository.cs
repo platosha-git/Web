@@ -4,6 +4,7 @@ using System.Linq;
 using ToursWeb.Repositories;
 using Microsoft.Extensions.Logging;
 using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 
 namespace ToursWeb.ImpRepositories
 {
@@ -17,23 +18,40 @@ namespace ToursWeb.ImpRepositories
             _db = createDB;
             _logger = logDB;
         }
-
-        public List<User> FindAll()
+        
+        List<UserBL> ListUserBL(List<User> users)
         {
-            return _db.Users.ToList();
+            List<UserBL> usersBL = new List<UserBL>();
+            foreach (var user in users)
+            {
+                UserBL userBL = new UserBL(user);
+                usersBL.Add(userBL);
+            }
+
+            return usersBL;
         }
 
-        public User FindByID(int id)
+        public List<UserBL> FindAll()
         {
-            return _db.Users.Find(id);
+            List<User> users = _db.Users.ToList();
+            List<UserBL> usersBL = ListUserBL(users);
+            return usersBL;
         }
 
-        public ExitCode Add(User obj)
+        public UserBL FindByID(int id)
+        {
+            User user = _db.Users.Find(id);
+            UserBL userBL = new UserBL(user);
+            return userBL;
+        }
+
+        public ExitCode Add(UserBL obj)
         {
             try
             {
-                obj.Userid = _db.Users.Count() + 1;
-                _db.Users.Add(obj);
+                User user = obj.GetUser();
+                user.Userid = _db.Users.Count() + 1;
+                _db.Users.Add(user);
                 _db.SaveChanges();
                 _logger.LogInformation("+UsersRep : User {Number} was added to Users", obj.Userid);
                 return ExitCode.Success;
@@ -50,11 +68,12 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public ExitCode Update(User obj)
+        public ExitCode Update(UserBL obj)
         {
             try
             {
-                _db.Users.Update(obj);
+                User uUser = obj.GetUser();
+                _db.Users.Update(uUser);
                 _db.SaveChanges();
                 _logger.LogInformation("+UsersRep : User {Number} was updated at Users", obj.Userid);
                 return ExitCode.Success;
@@ -75,7 +94,8 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                User user = FindByID(id);
+                UserBL userBL = FindByID(id);
+                User user = userBL.GetUser();
                 _db.Users.Remove(user);
                 _db.SaveChanges();
                 _logger.LogInformation("+UsersRep : User {Number} was deleted from Users", id);
@@ -88,28 +108,32 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public User FindUserByLP(string login, string password)
+        public UserBL FindUserByLP(string login, string password)
         {
             IQueryable<User> users = _db.Users.Where(needed => needed.Login.Equals(login) &&
                                                                    needed.Password.Equals(password));
             if (users != null)
             {
-                return users.First();
+                User user = users.First();
+                UserBL userBL = new UserBL(user);
+                return userBL;
             }
             return null;
         }
         
-        public int[] FindBookedTours(int id)
+        public List<int> FindBookedTours(int id)
         {
-            return FindByID(id).Toursid;
+            UserBL user = FindByID(id);
+            return user.Toursid;
         }
         
-        public ExitCode UpdateTours(User obj, int[] toursID)
+        public ExitCode UpdateTours(UserBL obj, List<int> toursID)
         {
             try
             {
-                obj.Toursid = toursID;
-                _db.Users.Update(obj);
+                User user = obj.GetUser();
+                user.Toursid = toursID.ToArray();
+                _db.Users.Update(user);
                 _db.SaveChanges();
                 _logger.LogInformation("+UsersRep : Tours user {Number} was updated at Users", obj.Userid);
                 return ExitCode.Success;

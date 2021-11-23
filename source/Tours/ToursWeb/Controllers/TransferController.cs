@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 using ToursWeb.Repositories;
 
 namespace ToursWeb.Controllers
@@ -14,39 +15,39 @@ namespace ToursWeb.Controllers
             _transferRepository = transferRepository;
         }
 
-        public List<Transfer> GetAllTransfer()
+        public List<TransferBL> GetAllTransfer()
         {
             return _transferRepository.FindAll();
         }
         
-        public Transfer GetTransferByID(int transfID)
+        public TransferBL GetTransferByID(int transfID)
         {
             return _transferRepository.FindByID(transfID);
         }
         
-        public List<Transfer> GetTransferByType(string type)
+        public List<TransferBL> GetTransferByType(string type)
         {
             return _transferRepository.FindTransferByType(type);
         }
         
-        public List<Transfer> GetTransfersByCity(string cityFrom)
+        public List<TransferBL> GetTransfersByCity(string cityFrom)
         {
             return _transferRepository.FindTransfersByCity(cityFrom);
         }
 
-        public List<Transfer> GetTransfersByDate(DateTime date)
+        public List<TransferBL> GetTransfersByDate(DateTime date)
         {
             return _transferRepository.FindTransfersByDate(date);
         }
         
-        public ExitCode AddTransfer(Transfer ntran)
+        public ExitCode AddTransfer(TransferBL tran)
         {
-            return _transferRepository.Add(ntran);
+            return _transferRepository.Add(tran);
         }
         
-        public ExitCode UpdateTransfer(Transfer ntran)
+        public ExitCode UpdateTransfer(TransferBL tran)
         {
-            return _transferRepository.Update(ntran);
+            return _transferRepository.Update(tran);
         }
         
         public ExitCode DeleteTransferByID(int tranID)

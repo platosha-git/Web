@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 using ToursWeb.Repositories;
 
 namespace ToursWeb.Controllers
@@ -22,14 +23,14 @@ namespace ToursWeb.Controllers
             _transferRepository = transferRepository;
         }
 
-        public List<UserTour> ToUserTour(List<Tour> tours)
+        public List<UserTour> ToUserTour(List<TourBL> tours)
         {
             List<UserTour> userTours = new List<UserTour>();
             foreach (var tour in tours)
             {
-                Hotel hotel = _hotelRepository.FindByID(tour.Hotel); 
-                Food food = _foodRepository.FindByID(tour.Food);
-                Transfer transfer = _transferRepository.FindByID(tour.Transfer);
+                HotelBL hotel = _hotelRepository.FindByID(tour.Hotel); 
+                FoodBL food = _foodRepository.FindByID(tour.Food);
+                TransferBL transfer = _transferRepository.FindByID(tour.Transfer);
                 
                 UserTour userTourDTO = new UserTour(tour, hotel, food, transfer);
                 userTours.Add(userTourDTO);
@@ -37,61 +38,61 @@ namespace ToursWeb.Controllers
             return userTours;
         }
 
-        public List<Tour> GetAllTours()
+        public List<TourBL> GetAllTours()
         {
             return _tourRepository.FindAll();
         }
         
-        public Tour GetTourByID(int tourID)
+        public TourBL GetTourByID(int tourID)
         {
             return _tourRepository.FindByID(tourID);
         }
         
-        public List<Tour> GetToursByDate(DateTime beg, DateTime end)
+        public List<TourBL> GetToursByDate(DateTime beg, DateTime end)
         {
             return _tourRepository.FindToursByDate(beg, end);
         }
         
-        public List<Tour> GetToursByCity(string city)
+        public List<TourBL> GetToursByCity(string city)
         {
-            List<Hotel> hotels = _hotelRepository.FindHotelsByCity(city);
+            List<HotelBL> hotels = _hotelRepository.FindHotelsByCity(city);
             
-            List<Tour> tours = new List<Tour>();
+            List<TourBL> tours = new List<TourBL>();
             for (int i = 0; i < hotels.Count; i++)
             {
-                Hotel curHotel = hotels[i];
-                List<Tour> curTour = _tourRepository.FindToursByHotel(curHotel.Hotelid);
+                HotelBL curHotel = hotels[i];
+                List<TourBL> curTour = _tourRepository.FindToursByHotel(curHotel.Hotelid);
                 tours.AddRange(curTour);
             }
 
             return tours;
         }
         
-        public List<Tour> GetToursByCityName(string city, string name)
+        public List<TourBL> GetToursByCityName(string city, string name)
         {
-            List<Hotel> hotelsCity = _hotelRepository.FindHotelsByCity(city);
-            List<Hotel> hotelsName = _hotelRepository.FindHotelsByName(name);
-            List<Hotel> hotels = hotelsCity.Intersect(hotelsName).ToList();
+            List<HotelBL> hotelsCity = _hotelRepository.FindHotelsByCity(city);
+            List<HotelBL> hotelsName = _hotelRepository.FindHotelsByName(name);
+            List<HotelBL> hotels = hotelsCity.Intersect(hotelsName).ToList();
 
-            List<Tour> tours = new List<Tour>();
+            List<TourBL> tours = new List<TourBL>();
             for (int i = 0; i < hotels.Count; i++)
             {
-                Hotel curHotel = hotels[i];
-                List<Tour> curTour = _tourRepository.FindToursByHotel(curHotel.Hotelid);
+                HotelBL curHotel = hotels[i];
+                List<TourBL> curTour = _tourRepository.FindToursByHotel(curHotel.Hotelid);
                 tours.AddRange(curTour);
             }
 
             return tours;
         }
 
-        public ExitCode AddTour(Tour ntour)
+        public ExitCode AddTour(TourBL tour)
         {
-            return _tourRepository.Add(ntour);
+            return _tourRepository.Add(tour);
         }
         
-        public ExitCode UpdateTour(Tour ntour)
+        public ExitCode UpdateTour(TourBL tour)
         {
-            return _tourRepository.Update(ntour);
+            return _tourRepository.Update(tour);
         }
         
         public ExitCode DeleteTourByID(int tourID)

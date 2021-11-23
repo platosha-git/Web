@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 
 namespace ToursWeb.Repositories
 {
-    public interface ITourRepository : CrudRepository<Tour, int>
+    public interface ITourRepository : CrudRepository<TourBL, int>
     {
-        List<Tour> FindToursByDate(DateTime b, DateTime e);
-        List<Tour> FindToursByHotel(int hotelID);
+        List<TourBL> FindToursByDate(DateTime b, DateTime e);
+        List<TourBL> FindToursByHotel(int hotelID);
     }
 }

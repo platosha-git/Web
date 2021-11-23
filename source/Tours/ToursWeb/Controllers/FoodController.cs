@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
-using ToursWeb.ModelsDB;
 using ToursWeb.Repositories;
+using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 
 namespace ToursWeb.Controllers
 {
@@ -14,39 +14,39 @@ namespace ToursWeb.Controllers
             _foodRepository = foodRepository;
         }
         
-        public List<Food> GetAllFood()
+        public List<FoodBL> GetAllFood()
         {
             return _foodRepository.FindAll();
         }
 
-        public Food GetFoodByID(int foodID)
+        public FoodBL GetFoodByID(int foodID)
         {
             return _foodRepository.FindByID(foodID);
         }
 
-        public List<Food> GetFoodByCategory(string cat)
+        public List<FoodBL> GetFoodByCategory(string cat)
         {
             return _foodRepository.FindFoodByCategory(cat);
         }
 
-        public List<Food> GetFoodByMenu(string menu)
+        public List<FoodBL> GetFoodByMenu(string menu)
         {
             return _foodRepository.FindFoodByMenu(menu);
         }
 
-        public List<Food> GetFoodByBar(bool bar)
+        public List<FoodBL> GetFoodByBar(bool bar)
         {
             return _foodRepository.FindFoodByBar(bar);
         }
         
-        public ExitCode AddFood(Food nfood)
+        public ExitCode AddFood(FoodBL food)
         {
-            return _foodRepository.Add(nfood);
+            return _foodRepository.Add(food);
         }
         
-        public ExitCode UpdateFood(Food nfood)
+        public ExitCode UpdateFood(FoodBL food)
         {
-            return _foodRepository.Update(nfood);
+            return _foodRepository.Update(food);
         }
         
         public ExitCode DeleteFoodByID(int foodID)

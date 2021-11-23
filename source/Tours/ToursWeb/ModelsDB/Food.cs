@@ -4,12 +4,7 @@
 
 namespace ToursWeb.ModelsDB
 {
-    public enum FMenu
-    {
-        Vegeterian,
-        Children,
-        Dietary
-    };
+    
     
     public partial class Food
     {

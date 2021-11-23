@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 
 namespace ToursWeb.Repositories
 {
-    public interface IFoodRepository : CrudRepository<Food, int>
+    public interface IFoodRepository : CrudRepository<FoodBL, int>
     {
-        List<Food> FindFoodByCategory(string cat);
-        List<Food> FindFoodByMenu(string menu);
-        List<Food> FindFoodByBar(bool bar);
+        List<FoodBL> FindFoodByCategory(string cat);
+        List<FoodBL> FindFoodByMenu(string menu);
+        List<FoodBL> FindFoodByBar(bool bar);
     }
 }

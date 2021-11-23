@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using ToursWeb.ModelsBL;
 using ToursWeb.ModelsDB;
 using ToursWeb.Repositories;
 
@@ -15,44 +14,44 @@ namespace ToursWeb.Controllers
             _hotelRepository = hotelRepository;
         }
 
-        public List<Hotel> GetAllHotels()
+        public List<HotelBL> GetAllHotels()
         {
             return _hotelRepository.FindAll();
         }
 
-        public Hotel GetHotelByID(int hotelID)
+        public HotelBL GetHotelByID(int hotelID)
         {
             return _hotelRepository.FindByID(hotelID);
         }
 
-        public List<Hotel> GetHotelsByCity(string city)
+        public List<HotelBL> GetHotelsByCity(string city)
         {
             return _hotelRepository.FindHotelsByCity(city);
         }
 
-        public List<Hotel> GetHotelsByType(string type)
+        public List<HotelBL> GetHotelsByType(string type)
         {
             return _hotelRepository.FindHotelByType(type);
         }
 
-        public List<Hotel> GetHotelsByClass(int cls)
+        public List<HotelBL> GetHotelsByClass(int cls)
         {
             return _hotelRepository.FindHotelByClass(cls);
         }
 
-        public List<Hotel> GetHotelsBySwimPool(bool sp)
+        public List<HotelBL> GetHotelsBySwimPool(bool sp)
         {
             return _hotelRepository.FindHotelBySwimPool(sp);
         }
         
-        public ExitCode AddHotel(Hotel nhotel)
+        public ExitCode AddHotel(HotelBL hotel)
         {
-            return _hotelRepository.Add(nhotel);
+            return _hotelRepository.Add(hotel);
         }
         
-        public ExitCode UpdateHotel(Hotel nhotel)
+        public ExitCode UpdateHotel(HotelBL hotel)
         {
-            return _hotelRepository.Update(nhotel);
+            return _hotelRepository.Update(hotel);
         }
         
         public ExitCode DeleteHotelByID(int hotelID)

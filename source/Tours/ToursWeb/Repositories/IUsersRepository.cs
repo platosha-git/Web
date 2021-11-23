@@ -1,10 +1,13 @@
-﻿using ToursWeb.ModelsDB;
+﻿using System.Collections.Generic;
+using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
+
 namespace ToursWeb.Repositories
 {
-    public interface IUsersRepository : CrudRepository<User, int>
+    public interface IUsersRepository : CrudRepository<UserBL, int>
     {
-        User FindUserByLP(string login, string password);
-        int[] FindBookedTours(int id);
-        ExitCode UpdateTours(User obj, int[] toursID);
+        UserBL FindUserByLP(string login, string password);
+        List<int> FindBookedTours(int id);
+        public ExitCode UpdateTours(UserBL obj, List<int> toursID);
     }
 }

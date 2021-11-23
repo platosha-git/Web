@@ -1,7 +1,7 @@
 using System;
 using ToursWeb.ModelsDB;
 
-namespace ToursAPI.ModelsDTO
+namespace ToursWeb.ModelsDTO
 {
     public class TourUserDTO
     {

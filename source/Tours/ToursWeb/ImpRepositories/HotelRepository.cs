@@ -4,6 +4,7 @@ using System.Linq;
 using ToursWeb.Repositories;
 using Microsoft.Extensions.Logging;
 using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 
 namespace ToursWeb.ImpRepositories
 {
@@ -18,22 +19,39 @@ namespace ToursWeb.ImpRepositories
             _logger = logDB;
         }
 
-        public List<Hotel> FindAll()
+        List<HotelBL> ListHotelBL(List<Hotel> hotels)
         {
-            return _db.Hotels.ToList();
+            List<HotelBL> hotelsBL = new List<HotelBL>();
+            foreach (var hotel in hotels)
+            {
+                HotelBL hotelBL = new HotelBL(hotel);
+                hotelsBL.Add(hotelBL);
+            }
+
+            return hotelsBL;
         }
 
-        public Hotel FindByID(int id)
+        public List<HotelBL> FindAll()
         {
-            return _db.Hotels.Find(id);
+            List<Hotel> hotels = _db.Hotels.ToList();
+            List<HotelBL> hotelsBL = ListHotelBL(hotels);
+            return hotelsBL;
         }
 
-        public ExitCode Add(Hotel obj)
+        public HotelBL FindByID(int id)
+        {
+            Hotel hotel = _db.Hotels.Find(id);
+            HotelBL hotelBL = new HotelBL(hotel);
+            return hotelBL;
+        }
+
+        public ExitCode Add(HotelBL obj)
         {
             try
             {
-                obj.Hotelid = _db.Hotels.Count() + 1;
-                _db.Hotels.Add(obj);
+                Hotel hotel = obj.GetHotel();
+                hotel.Hotelid = _db.Hotels.Count() + 1;
+                _db.Hotels.Add(hotel);
                 _db.SaveChanges();
                 _logger.LogInformation("+HotelRep : Hotel {Number} was added to Hotels", obj.Hotelid);
                 return ExitCode.Success;
@@ -50,14 +68,11 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
-        public ExitCode Update(Hotel obj)
+        public ExitCode Update(HotelBL obj)
         {
             try
             {
-                Hotel uHotel = FindByID(obj.Hotelid);
-                uHotel.Name = obj.Name; uHotel.Type = obj.Type; uHotel.Class = obj.Class;
-                uHotel.Swimpool = obj.Swimpool; uHotel.City = obj.City; uHotel.Cost = obj.Cost;
-
+                Hotel uHotel = obj.GetHotel();
                 _db.Hotels.Update(uHotel);
                 _db.SaveChanges();
                 _logger.LogInformation("+HotelRep : Hotel {Number} was updated in Hotels", obj.Hotelid);
@@ -79,7 +94,8 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                Hotel hotel = FindByID(id);
+                HotelBL hotelBL = FindByID(id);
+                Hotel hotel = hotelBL.GetHotel();
                 _db.Hotels.Remove(hotel);
                 _db.SaveChanges();
                 _logger.LogInformation("+HotelRep : Hotel {Number} was deleted from Hotels", id);
@@ -92,34 +108,44 @@ namespace ToursWeb.ImpRepositories
             }
         }
         
-        public List<Hotel> FindHotelsByCity(string city)
+        public List<HotelBL> FindHotelsByCity(string city)
         {
             IQueryable<Hotel> hotels = _db.Hotels.Where(needed => needed.City.Equals(city));
-            return hotels.ToList();
+            List<Hotel> lHotels = hotels.ToList();
+            List<HotelBL> lHotelsBL = ListHotelBL(lHotels);
+            return lHotelsBL;
         }
 
-        public List<Hotel> FindHotelsByName(string name)
+        public List<HotelBL> FindHotelsByName(string name)
         {
-            IQueryable<Hotel> hotel = _db.Hotels.Where(needed => needed.Name == name);
-            return hotel.ToList();
+            IQueryable<Hotel> hotels = _db.Hotels.Where(needed => needed.Name == name);
+            List<Hotel> lHotels = hotels.ToList();
+            List<HotelBL> lHotelsBL = ListHotelBL(lHotels);
+            return lHotelsBL;
         }
 
-        public List<Hotel> FindHotelByType(string type)
+        public List<HotelBL> FindHotelByType(string type)
         {
             IQueryable<Hotel> hotels = _db.Hotels.Where(needed => needed.Type == type);
-            return hotels.ToList();
+            List<Hotel> lHotels = hotels.ToList();
+            List<HotelBL> lHotelsBL = ListHotelBL(lHotels);
+            return lHotelsBL;
         }
 
-        public List<Hotel> FindHotelByClass(int cls)
+        public List<HotelBL> FindHotelByClass(int cls)
         {
             IQueryable<Hotel> hotels = _db.Hotels.Where(needed => needed.Class == cls);
-            return hotels.ToList();
+            List<Hotel> lHotels = hotels.ToList();
+            List<HotelBL> lHotelsBL = ListHotelBL(lHotels);
+            return lHotelsBL;
         }
 
-        public List<Hotel> FindHotelBySwimPool(bool sp)
+        public List<HotelBL> FindHotelBySwimPool(bool sp)
         {
             IQueryable<Hotel> hotels = _db.Hotels.Where(needed => needed.Swimpool == sp);
-            return hotels.ToList();
+            List<Hotel> lHotels = hotels.ToList();
+            List<HotelBL> lHotelsBL = ListHotelBL(lHotels);
+            return lHotelsBL;
         }
 
         public void Dispose()
