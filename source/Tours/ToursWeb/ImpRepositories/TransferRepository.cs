@@ -95,8 +95,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                TransferBL transferBL = FindByID(id);
-                Transfer transfer = transferBL.GetTransfer();
+                Transfer transfer = _db.Transfers.Find(id);
                 _db.Transfers.Remove(transfer);
                 _db.SaveChanges();
                 _logger.LogInformation("+TransferRep : Transfer {Number} was deleted from Transfers", transfer.Transferid);

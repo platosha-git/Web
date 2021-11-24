@@ -94,8 +94,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                UserBL userBL = FindByID(id);
-                User user = userBL.GetUser();
+                User user = _db.Users.Find(id);
                 _db.Users.Remove(user);
                 _db.SaveChanges();
                 _logger.LogInformation("+UsersRep : User {Number} was deleted from Users", id);

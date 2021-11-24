@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ToursWeb.ModelsDB;
-using ToursWeb.Controllers;
+using ToursWeb.ModelsBL;
 using ToursWeb.ModelsDTO;
+using ToursWeb.Controllers;
 
 namespace ToursAPI.Controllers
 {
@@ -20,7 +20,7 @@ namespace ToursAPI.Controllers
             _hotelController = hotelController;
         }
 
-        private List<HotelDTO> ListHotelDTO(List<Hotel> lHotels)
+        private List<HotelDTO> ListHotelDTO(List<HotelBL> lHotels)
         {
             List<HotelDTO> lHotelDTO = new List<HotelDTO>();
             foreach (var hotel in lHotels)
@@ -46,7 +46,7 @@ namespace ToursAPI.Controllers
             [FromQuery(Name = "Class")] int? cls = null, [FromQuery(Name = "Type")] string type = null,
             [FromQuery(Name = "Swimming pool")] bool? sp = null)
         {
-            List<Hotel> hotels = _hotelController.GetAllHotels();
+            List<HotelBL> hotels = _hotelController.GetAllHotels();
             if (hotels != null)
             {
                 if (city != null)
@@ -56,22 +56,22 @@ namespace ToursAPI.Controllers
 
                 if (cls != null)
                 {
-                    List<Hotel> hotelsCls = _hotelController.GetHotelsByClass((int)cls);
-                    List<Hotel> res1 = hotels.Intersect(hotelsCls).ToList();
+                    List<HotelBL> hotelsCls = _hotelController.GetHotelsByClass((int)cls);
+                    List<HotelBL> res1 = hotels.Intersect(hotelsCls).ToList();
                     hotels = res1;
                 }
 
                 if (type != null)
                 {
-                    List<Hotel> hotelsType = _hotelController.GetHotelsByType(type);
-                    List<Hotel> res2 = hotels.Intersect(hotelsType).ToList();
+                    List<HotelBL> hotelsType = _hotelController.GetHotelsByType(type);
+                    List<HotelBL> res2 = hotels.Intersect(hotelsType).ToList();
                     hotels = res2;
                 }
                 
                 if (sp != null)
                 {
-                    List<Hotel> hotelsSP = _hotelController.GetHotelsBySwimPool((bool)sp);
-                    List<Hotel> res3 = hotels.Intersect(hotelsSP).ToList();
+                    List<HotelBL> hotelsSP = _hotelController.GetHotelsBySwimPool((bool)sp);
+                    List<HotelBL> res3 = hotels.Intersect(hotelsSP).ToList();
                     hotels = res3;
                 }
             }
@@ -117,7 +117,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult AddHotel([FromBody] HotelUserDTO hotelDTO)
         {
-            Hotel aHotel = hotelDTO.GetHotel();
+            HotelBL aHotel = hotelDTO.GetHotel();
             ExitCode result = _hotelController.AddHotel(aHotel);
             
             if (result == ExitCode.Constraint) 
@@ -146,7 +146,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult UpdateHotel([FromBody] HotelDTO hotelDTO)
         {
-            Hotel uHotel = hotelDTO.GetHotel(hotelDTO.Hotelid);
+            HotelBL uHotel = hotelDTO.GetHotel(hotelDTO.Hotelid);
             ExitCode result = _hotelController.UpdateHotel(uHotel);
 
             if (result == ExitCode.Constraint) 
@@ -175,7 +175,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteHotel([FromRoute(Name = "HotelID")] int hotelID)
         {
-            Hotel delHotel = _hotelController.GetHotelByID(hotelID);
+            HotelBL delHotel = _hotelController.GetHotelByID(hotelID);
             if (delHotel == null)
             {
                 return NotFound();

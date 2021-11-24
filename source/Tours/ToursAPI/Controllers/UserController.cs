@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ToursWeb.ModelsDB;
 using ToursWeb.Controllers;
 using ToursWeb.ModelsDTO;
 using ToursWeb.ModelsBL;
@@ -23,7 +22,7 @@ namespace ToursAPI.Controllers
             _tourController = tourController;
         }
 
-        private List<UserDTO> ListUsersDTO(List<User> lUsers)
+        private List<UserDTO> ListUsersDTO(List<UserBL> lUsers)
         {
             List<UserDTO> lUsersDTO = new List<UserDTO>();
             foreach (var user in lUsers)
@@ -36,16 +35,16 @@ namespace ToursAPI.Controllers
         
         private List<UserTour> GetAllUserBookings(int userID)
         {
-            int[] toursID = _userController.GetBookedTours(userID);
-            if (toursID.Length == 0)
+            List<int> toursID = _userController.GetBookedTours(userID);
+            if (toursID.Count == 0)
             {
                 return null;
             }
             
-            List<Tour> tours = new List<Tour>();
+            List<TourBL> tours = new List<TourBL>();
             foreach (int tour in toursID)
             {
-                Tour curTour = _tourController.GetTourByID(tour);
+                TourBL curTour = _tourController.GetTourByID(tour);
                 tours.Add(curTour);
             }
 
@@ -62,11 +61,11 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllUsers([FromQuery(Name = "Login")] string login = null, [FromQuery(Name = "Password")] string password = null)
         {
-            List<User> users = _userController.GetAllUsers();
+            List<UserBL> users = _userController.GetAllUsers();
             if (login != null && password != null)
             {
-                User user = _userController.GetUserByLP(login, password);
-                List<User> newUsers = new List<User>();
+                UserBL user = _userController.GetUserByLP(login, password);
+                List<UserBL> newUsers = new List<UserBL>();
                 newUsers.Add(user);
                 users = newUsers;
             }
@@ -90,7 +89,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllUserInfo([FromRoute(Name = "UserID")] int userID)
         {
-            User user = _userController.GetAllUserInfo(userID);
+            UserBL user = _userController.GetAllUserInfo(userID);
             if (user == null)
             {
                 return NotFound();
@@ -145,8 +144,8 @@ namespace ToursAPI.Controllers
                 return BadRequest();
             }
             
-            int[] toursID = _userController.GetBookedTours(userID);
-            int size = toursID.Length;
+            List<int> toursID = _userController.GetBookedTours(userID);
+            int size = toursID.Count;
 
             bool isExists = false;
             for (int i = 0; i < size && !isExists; i++)

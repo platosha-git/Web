@@ -1,4 +1,4 @@
-using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 
 namespace ToursWeb.ModelsDTO
 {
@@ -13,9 +13,9 @@ namespace ToursWeb.ModelsDTO
 
         public HotelUserDTO() {}
 
-        public Hotel GetHotel(int hotelID = 0)
+        public HotelBL GetHotel(int hotelID = 0)
         {
-            Hotel hotel = new Hotel ()
+            HotelBL hotel = new HotelBL ()
             {
                 Hotelid = hotelID,
                 Name = Name,
@@ -36,7 +36,7 @@ namespace ToursWeb.ModelsDTO
         
         public HotelDTO() {}
         
-        public HotelDTO(Hotel hotel)
+        public HotelDTO(HotelBL hotel)
         {
             Hotelid = hotel.Hotelid;
             Name = hotel.Name;

@@ -94,8 +94,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                HotelBL hotelBL = FindByID(id);
-                Hotel hotel = hotelBL.GetHotel();
+                Hotel hotel = _db.Hotels.Find(id);
                 _db.Hotels.Remove(hotel);
                 _db.SaveChanges();
                 _logger.LogInformation("+HotelRep : Hotel {Number} was deleted from Hotels", id);

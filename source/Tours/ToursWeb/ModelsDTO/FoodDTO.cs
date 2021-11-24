@@ -1,4 +1,5 @@
-using ToursWeb.ModelsDB;
+using System;
+using ToursWeb.ModelsBL;
 
 namespace ToursWeb.ModelsDTO
 {
@@ -9,17 +10,15 @@ namespace ToursWeb.ModelsDTO
         public bool? Bar { get; set; }
         public int Cost { get; set; }
 
-        public FoodUserDTO()
-        {
-        }
+        public FoodUserDTO() { }
         
-        public Food GetFood(int foodID = 0)
+        public FoodBL GetFood(int foodID = 0)
         {
-            Food food = new Food ()
+            FoodBL food = new FoodBL ()
             {
                 Foodid = foodID,
                 Category = Category,
-                Menu = Menu,
+                Menu = Menu.ToString(),
                 Bar = Bar,
                 Cost = Cost
             };
@@ -34,7 +33,7 @@ namespace ToursWeb.ModelsDTO
 
         public FoodDTO() {}
         
-        public FoodDTO(Food food)
+        public FoodDTO(FoodBL food)
         {
             Foodid = food.Foodid;
             Category = food.Category;

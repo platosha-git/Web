@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ToursWeb.ModelsDB;
 using ToursWeb.Controllers;
 using ToursWeb.ModelsDTO;
 using ToursWeb.ModelsBL;
@@ -37,21 +36,21 @@ namespace ToursAPI.Controllers
             [FromQuery(Name = "HotelName")] string name = null,
             [FromQuery(Name = "DateBegin")] string dBegin = null, [FromQuery(Name = "DateEnd")] string dEnd = null)
         {
-            List<Tour> tours = _tourController.GetAllTours();
+            List<TourBL> tours = _tourController.GetAllTours();
             if (tours != null)
             {
                 if (city != null)
                 {
                     if (name != null)
                     {
-                        List<Tour> toursCN = _tourController.GetToursByCityName(city, name);
-                        List<Tour> res1 = tours.Intersect(toursCN).ToList();
+                        List<TourBL> toursCN = _tourController.GetToursByCityName(city, name);
+                        List<TourBL> res1 = tours.Intersect(toursCN).ToList();
                         tours = res1;
                     }
                     else
                     {
-                        List<Tour> toursC = _tourController.GetToursByCity(city);
-                        List<Tour> res2 = tours.Intersect(toursC).ToList();
+                        List<TourBL> toursC = _tourController.GetToursByCity(city);
+                        List<TourBL> res2 = tours.Intersect(toursC).ToList();
                         tours = res2;
                     }
                 }
@@ -61,8 +60,8 @@ namespace ToursAPI.Controllers
                     DateTime beg = Convert.ToDateTime(dBegin);
                     DateTime end = Convert.ToDateTime(dEnd);
 
-                    List<Tour> toursDate = _tourController.GetToursByDate(beg, end);
-                    List<Tour> res1 = tours.Intersect(toursDate).ToList();
+                    List<TourBL> toursDate = _tourController.GetToursByDate(beg, end);
+                    List<TourBL> res1 = tours.Intersect(toursDate).ToList();
                     tours = res1;
                 }
             }
@@ -108,7 +107,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult AddTour([FromBody] TourUserDTO tourDTO)
         {
-            Tour aTour = tourDTO.GetTour();
+            TourBL aTour = tourDTO.GetTour();
             ExitCode result = _tourController.AddTour(aTour);
             
             if (result == ExitCode.Constraint) 
@@ -137,7 +136,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult UpdateTour([FromBody] TourDTO tourDTO)
         {
-            Tour uTour = tourDTO.GetTour(tourDTO.Tourid);
+            TourBL uTour = tourDTO.GetTour(tourDTO.Tourid);
             ExitCode result = _tourController.UpdateTour(uTour);
             
             if (result == ExitCode.Constraint) 
@@ -165,7 +164,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteTour([FromRoute(Name = "TourID")] int tourID)
         {
-            Tour delTour = _tourController.GetTourByID(tourID);
+            TourBL delTour = _tourController.GetTourByID(tourID);
             if (delTour == null)
             {
                 return NotFound();

@@ -1,11 +1,12 @@
-using ToursWeb.ModelsDB;
+using System.Collections.Generic;
+using ToursWeb.ModelsBL;
 
 namespace ToursWeb.ModelsDTO
 {
     public class UserDTO
     {
         public int Userid { get; set; }
-        public int[] Toursid { get; set; }
+        public List<int> Toursid { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public int? Accesslevel { get; set; }
@@ -14,7 +15,7 @@ namespace ToursWeb.ModelsDTO
         {
         }
         
-        public UserDTO(User user)
+        public UserDTO(UserBL user)
         {
             Userid = user.Userid;
             Toursid = user.Toursid;

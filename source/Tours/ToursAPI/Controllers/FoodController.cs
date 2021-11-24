@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ToursWeb.ModelsDB;
 using ToursWeb.Controllers;
 using ToursWeb.ModelsDTO;
 using ToursWeb.ModelsBL;
@@ -21,16 +20,16 @@ namespace ToursAPI.Controllers
             _foodController = foodController;
         }
 
-        private List<FoodDTO> ListFoodDTO(List<Food> lFood)
+        private List<FoodDTO> ListFoodDTO(List<FoodBL> foods)
         {
-            List<FoodDTO> lFoodDTO = new List<FoodDTO>();
-            foreach (var food in lFood)
+            List<FoodDTO> foodsDTO = new List<FoodDTO>();
+            foreach (var food in foods)
             {
                 FoodDTO foodDTO = new FoodDTO(food);
-                lFoodDTO.Add(foodDTO);
+                foodsDTO.Add(foodDTO);
             }
 
-            return lFoodDTO;
+            return foodsDTO;
         }
         
         /// <summary>Foods by parameters</summary>
@@ -41,12 +40,12 @@ namespace ToursAPI.Controllers
         /// <response code="200">Foods found</response>
         /// <response code="404">No food</response>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodDTO>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodBL>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllFood([FromQuery(Name = "Category")] string category = null,
             [FromQuery(Name = "Menu")] FMenu? menu = null, [FromQuery(Name = "Bar")] bool? bar = null)
         {
-            List<Food> foods = _foodController.GetAllFood();
+            List<FoodBL> foods = _foodController.GetAllFood();
             if (foods != null)
             {
                 if (category != null)
@@ -56,15 +55,16 @@ namespace ToursAPI.Controllers
 
                 if (menu != null)
                 {
-                    List<Food> foodMenu = _foodController.GetFoodByMenu(menu.ToString());
-                    List<Food> res1 = foods.Intersect(foodMenu).ToList();
+                    List<FoodBL> foodMenu = _foodController.GetFoodByMenu(menu.ToString());
+                    List<FoodBL> res1 = foods.Intersect(foodMenu).ToList();
                     foods = res1;
                 }
 
                 if (bar != null)
                 {
-                    List<Food> foodsBar = _foodController.GetFoodByBar((bool) bar);
-                    List<Food> res2 = foods.Intersect(foodsBar).ToList();
+                    List<FoodBL> foodsBar = _foodController.GetFoodByBar((bool) bar);
+                    List<FoodBL> res2 = foods.Intersect(foodsBar).ToList();
+                    return Ok(foods);
                     foods = res2;
                 }
             }
@@ -73,8 +73,10 @@ namespace ToursAPI.Controllers
             {
                 return NotFound();
             }
-            List<FoodDTO> lFoodDTO = ListFoodDTO(foods);
-            return Ok(lFoodDTO);
+
+            return Ok(foods);
+            //List<FoodDTO> lFoodDTO = ListFoodDTO(foods);
+            //return Ok(lFoodDTO);
         }
         
         /// <summary>Food by ID</summary>
@@ -109,7 +111,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult AddFood([FromBody] FoodUserDTO foodDTO)
         {
-            Food aFood = foodDTO.GetFood();
+            FoodBL aFood = foodDTO.GetFood();
             ExitCode result = _foodController.AddFood(aFood);
             
             if (result == ExitCode.Constraint) 
@@ -138,7 +140,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult UpdateFood([FromBody] FoodDTO foodDTO)
         {
-            Food uFood = foodDTO.GetFood(foodDTO.Foodid);
+            FoodBL uFood = foodDTO.GetFood(foodDTO.Foodid);
             ExitCode result = _foodController.UpdateFood(uFood);
             
             if (result == ExitCode.Constraint) 
@@ -167,7 +169,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteFood([FromRoute(Name = "FoodID")] int foodID)
         {
-            Food delFood = _foodController.GetFoodByID(foodID);
+            FoodBL delFood = _foodController.GetFoodByID(foodID);
             if (delFood == null)
             {
                 return NotFound();

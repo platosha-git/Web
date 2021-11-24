@@ -3,6 +3,13 @@ using ToursWeb.ModelsDB;
 
 namespace ToursWeb.ModelsBL
 {
+    public enum ExitCode
+    {
+        Success,
+        Constraint,
+        Error
+    }
+    
     public class UserTour
     {
         public int Tourid { get; set; }

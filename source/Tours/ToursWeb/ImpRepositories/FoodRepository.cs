@@ -94,8 +94,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                FoodBL foodBL = FindByID(id);
-                Food food = foodBL.GetFood();
+                Food food = _db.Foods.Find(id);
                 _db.Foods.Remove(food);
                 _db.SaveChanges();
                 _logger.LogInformation("+FoodRep : Food {Number} was deleted from Food", id);

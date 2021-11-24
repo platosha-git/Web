@@ -1,20 +1,20 @@
 using System;
-using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 
 namespace ToursWeb.ModelsDTO
 {
     public class TransferUserDTO
     {
-        public string Type { get; set; }
+        public TType Type { get; set; }
         public string Cityfrom { get; set; }
         public DateTime? Departuretime { get; set; }
         public int? Cost { get; set; }
 
         public TransferUserDTO() {}
 
-        public Transfer GetTransfer(int transferID = 0)
+        public TransferBL GetTransfer(int transferID = 0)
         {
-            Transfer transfer = new Transfer ()
+            TransferBL transfer = new TransferBL ()
             {
                 Transferid = transferID,
                 Type = Type,
@@ -33,7 +33,7 @@ namespace ToursWeb.ModelsDTO
         
         public TransferDTO() {}
         
-        public TransferDTO(Transfer transfer)
+        public TransferDTO(TransferBL transfer)
         {
             Transferid = transfer.Transferid;
             Type = transfer.Type;

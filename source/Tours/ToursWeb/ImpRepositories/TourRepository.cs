@@ -94,8 +94,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                TourBL tourBL = FindByID(id);
-                Tour tour = tourBL.GetTour();
+                Tour tour = _db.Tours.Find(id);
                 _db.Tours.Remove(tour);
                 _db.SaveChanges();
                 _logger.LogInformation("+TourRep : Tours {Number} was deleted from Tours", tour.Tourid);

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ToursWeb.ModelsDB;
 using ToursWeb.Controllers;
 using ToursWeb.ModelsDTO;
 using ToursWeb.ModelsBL;
@@ -22,7 +21,7 @@ namespace ToursAPI.Controllers
             _transferController = transferController;
         }
 
-        private List<TransferDTO> ListTransferDTO(List<Transfer> lTransfers)
+        private List<TransferDTO> ListTransferDTO(List<TransferBL> lTransfers)
         {
             List<TransferDTO> lTransfersDTO = new List<TransferDTO>();
             foreach (var transfer in lTransfers)
@@ -46,7 +45,7 @@ namespace ToursAPI.Controllers
         public IActionResult GetAllTransfer([FromQuery(Name = "Type")] TType? type = null,
             [FromQuery(Name = "CityFrom")] string cityFrom = null, [FromQuery(Name = "Date")] string date = null)
         {
-            List<Transfer> transfers = _transferController.GetAllTransfer();
+            List<TransferBL> transfers = _transferController.GetAllTransfer();
             if (transfers != null)
             {
                 if (type != null)
@@ -56,16 +55,16 @@ namespace ToursAPI.Controllers
 
                 if (cityFrom != null)
                 {
-                    List<Transfer> transfersCities = _transferController.GetTransfersByCity(cityFrom);
-                    List<Transfer> res1 = transfers.Intersect(transfersCities).ToList();
+                    List<TransferBL> transfersCities = _transferController.GetTransfersByCity(cityFrom);
+                    List<TransferBL> res1 = transfers.Intersect(transfersCities).ToList();
                     transfers = res1;
                 }
 
                 if (date != null)
                 {
                     DateTime dateTr = Convert.ToDateTime(date);
-                    List<Transfer> transfersDate = _transferController.GetTransfersByDate(dateTr);
-                    List<Transfer> res2 = transfers.Intersect(transfersDate).ToList();
+                    List<TransferBL> transfersDate = _transferController.GetTransfersByDate(dateTr);
+                    List<TransferBL> res2 = transfers.Intersect(transfersDate).ToList();
                     transfers = res2;
                 }
             }
@@ -111,7 +110,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult AddTransfer([FromBody] TransferUserDTO transferDTO)
         {
-            Transfer aTransfer = transferDTO.GetTransfer();
+            TransferBL aTransfer = transferDTO.GetTransfer();
             ExitCode result = _transferController.AddTransfer(aTransfer);
             
             if (result == ExitCode.Constraint) 
@@ -140,7 +139,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult UpdateTransfer([FromBody] TransferDTO transferDTO)
         {
-            Transfer uTransfer = transferDTO.GetTransfer(transferDTO.Transferid);
+            TransferBL uTransfer = transferDTO.GetTransfer(transferDTO.Transferid);
             ExitCode result = _transferController.UpdateTransfer(uTransfer);
             
             if (result == ExitCode.Constraint) 
@@ -169,7 +168,7 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteTransfer([FromRoute(Name = "TransferID")] int transferID)
         {
-            Transfer delTransfer = _transferController.GetTransferByID(transferID);
+            TransferBL delTransfer = _transferController.GetTransferByID(transferID);
             if (delTransfer == null)
             {
                 return NotFound();

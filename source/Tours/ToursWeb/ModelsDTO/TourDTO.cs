@@ -1,5 +1,5 @@
 using System;
-using ToursWeb.ModelsDB;
+using ToursWeb.ModelsBL;
 
 namespace ToursWeb.ModelsDTO
 {
@@ -14,9 +14,9 @@ namespace ToursWeb.ModelsDTO
 
         public TourUserDTO() {}
         
-        public Tour GetTour(int tourID = 0)
+        public TourBL GetTour(int tourID = 0)
         {
-            Tour tour = new Tour ()
+            TourBL tour = new TourBL ()
             {
                 Tourid = tourID,
                 Food = Food,
@@ -37,7 +37,7 @@ namespace ToursWeb.ModelsDTO
 
         public TourDTO() {}
 
-        public TourDTO(Tour tour)
+        public TourDTO(TourBL tour)
         {
             Tourid = tour.Tourid;
             Food = tour.Food;
