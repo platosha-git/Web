@@ -21,6 +21,11 @@ namespace ToursWeb.ImpRepositories
 
         List<HotelBL> ListHotelBL(List<Hotel> hotels)
         {
+            if (hotels == null)
+            {
+                return null;
+            }
+            
             List<HotelBL> hotelsBL = new List<HotelBL>();
             foreach (var hotel in hotels)
             {
@@ -41,6 +46,11 @@ namespace ToursWeb.ImpRepositories
         public HotelBL FindByID(int id)
         {
             Hotel hotel = _db.Hotels.Find(id);
+            if (hotel is null)
+            {
+                return null;
+            }
+            
             HotelBL hotelBL = new HotelBL(hotel);
             return hotelBL;
         }

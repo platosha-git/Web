@@ -35,6 +35,11 @@ namespace ToursAPI.Controllers
         
         private List<UserTour> GetAllUserBookings(int userID)
         {
+            if (_userController.GetAllUserInfo(userID) == null)
+            {
+                return null;
+            }
+            
             List<int> toursID = _userController.GetBookedTours(userID);
             if (toursID.Count == 0)
             {

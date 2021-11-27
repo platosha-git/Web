@@ -21,6 +21,11 @@ namespace ToursWeb.ImpRepositories
 
         List<TransferBL> ListTransferBL(List<Transfer> transfers)
         {
+            if (transfers == null)
+            {
+                return null;
+            }
+            
             List<TransferBL> transfersBL = new List<TransferBL>();
             foreach (var transfer in transfers)
             {
@@ -41,6 +46,11 @@ namespace ToursWeb.ImpRepositories
         public TransferBL FindByID(int id)
         {
             Transfer transfer = _db.Transfers.Find(id);
+            if (transfer is null)
+            {
+                return null;
+            }
+            
             TransferBL transferBL = new TransferBL(transfer);
             return transferBL;
         }

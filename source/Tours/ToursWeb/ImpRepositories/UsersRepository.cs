@@ -21,6 +21,11 @@ namespace ToursWeb.ImpRepositories
         
         List<UserBL> ListUserBL(List<User> users)
         {
+            if (users == null)
+            {
+                return null;
+            }
+            
             List<UserBL> usersBL = new List<UserBL>();
             foreach (var user in users)
             {
@@ -41,6 +46,11 @@ namespace ToursWeb.ImpRepositories
         public UserBL FindByID(int id)
         {
             User user = _db.Users.Find(id);
+            if (user == null)
+            {
+                return null;
+            }
+            
             UserBL userBL = new UserBL(user);
             return userBL;
         }
@@ -125,6 +135,11 @@ namespace ToursWeb.ImpRepositories
         public List<int> FindBookedTours(int id)
         {
             UserBL user = FindByID(id);
+            if (user is null)
+            {
+                return null;
+            }
+            
             return user.Toursid;
         }
         

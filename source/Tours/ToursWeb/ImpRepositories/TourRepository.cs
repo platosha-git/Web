@@ -21,6 +21,11 @@ namespace ToursWeb.ImpRepositories
 
         List<TourBL> ListTourBL(List<Tour> tours)
         {
+            if (tours == null)
+            {
+                return null;
+            }
+            
             List<TourBL> toursBL = new List<TourBL>();
             foreach (var tour in tours)
             {
@@ -41,6 +46,11 @@ namespace ToursWeb.ImpRepositories
         public TourBL FindByID(int id)
         {
             Tour tour = _db.Tours.Find(id);
+            if (tour is null)
+            {
+                return null;
+            }
+            
             TourBL tourBL = new TourBL(tour);
             return tourBL;
         }
