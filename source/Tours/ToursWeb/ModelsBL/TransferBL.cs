@@ -42,5 +42,22 @@ namespace ToursWeb.ModelsBL
 
             return transfer;
         }
+        
+        private bool Equals(TransferBL transfer)
+        {
+            if (transfer is null)
+            {
+                return false;
+            }
+
+            return Transferid == transfer.Transferid &&
+                   Type == transfer.Type &&
+                   Cityfrom == transfer.Cityfrom &&
+                   Departuretime == transfer.Departuretime &&
+                   Cost == transfer.Cost;
+        }
+
+        public override bool Equals(object obj) => Equals(obj as TransferBL);
+        public override int GetHashCode() => (Transferid, Type, Cityfrom, Departuretime, Cost).GetHashCode();
     }
 }

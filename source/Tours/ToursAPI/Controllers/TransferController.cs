@@ -134,12 +134,13 @@ namespace ToursAPI.Controllers
         /// <response code="400">Update error</response>
         /// <response code="409">Constraint error</response>
         [HttpPut]
+        [Route("{TransferID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public IActionResult UpdateTransfer([FromBody] TransferDTO transferDTO)
+        public IActionResult UpdateTransfer([FromRoute(Name = "TransferID")] int transferID, [FromBody] TransferUserDTO transferDTO)
         {
-            TransferBL uTransfer = transferDTO.GetTransfer(transferDTO.Transferid);
+            TransferBL uTransfer = transferDTO.GetTransfer(transferID);
             ExitCode result = _transferController.UpdateTransfer(uTransfer);
             
             if (result == ExitCode.Constraint) 

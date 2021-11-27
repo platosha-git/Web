@@ -78,5 +78,24 @@ namespace ToursWeb.ModelsBL
 
             return tour;
         }
+        
+        private bool Equals(TourBL tour)
+        {
+            if (tour is null)
+            {
+                return false;
+            }
+
+            return Tourid == tour.Tourid &&
+                   Food == tour.Food &&
+                   Hotel == tour.Hotel &&
+                   Transfer == tour.Transfer &&
+                   Cost == tour.Cost &&
+                   Datebegin == tour.Datebegin &&
+                   Dateend == tour.Dateend;
+        }
+
+        public override bool Equals(object obj) => Equals(obj as TourBL);
+        public override int GetHashCode() => (Tourid, Food, Hotel, Transfer, Cost, Datebegin, Dateend).GetHashCode();
     }
 }

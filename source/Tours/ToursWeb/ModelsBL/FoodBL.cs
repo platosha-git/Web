@@ -41,5 +41,22 @@ namespace ToursWeb.ModelsBL
             
             return food;
         }
+        
+        private bool Equals(FoodBL food)
+        {
+            if (food is null)
+            {
+                return false;
+            }
+
+            return Foodid == food.Foodid && 
+                   Category == food.Category &&
+                   Menu == food.Menu &&
+                   Bar == food.Bar &&
+                   Cost == food.Cost;
+        }
+
+        public override bool Equals(object obj) => Equals(obj as FoodBL);
+        public override int GetHashCode() => (Foodid, Category, Menu, Bar, Cost).GetHashCode();
     }
 }

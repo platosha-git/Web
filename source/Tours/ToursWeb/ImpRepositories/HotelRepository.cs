@@ -50,6 +50,7 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 Hotel hotel = obj.GetHotel();
+                obj.Hotelid = _db.Hotels.Count() + 1;
                 hotel.Hotelid = _db.Hotels.Count() + 1;
                 _db.Hotels.Add(hotel);
                 _db.SaveChanges();

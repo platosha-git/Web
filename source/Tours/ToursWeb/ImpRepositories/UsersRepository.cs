@@ -50,6 +50,8 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 User user = obj.GetUser();
+                obj.Userid = _db.Users.Count() + 1;
+                
                 user.Userid = _db.Users.Count() + 1;
                 _db.Users.Add(user);
                 _db.SaveChanges();

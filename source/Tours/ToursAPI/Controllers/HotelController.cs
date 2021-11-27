@@ -141,12 +141,13 @@ namespace ToursAPI.Controllers
         /// <response code="400">Update error</response>
         /// <response code="409">Constraint error</response>
         [HttpPut]
+        [Route("{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public IActionResult UpdateHotel([FromBody] HotelDTO hotelDTO)
+        public IActionResult UpdateHotel([FromRoute(Name = "HotelID")] int hotelID, [FromBody] HotelUserDTO hotelDTO)
         {
-            HotelBL uHotel = hotelDTO.GetHotel(hotelDTO.Hotelid);
+            HotelBL uHotel = hotelDTO.GetHotel(hotelID);
             ExitCode result = _hotelController.UpdateHotel(uHotel);
 
             if (result == ExitCode.Constraint) 

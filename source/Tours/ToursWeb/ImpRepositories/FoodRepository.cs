@@ -21,6 +21,11 @@ namespace ToursWeb.ImpRepositories
 
         List<FoodBL> ListFoodBL(List<Food> foods)
         {
+            if (foods == null)
+            {
+                return null;
+            }
+            
             List<FoodBL> foodsBL = new List<FoodBL>();
             foreach (var food in foods)
             {
@@ -41,6 +46,11 @@ namespace ToursWeb.ImpRepositories
         public FoodBL FindByID(int id)
         {
             Food food = _db.Foods.Find(id);
+            if (food is null)
+            {
+                return null;
+            }
+            
             FoodBL foodBL = new FoodBL(food);
             return foodBL;
         }
@@ -50,6 +60,8 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 Food food = obj.GetFood();
+                obj.Foodid = _db.Foods.Count() + 1;
+                
                 food.Foodid = _db.Foods.Count() + 1;
                 _db.Foods.Add(food);
                 _db.SaveChanges();

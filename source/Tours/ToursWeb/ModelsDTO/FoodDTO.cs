@@ -18,7 +18,7 @@ namespace ToursWeb.ModelsDTO
             {
                 Foodid = foodID,
                 Category = Category,
-                Menu = Menu.ToString(),
+                Menu = Menu,
                 Bar = Bar,
                 Cost = Cost
             };

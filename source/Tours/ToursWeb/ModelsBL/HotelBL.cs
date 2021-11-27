@@ -40,5 +40,24 @@ namespace ToursWeb.ModelsBL
 
             return hotel;
         }
+        
+        private bool Equals(HotelBL hotel)
+        {
+            if (hotel is null)
+            {
+                return false;
+            }
+
+            return Hotelid == hotel.Hotelid && 
+                   Name == hotel.Name && 
+                   Type == hotel.Type && 
+                   Class == hotel.Class && 
+                   Swimpool == hotel.Swimpool && 
+                   City == hotel.City && 
+                   Cost == hotel.Cost;
+        }
+
+        public override bool Equals(object obj) => Equals(obj as HotelBL);
+        public override int GetHashCode() => (Hotelid, Name, Type, Class, Swimpool, City, Cost).GetHashCode();
     }
 }

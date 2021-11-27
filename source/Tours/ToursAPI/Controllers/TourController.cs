@@ -131,12 +131,13 @@ namespace ToursAPI.Controllers
         /// <response code="400">Update error</response>
         /// <response code="409">Constraint error</response>
         [HttpPut]
+        [Route("{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public IActionResult UpdateTour([FromBody] TourDTO tourDTO)
+        public IActionResult UpdateTour([FromRoute(Name = "TourID")] int tourID, [FromBody] TourUserDTO tourDTO)
         {
-            TourBL uTour = tourDTO.GetTour(tourDTO.Tourid);
+            TourBL uTour = tourDTO.GetTour(tourID);
             ExitCode result = _tourController.UpdateTour(uTour);
             
             if (result == ExitCode.Constraint) 

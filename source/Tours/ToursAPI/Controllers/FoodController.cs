@@ -55,8 +55,8 @@ namespace ToursAPI.Controllers
 
                 if (menu != null)
                 {
-                    List<FoodBL> foodMenu = _foodController.GetFoodByMenu(menu.ToString());
-                    List<FoodBL> res1 = foods.Intersect(foodMenu).ToList();
+                    List<FoodBL> foodsMenu = _foodController.GetFoodByMenu(menu.ToString());
+                    List<FoodBL> res1 = foods.Intersect(foodsMenu).ToList();
                     foods = res1;
                 }
 
@@ -64,7 +64,6 @@ namespace ToursAPI.Controllers
                 {
                     List<FoodBL> foodsBar = _foodController.GetFoodByBar((bool) bar);
                     List<FoodBL> res2 = foods.Intersect(foodsBar).ToList();
-                    return Ok(foods);
                     foods = res2;
                 }
             }
@@ -73,10 +72,9 @@ namespace ToursAPI.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(foods);
-            //List<FoodDTO> lFoodDTO = ListFoodDTO(foods);
-            //return Ok(lFoodDTO);
+            
+            List<FoodDTO> lFoodDTO = ListFoodDTO(foods);
+            return Ok(lFoodDTO);
         }
         
         /// <summary>Food by ID</summary>
@@ -135,12 +133,13 @@ namespace ToursAPI.Controllers
         /// <response code="400">Update error</response>
         /// <response code="409">Constraint error</response>
         [HttpPut]
+        [Route("{FoodID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FoodDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public IActionResult UpdateFood([FromBody] FoodDTO foodDTO)
+        public IActionResult UpdateFood([FromRoute(Name = "FoodID")] int foodID, [FromBody] FoodUserDTO foodDTO)
         {
-            FoodBL uFood = foodDTO.GetFood(foodDTO.Foodid);
+            FoodBL uFood = foodDTO.GetFood(foodID);
             ExitCode result = _foodController.UpdateFood(uFood);
             
             if (result == ExitCode.Constraint) 

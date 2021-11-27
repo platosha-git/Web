@@ -50,6 +50,8 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 Transfer transfer = obj.GetTransfer();
+                obj.Transferid = _db.Transfers.Count() + 1;
+                
                 transfer.Transferid = _db.Transfers.Count() + 1;
                 _db.Transfers.Add(transfer);
                 _db.SaveChanges();

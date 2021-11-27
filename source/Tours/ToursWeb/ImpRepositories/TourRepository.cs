@@ -50,6 +50,8 @@ namespace ToursWeb.ImpRepositories
             try
             {
                 Tour tour = obj.GetTour();
+                obj.Tourid = _db.Tours.Count() + 1;
+                
                 tour.Tourid = _db.Tours.Count() + 1;
                 _db.Tours.Add(tour);
                 _db.SaveChanges();
