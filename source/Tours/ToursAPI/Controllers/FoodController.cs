@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ToursWeb.Controllers;
@@ -41,7 +43,7 @@ namespace ToursAPI.Controllers
         /// <response code="404">No food</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodBL>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Nullable))]
         public IActionResult GetAllFood([FromQuery(Name = "Category")] string category = null,
             [FromQuery(Name = "Menu")] FMenu? menu = null, [FromQuery(Name = "Bar")] bool? bar = null)
         {
