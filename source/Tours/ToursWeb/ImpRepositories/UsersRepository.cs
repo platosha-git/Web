@@ -123,13 +123,14 @@ namespace ToursWeb.ImpRepositories
         {
             IQueryable<User> users = _db.Users.Where(needed => needed.Login.Equals(login) &&
                                                                    needed.Password.Equals(password));
-            if (users != null)
+            if (!users.Any())
             {
-                User user = users.First();
-                UserBL userBL = new UserBL(user);
-                return userBL;
+                return null;
             }
-            return null;
+            
+            User user = users.First();
+            UserBL userBL = new UserBL(user);
+            return userBL;
         }
         
         public List<int> FindBookedTours(int id)
