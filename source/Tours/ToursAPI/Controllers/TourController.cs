@@ -118,11 +118,13 @@ namespace ToursAPI.Controllers
         /// <summary>Adding tour</summary>
         /// <param name="tourDTO">Tour to add</param>
         /// <returns>Added tour</returns>
-        /// <response code="200">Tour added</response>
+        /// <response code="201">Tour added</response>
+        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
         /// <response code="503">Internal server error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(TourDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public IActionResult AddTour([FromBody] TourUserDTO tourDTO)
@@ -148,11 +150,13 @@ namespace ToursAPI.Controllers
         /// <param name="tourDTO">Tour to update</param>
         /// <returns>Updated tour</returns>
         /// <response code="200">Tour updated</response>
+        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
         /// <response code="503">Internal server error</response>
         [HttpPut]
         [Route("{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public IActionResult UpdateTour([FromRoute(Name = "TourID")] int tourID, [FromBody] TourUserDTO tourDTO)

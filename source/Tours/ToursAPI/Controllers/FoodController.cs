@@ -114,10 +114,12 @@ namespace ToursAPI.Controllers
         /// <param name="foodDTO">Food to add</param>
         /// <returns>Added food</returns>
         /// <response code="201">Food added</response>
+        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
         /// <response code="503">Internal server error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(FoodDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public IActionResult AddFood([FromBody] FoodUserDTO foodDTO)
@@ -143,11 +145,13 @@ namespace ToursAPI.Controllers
         /// <param name="foodDTO">Food to update</param>
         /// <returns>Updated food</returns>
         /// <response code="200">Food updated</response>
+        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
         /// <response code="503">Internal server error</response>
         [HttpPut]
         [Route("{FoodID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FoodDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public IActionResult UpdateFood([FromRoute(Name = "FoodID")] int foodID, [FromBody] FoodUserDTO foodDTO)

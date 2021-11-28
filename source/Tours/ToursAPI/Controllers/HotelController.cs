@@ -22,7 +22,7 @@ namespace ToursAPI.Controllers
 
         bool isCorrectClass(int cls)
         {
-            return (cls >= 0 && cls <= 5);
+            return (cls is >= 0 and <= 5);
         }
         
         bool isCorrectType(string type)
@@ -132,10 +132,12 @@ namespace ToursAPI.Controllers
         /// <param name="hotelDTO">Hotel to add</param>
         /// <returns>Added hotel</returns>
         /// <response code="201">Hotel added</response>
+        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
         /// <response code="503">Internal server error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(HotelDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public IActionResult AddHotel([FromBody] HotelUserDTO hotelDTO)
@@ -161,11 +163,13 @@ namespace ToursAPI.Controllers
         /// <param name="hotelDTO">Hotel to update</param>
         /// <returns>Updated hotel</returns>
         /// <response code="200">Hotel updated</response>
+        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
         /// <response code="503">Internal server error</response>
         [HttpPut]
         [Route("{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public IActionResult UpdateHotel([FromRoute(Name = "HotelID")] int hotelID, [FromBody] HotelUserDTO hotelDTO)

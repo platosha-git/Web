@@ -60,10 +60,10 @@ namespace ToursAPI.Controllers
         /// <summary>Users by params</summary>
         /// <returns>Users information</returns>
         /// <response code="200">Users found</response>
-        /// <response code="404">No users</response>
+        /// <response code="401">Error login</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserDTO>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult GetAllUsers([FromQuery(Name = "Login")] string login = null, [FromQuery(Name = "Password")] string password = null)
         {
             List<UserBL> users = _userController.GetAllUsers();
@@ -75,9 +75,9 @@ namespace ToursAPI.Controllers
                 users = newUsers;
             }
             
-            if (users == null)
+            if (users.Count == 0)
             {
-                return NotFound();
+                return Unauthorized();
             }
 
             List<UserDTO> lUsersDTO = ListUsersDTO(users);
