@@ -20,6 +20,19 @@ namespace ToursAPI.Controllers
             _hotelController = hotelController;
         }
 
+        bool isCorrectClass(int cls)
+        {
+            return (cls >= 0 && cls <= 5);
+        }
+        
+        bool isCorrectType(string type)
+        {
+            return (type.Equals("Hotel") || type.Equals("Apartment") ||
+                    type.Equals("Hostel") || type.Equals("Guest house") ||
+                    type.Equals("Motel") || type.Equals("Vila") ||
+                    type.Equals("Camping") || type.Equals("BnB"));
+        }
+        
         private List<HotelDTO> ListHotelDTO(List<HotelBL> lHotels)
         {
             List<HotelDTO> lHotelDTO = new List<HotelDTO>();
@@ -38,16 +51,18 @@ namespace ToursAPI.Controllers
         /// <param name="sp"></param>
         /// <returns>Hotels information</returns>
         /// <response code="200">Hotels found</response>
-        /// <response code="404">No hotels</response>
+        /// <response code="204">No hotels</response>
+        /// <response code="400">Incorrect input</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<HotelDTO>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetAllHotels([FromQuery(Name = "City")] string city = null,
             [FromQuery(Name = "Class")] int? cls = null, [FromQuery(Name = "Type")] string type = null,
             [FromQuery(Name = "Swimming pool")] bool? sp = null)
         {
             List<HotelBL> hotels = _hotelController.GetAllHotels();
-            if (hotels != null)
+            if (hotels.Count != 0)
             {
                 if (city != null)
                 {
@@ -56,6 +71,10 @@ namespace ToursAPI.Controllers
 
                 if (cls != null)
                 {
+                    if (!isCorrectClass((int) cls))
+                    {
+                        return BadRequest();
+                    }
                     List<HotelBL> hotelsCls = _hotelController.GetHotelsByClass((int)cls);
                     List<HotelBL> res1 = hotels.Intersect(hotelsCls).ToList();
                     hotels = res1;
@@ -63,6 +82,10 @@ namespace ToursAPI.Controllers
 
                 if (type != null)
                 {
+                    if (!isCorrectType(type))
+                    {
+                        return BadRequest();
+                    }
                     List<HotelBL> hotelsType = _hotelController.GetHotelsByType(type);
                     List<HotelBL> res2 = hotels.Intersect(hotelsType).ToList();
                     hotels = res2;
@@ -76,9 +99,9 @@ namespace ToursAPI.Controllers
                 }
             }
             
-            if (hotels == null || hotels.Count == 0)
+            if (hotels.Count == 0)
             {
-                return NotFound();
+                return NoContent();
             }
 
             List<HotelDTO> lHotelsDTO = ListHotelDTO(hotels);
@@ -96,7 +119,7 @@ namespace ToursAPI.Controllers
         public IActionResult GetHotelByID([FromRoute(Name = "HotelID")] int hotelID)
         {
             var hotel = _hotelController.GetHotelByID(hotelID);
-            if (hotel == null)
+            if (hotel is null)
             {
                 return NotFound();
             }
@@ -108,13 +131,13 @@ namespace ToursAPI.Controllers
         /// <summary>Adding hotel</summary>
         /// <param name="hotelDTO">Hotel to add</param>
         /// <returns>Added hotel</returns>
-        /// <response code="200">Hotel added</response>
-        /// <response code="400">Add error</response>
+        /// <response code="201">Hotel added</response>
         /// <response code="409">Constraint error</response>
+        /// <response code="503">Internal server error</response>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public IActionResult AddHotel([FromBody] HotelUserDTO hotelDTO)
         {
             HotelBL aHotel = hotelDTO.GetHotel();
@@ -127,24 +150,24 @@ namespace ToursAPI.Controllers
 
             if (result == ExitCode.Error)
             {
-                return BadRequest();
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
             }
 
             HotelDTO addedHotel = new HotelDTO(aHotel);
-            return Ok(addedHotel);
+            return StatusCode(StatusCodes.Status201Created, addedHotel);
         }
 
         /// <summary>Updating hotel</summary>
         /// <param name="hotelDTO">Hotel to update</param>
         /// <returns>Updated hotel</returns>
         /// <response code="200">Hotel updated</response>
-        /// <response code="400">Update error</response>
         /// <response code="409">Constraint error</response>
+        /// <response code="503">Internal server error</response>
         [HttpPut]
         [Route("{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public IActionResult UpdateHotel([FromRoute(Name = "HotelID")] int hotelID, [FromBody] HotelUserDTO hotelDTO)
         {
             HotelBL uHotel = hotelDTO.GetHotel(hotelID);
@@ -157,7 +180,7 @@ namespace ToursAPI.Controllers
 
             if (result == ExitCode.Error)
             {
-                return BadRequest();
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
             }
 
             HotelDTO updatedHotel = new HotelDTO(uHotel);
@@ -167,13 +190,13 @@ namespace ToursAPI.Controllers
         /// <summary>Removing hotel by ID</summary>
         /// <returns>Removed hotel</returns>
         /// <response code="200">Hotel removed</response>
-        /// <response code="400">Remove error</response>
         /// <response code="404">No hotel</response>
+        /// <response code="503">Internal server error</response>
         [HttpDelete]
         [Route("{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public IActionResult DeleteHotel([FromRoute(Name = "HotelID")] int hotelID)
         {
             HotelBL delHotel = _hotelController.GetHotelByID(hotelID);
@@ -185,7 +208,7 @@ namespace ToursAPI.Controllers
             ExitCode result = _hotelController.DeleteHotelByID(hotelID);
             if (result == ExitCode.Error)
             {
-                return BadRequest();
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
             }
             
             HotelDTO hotel = new HotelDTO(delHotel);

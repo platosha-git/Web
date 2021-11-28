@@ -21,6 +21,19 @@ namespace ToursAPI.Controllers
             _tourController = tourController;
         }
 
+        bool isCorrectDate(string date)
+        {
+            try
+            {
+                Convert.ToDateTime(date);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         /// <summary>Tours by parameters</summary>
         /// <returns>Tours information</returns>
         /// <param name="city"></param>
@@ -28,16 +41,18 @@ namespace ToursAPI.Controllers
         /// <param name="dBegin">Format: dd-mm-yyyy</param>
         /// <param name="dEnd">Format: dd-mm-yyyy</param>
         /// <response code="200">Tours found</response>
-        /// <response code="404">No tours</response>
+        /// <response code="204">No tours</response>
+        /// <response code="400">Incorrect input</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetAllTours([FromQuery(Name = "City")] string city = null,
             [FromQuery(Name = "HotelName")] string name = null,
             [FromQuery(Name = "DateBegin")] string dBegin = null, [FromQuery(Name = "DateEnd")] string dEnd = null)
         {
             List<TourBL> tours = _tourController.GetAllTours();
-            if (tours != null)
+            if (tours.Count != 0)
             {
                 if (city != null)
                 {
@@ -57,6 +72,11 @@ namespace ToursAPI.Controllers
 
                 if (dBegin != null && dEnd != null)
                 {
+                    if (!isCorrectDate(dBegin) || !isCorrectDate(dEnd))
+                    {
+                        return BadRequest();
+                    }
+                    
                     DateTime beg = Convert.ToDateTime(dBegin);
                     DateTime end = Convert.ToDateTime(dEnd);
 
@@ -66,9 +86,9 @@ namespace ToursAPI.Controllers
                 }
             }
             
-            if (tours == null || tours.Count == 0)
+            if (tours.Count == 0)
             {
-                return NotFound();
+                return NoContent();
             }
 
             List<UserTour> lUserToursDTO = _tourController.ToUserTour(tours);
@@ -99,12 +119,12 @@ namespace ToursAPI.Controllers
         /// <param name="tourDTO">Tour to add</param>
         /// <returns>Added tour</returns>
         /// <response code="200">Tour added</response>
-        /// <response code="400">Add error</response>
         /// <response code="409">Constraint error</response>
+        /// <response code="503">Internal server error</response>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public IActionResult AddTour([FromBody] TourUserDTO tourDTO)
         {
             TourBL aTour = tourDTO.GetTour();
@@ -117,24 +137,24 @@ namespace ToursAPI.Controllers
 
             if (result == ExitCode.Error)
             {
-                return BadRequest();
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
             }
 
             TourDTO addedTour = new TourDTO(aTour);
-            return Ok(addedTour);
+            return StatusCode(StatusCodes.Status201Created, addedTour);
         }
 
         /// <summary>Updating tour</summary>
         /// <param name="tourDTO">Tour to update</param>
         /// <returns>Updated tour</returns>
         /// <response code="200">Tour updated</response>
-        /// <response code="400">Update error</response>
         /// <response code="409">Constraint error</response>
+        /// <response code="503">Internal server error</response>
         [HttpPut]
         [Route("{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public IActionResult UpdateTour([FromRoute(Name = "TourID")] int tourID, [FromBody] TourUserDTO tourDTO)
         {
             TourBL uTour = tourDTO.GetTour(tourID);
@@ -147,7 +167,7 @@ namespace ToursAPI.Controllers
 
             if (result == ExitCode.Error)
             {
-                return BadRequest();
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
             }
 
             TourDTO updatedTour = new TourDTO(uTour);
@@ -157,8 +177,8 @@ namespace ToursAPI.Controllers
         /// <summary>Removing transfer by ID</summary>
         /// <returns>Removed transfer</returns>
         /// <response code="200">Transfer removed</response>
-        /// <response code="400">Remove error</response>
         /// <response code="404">No transfer</response>
+        /// <response code="503">Internal server error</response>
         [HttpDelete]
         [Route("{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
@@ -174,7 +194,7 @@ namespace ToursAPI.Controllers
             ExitCode result = _tourController.DeleteTourByID(tourID);
             if (result == ExitCode.Error)
             {
-                return BadRequest();
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
             }
             
             TourDTO tour = new TourDTO(delTour);
