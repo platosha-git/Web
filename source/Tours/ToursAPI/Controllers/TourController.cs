@@ -15,10 +15,12 @@ namespace ToursAPI.Controllers
     public class ApiTourController : ControllerBase
     {
         private readonly TourController _tourController;
+        private readonly UserController _userController;
 
-        public ApiTourController(TourController tourController)
+        public ApiTourController(TourController tourController, UserController userController)
         {
             _tourController = tourController;
+            _userController = userController;
         }
 
         bool isCorrectDate(string date)
@@ -40,6 +42,7 @@ namespace ToursAPI.Controllers
         /// <param name="name"></param>
         /// <param name="dBegin">Format: dd-mm-yyyy</param>
         /// <param name="dEnd">Format: dd-mm-yyyy</param>
+        /// <param name="userID"></param>
         /// <response code="200">Tours found</response>
         /// <response code="204">No tours</response>
         /// <response code="400">Incorrect input</response>
@@ -47,11 +50,15 @@ namespace ToursAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetAllTours([FromQuery(Name = "City")] string city = null,
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+            public IActionResult GetAllTours([FromQuery(Name = "City")] string city = null,
             [FromQuery(Name = "HotelName")] string name = null,
-            [FromQuery(Name = "DateBegin")] string dBegin = null, [FromQuery(Name = "DateEnd")] string dEnd = null)
+            [FromQuery(Name = "DateBegin")] string dBegin = null, [FromQuery(Name = "DateEnd")] string dEnd = null,
+            [FromQuery(Name = "UserID")] int? userID = null)
         {
             List<TourBL> tours = _tourController.GetAllTours();
+            List<UserTour> lTours = null;
             if (tours.Count != 0)
             {
                 if (city != null)
@@ -83,6 +90,30 @@ namespace ToursAPI.Controllers
                     List<TourBL> toursDate = _tourController.GetToursByDate(beg, end);
                     List<TourBL> res1 = tours.Intersect(toursDate).ToList();
                     tours = res1;
+                }
+
+                if (userID != null)
+                {
+                    if (_userController.GetAllUserInfo((int) userID) == null)
+                    {
+                        return NotFound();
+                    }
+            
+                    List<int> toursID = _userController.GetBookedTours((int) userID);
+                    if (toursID.Count == 0)
+                    {
+                        return NoContent();
+                    }
+            
+                    List<TourBL> toursUser = new List<TourBL>();
+                    foreach (int tour in toursID)
+                    {
+                        TourBL curTour = _tourController.GetTourByID(tour);
+                        toursUser.Add(curTour);
+                    }
+
+                    lTours = _tourController.ToUserTour(toursUser);
+                    return Ok(lTours);
                 }
             }
             

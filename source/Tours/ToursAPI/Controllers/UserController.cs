@@ -110,25 +110,6 @@ namespace ToursAPI.Controllers
             return Ok(userDTO);
         }
 
-        /// <summary>User tours</summary>
-        /// <returns>Tours information</returns>
-        /// <response code="200">Tours found</response>
-        /// <response code="404">No tours</response>
-        [HttpGet]
-        [Route("{UserID:int}/Tour")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetAllBookings([FromRoute(Name = "UserID")] int userID)
-        {
-            List<UserTour> lTours = GetAllUserBookings(userID);
-            if (lTours == null)
-            {
-                return NotFound();
-            }
-            
-            return Ok(lTours);
-        }
-
         public enum Action
         {
             Book,
