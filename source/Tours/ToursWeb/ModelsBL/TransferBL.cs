@@ -13,7 +13,7 @@ namespace ToursWeb.ModelsBL
     public class TransferBL
     {
         public int Transferid { get; set; }
-        public string Type { get; set; }
+        public TType Type { get; set; }
         public string Cityfrom { get; set; }
         public DateTime? Departuretime { get; set; }
         public int? Cost { get; set; }

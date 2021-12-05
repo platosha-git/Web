@@ -11,7 +11,7 @@ namespace ToursWeb.ModelsBL
     {
         public int Foodid { get; set; }
         public string Category { get; set; }
-        public string Menu { get; set; }
+        public FMenu? Menu { get; set; }
         public bool? Bar { get; set; }
         public int Cost { get; set; }
 

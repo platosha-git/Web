@@ -17,7 +17,7 @@ namespace ToursWeb.ModelsDB
         {
             Foodid = foodBL.Foodid;
             Category = foodBL.Category;
-            Menu = foodBL.Menu;
+            Menu = (foodBL.Menu is null) ? "" : Enum.GetName(typeof(FMenu), foodBL.Menu);
             Bar = foodBL.Bar;
             Cost = foodBL.Cost;
         }
@@ -36,7 +36,7 @@ namespace ToursWeb.ModelsDB
             {
                 Foodid = Foodid,
                 Category = Category,
-                Menu = Menu,
+                Menu = (Menu == "") ? null : (FMenu) Enum.Parse(typeof(FMenu), Menu),
                 Bar = Bar,
                 Cost = Cost
             };

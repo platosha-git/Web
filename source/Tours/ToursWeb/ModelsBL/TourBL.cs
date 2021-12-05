@@ -18,7 +18,7 @@ namespace ToursWeb.ModelsBL
         public string HType { get; set; }
         public int HClass { get; set; }
         public string FCategory { get; set; }
-        public string TType { get; set; }
+        public TType TType { get; set; }
         public DateTime Datebegin { get; set; }
         public DateTime Dateend { get; set; }
         public int Cost { get; set; }
@@ -33,7 +33,7 @@ namespace ToursWeb.ModelsBL
             HType = hotel.Type;
             HClass = (int) hotel.Class;
             FCategory = food.Category;
-            TType = transfer.Type.ToString();
+            TType = transfer.Type;
             Datebegin = tour.Datebegin;
             Dateend = tour.Dateend;
             Cost = tour.Cost;

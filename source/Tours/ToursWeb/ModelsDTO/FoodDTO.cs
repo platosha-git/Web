@@ -1,4 +1,3 @@
-using System;
 using ToursWeb.ModelsBL;
 
 namespace ToursWeb.ModelsDTO
@@ -6,7 +5,7 @@ namespace ToursWeb.ModelsDTO
     public class FoodUserDTO 
     {
         public string Category { get; set; }
-        public string Menu { get; set; }
+        public FMenu? Menu { get; set; }
         public bool? Bar { get; set; }
         public int Cost { get; set; }
 

@@ -16,7 +16,7 @@ namespace ToursWeb.ModelsDB
         public Transfer(TransferBL transferBL)
         {
             Transferid = transferBL.Transferid;
-            Type = transferBL.Type.ToString();
+            Type = Enum.GetName(typeof(TType), transferBL.Type);
             Cityfrom = transferBL.Cityfrom;
             Departuretime = transferBL.Departuretime;
             Cost = transferBL.Cost;
@@ -35,7 +35,7 @@ namespace ToursWeb.ModelsDB
             TransferBL transferBl = new TransferBL()
             {
                 Transferid = Transferid,
-                Type = Type,
+                Type = (TType) Enum.Parse(typeof(TType), Type),
                 Cityfrom = Cityfrom,
                 Departuretime = Departuretime,
                 Cost = Cost
