@@ -119,6 +119,14 @@ namespace ToursWeb.ImpRepositories
             }
         }
 
+        public List<UserBL> FindUsersByLogin(string login)
+        {
+            IQueryable<User> users = _db.Users.Where(needed => needed.Login.Contains(login));
+            List<User> lUsers = users.ToList();
+            List<UserBL> lUsersBL = ListUserBL(lUsers);
+            return lUsersBL;
+        }
+
         public UserBL FindUserByLP(string login, string password)
         {
             IQueryable<User> users = _db.Users.Where(needed => needed.Login.Equals(login) &&

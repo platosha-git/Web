@@ -52,7 +52,6 @@ namespace ToursAPI.Controllers
         /// <param name="date">Format: dd-mm-yyyy</param>
         /// <response code="200">Transfers found</response>
         /// <response code="204">No transfers</response>
-        /// <response code="400">Incorrect input</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TransferDTO>))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -121,15 +120,13 @@ namespace ToursAPI.Controllers
         /// <param name="transferDTO">Transfer to add</param>
         /// <returns>Added transfer</returns>
         /// <response code="201">Transfer added</response>
-        /// <response code="400">Incorrect input</response>
-        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
-        /// <response code="503">Internal server error</response>
+        /// <response code="500">Internal server error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(TransferDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult AddTransfer([FromBody] TransferUserDTO transferDTO)
         {
             TransferBL aTransfer = transferDTO.GetTransfer();
@@ -142,7 +139,7 @@ namespace ToursAPI.Controllers
 
             if (result == ExitCode.Error)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             TransferDTO addedTransfer = new TransferDTO(aTransfer);
@@ -153,15 +150,14 @@ namespace ToursAPI.Controllers
         /// <param name="transferDTO">Transfer to update</param>
         /// <returns>Updated transfer</returns>
         /// <response code="200">Transfer updated</response>
-        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
-        /// <response code="503">Internal server error</response>
+        /// <response code="500">Internal server error</response>
         [HttpPut]
         [Route("{TransferID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult UpdateTransfer([FromRoute(Name = "TransferID")] int transferID, [FromBody] TransferUserDTO transferDTO)
         {
             TransferBL uTransfer = transferDTO.GetTransfer(transferID);
@@ -174,7 +170,7 @@ namespace ToursAPI.Controllers
 
             if (result == ExitCode.Error)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             TransferDTO updatedTransfer = new TransferDTO(uTransfer);
@@ -185,12 +181,12 @@ namespace ToursAPI.Controllers
         /// <returns>Removed transfer</returns>
         /// <response code="200">Transfer removed</response>
         /// <response code="404">No transfer</response>
-        /// <response code="503">Internal server error</response>
+        /// <response code="500">Internal server error</response>
         [HttpDelete]
         [Route("{TransferID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteTransfer([FromRoute(Name = "TransferID")] int transferID)
         {
             TransferBL delTransfer = _transferController.GetTransferByID(transferID);
@@ -202,7 +198,7 @@ namespace ToursAPI.Controllers
             ExitCode result = _transferController.DeleteTransferByID(transferID);
             if (result == ExitCode.Error)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
             
             TransferDTO transfer = new TransferDTO(delTransfer);

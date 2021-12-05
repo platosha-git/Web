@@ -52,7 +52,6 @@ namespace ToursAPI.Controllers
         /// <returns>Hotels information</returns>
         /// <response code="200">Hotels found</response>
         /// <response code="204">No hotels</response>
-        /// <response code="400">Incorrect input</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<HotelDTO>))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -132,14 +131,13 @@ namespace ToursAPI.Controllers
         /// <param name="hotelDTO">Hotel to add</param>
         /// <returns>Added hotel</returns>
         /// <response code="201">Hotel added</response>
-        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
-        /// <response code="503">Internal server error</response>
+        /// <response code="500">Internal server error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult AddHotel([FromBody] HotelUserDTO hotelDTO)
         {
             HotelBL aHotel = hotelDTO.GetHotel();
@@ -152,7 +150,7 @@ namespace ToursAPI.Controllers
 
             if (result == ExitCode.Error)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             HotelDTO addedHotel = new HotelDTO(aHotel);
@@ -163,15 +161,14 @@ namespace ToursAPI.Controllers
         /// <param name="hotelDTO">Hotel to update</param>
         /// <returns>Updated hotel</returns>
         /// <response code="200">Hotel updated</response>
-        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
-        /// <response code="503">Internal server error</response>
+        /// <response code="500">Internal server error</response>
         [HttpPut]
         [Route("{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult UpdateHotel([FromRoute(Name = "HotelID")] int hotelID, [FromBody] HotelUserDTO hotelDTO)
         {
             HotelBL uHotel = hotelDTO.GetHotel(hotelID);
@@ -184,7 +181,7 @@ namespace ToursAPI.Controllers
 
             if (result == ExitCode.Error)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             HotelDTO updatedHotel = new HotelDTO(uHotel);
@@ -195,12 +192,12 @@ namespace ToursAPI.Controllers
         /// <returns>Removed hotel</returns>
         /// <response code="200">Hotel removed</response>
         /// <response code="404">No hotel</response>
-        /// <response code="503">Internal server error</response>
+        /// <response code="500">Internal server error</response>
         [HttpDelete]
         [Route("{HotelID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HotelDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteHotel([FromRoute(Name = "HotelID")] int hotelID)
         {
             HotelBL delHotel = _hotelController.GetHotelByID(hotelID);
@@ -212,7 +209,7 @@ namespace ToursAPI.Controllers
             ExitCode result = _hotelController.DeleteHotelByID(hotelID);
             if (result == ExitCode.Error)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
             
             HotelDTO hotel = new HotelDTO(delHotel);

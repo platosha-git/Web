@@ -65,20 +65,13 @@ namespace ToursAPI.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserDTO>))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public IActionResult GetAllUsers([FromQuery(Name = "Login")] string login = null, [FromQuery(Name = "Password")] string password = null)
+        public IActionResult GetAllUsers([FromQuery(Name = "Login")] string login = null)
         {
             List<UserBL> users = _userController.GetAllUsers();
-            if (login != null && password != null)
+            if (login != null)
             {
-                UserBL user = _userController.GetUserByLP(login, password);
-                if (user is null)
-                {
-                    return Unauthorized();
-                }
-                
-                List<UserBL> newUsers = new List<UserBL>();
-                newUsers.Add(user);
-                users = newUsers;
+                List<UserBL> usersL = _userController.GetUserByLogin(login);
+                users = usersL;
             }
             
             if (users.Count == 0)
@@ -120,16 +113,15 @@ namespace ToursAPI.Controllers
         /// <returns>Tours information</returns>
         /// <response code="200">Tours updated</response>
         /// <response code="204">No booked tours</response>
-        /// <response code="400">Error manage</response>
         /// <response code="409">Constraint error</response>
-        /// <response code="503">Internal server error</response>
+        /// <response code="500">Internal server error</response>
         [HttpPatch]
         [Route("{UserID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult ManageTours([FromQuery(Name = "Action"), Required] Action action, 
             [FromRoute(Name = "UserID")] int userID, [FromQuery(Name = "TourID"), Required] int tourID)
         {
@@ -175,7 +167,7 @@ namespace ToursAPI.Controllers
 
             if (result == ExitCode.Error)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             List<UserTour> lTours = GetAllUserBookings(userID);

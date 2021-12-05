@@ -46,7 +46,6 @@ namespace ToursAPI.Controllers
         /// <returns>Foods information</returns>
         /// <response code="200">Foods found</response>
         /// <response code="204">No food</response>
-        /// <response code="400">Incorrect input</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FoodBL>))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -114,14 +113,13 @@ namespace ToursAPI.Controllers
         /// <param name="foodDTO">Food to add</param>
         /// <returns>Added food</returns>
         /// <response code="201">Food added</response>
-        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
-        /// <response code="503">Internal server error</response>
+        /// <response code="500">Internal server error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(FoodDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult AddFood([FromBody] FoodUserDTO foodDTO)
         {
             FoodBL aFood = foodDTO.GetFood();
@@ -134,7 +132,7 @@ namespace ToursAPI.Controllers
 
             if (result == ExitCode.Error)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
             
             FoodDTO addedFood = new FoodDTO(aFood); 
@@ -145,15 +143,14 @@ namespace ToursAPI.Controllers
         /// <param name="foodDTO">Food to update</param>
         /// <returns>Updated food</returns>
         /// <response code="200">Food updated</response>
-        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
-        /// <response code="503">Internal server error</response>
+        /// <response code="500">Internal server error</response>
         [HttpPut]
         [Route("{FoodID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FoodDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult UpdateFood([FromRoute(Name = "FoodID")] int foodID, [FromBody] FoodUserDTO foodDTO)
         {
             FoodBL uFood = foodDTO.GetFood(foodID);
@@ -166,7 +163,7 @@ namespace ToursAPI.Controllers
 
             if (result == ExitCode.Error)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             FoodDTO updatedFood = new FoodDTO(uFood);
@@ -177,12 +174,12 @@ namespace ToursAPI.Controllers
         /// <returns>Removed food</returns>
         /// <response code="200">Food removed</response>
         /// <response code="404">No food</response>
-        /// <response code="503">Internal server error</response>
+        /// <response code="500">Internal server error</response>
         [HttpDelete]
         [Route("{FoodID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FoodDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteFood([FromRoute(Name = "FoodID")] int foodID)
         {
             FoodBL delFood = _foodController.GetFoodByID(foodID);
@@ -194,7 +191,7 @@ namespace ToursAPI.Controllers
             ExitCode result = _foodController.DeleteFoodByID(foodID);
             if (result == ExitCode.Error)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
             
             FoodDTO food = new FoodDTO(delFood);

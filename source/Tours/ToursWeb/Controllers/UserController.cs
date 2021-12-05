@@ -24,6 +24,11 @@ namespace ToursWeb.Controllers
             return _userRepository.FindByID(userID);
         }
 
+        public List<UserBL> GetUserByLogin(string login)
+        {
+            return _userRepository.FindUsersByLogin(login);
+        }
+        
         public UserBL GetUserByLP(string login, string password)
         {
             return _userRepository.FindUserByLP(login, password);

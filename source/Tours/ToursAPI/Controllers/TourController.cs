@@ -45,7 +45,6 @@ namespace ToursAPI.Controllers
         /// <param name="userID"></param>
         /// <response code="200">Tours found</response>
         /// <response code="204">No tours</response>
-        /// <response code="400">Incorrect input</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserTour>))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -150,14 +149,13 @@ namespace ToursAPI.Controllers
         /// <param name="tourDTO">Tour to add</param>
         /// <returns>Added tour</returns>
         /// <response code="201">Tour added</response>
-        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
-        /// <response code="503">Internal server error</response>
+        /// <response code="500">Internal server error</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult AddTour([FromBody] TourUserDTO tourDTO)
         {
             TourBL aTour = tourDTO.GetTour();
@@ -170,7 +168,7 @@ namespace ToursAPI.Controllers
 
             if (result == ExitCode.Error)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             TourDTO addedTour = new TourDTO(aTour);
@@ -181,15 +179,14 @@ namespace ToursAPI.Controllers
         /// <param name="tourDTO">Tour to update</param>
         /// <returns>Updated tour</returns>
         /// <response code="200">Tour updated</response>
-        /// <response code="400">Incorrect input</response>
         /// <response code="409">Constraint error</response>
-        /// <response code="503">Internal server error</response>
+        /// <response code="500">Internal server error</response>
         [HttpPut]
         [Route("{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult UpdateTour([FromRoute(Name = "TourID")] int tourID, [FromBody] TourUserDTO tourDTO)
         {
             TourBL uTour = tourDTO.GetTour(tourID);
@@ -202,7 +199,7 @@ namespace ToursAPI.Controllers
 
             if (result == ExitCode.Error)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             TourDTO updatedTour = new TourDTO(uTour);
@@ -213,7 +210,7 @@ namespace ToursAPI.Controllers
         /// <returns>Removed transfer</returns>
         /// <response code="200">Transfer removed</response>
         /// <response code="404">No transfer</response>
-        /// <response code="503">Internal server error</response>
+        /// <response code="500">Internal server error</response>
         [HttpDelete]
         [Route("{TourID:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TourDTO))]
@@ -229,7 +226,7 @@ namespace ToursAPI.Controllers
             ExitCode result = _tourController.DeleteTourByID(tourID);
             if (result == ExitCode.Error)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
             
             TourDTO tour = new TourDTO(delTour);
