@@ -1,5 +1,3 @@
-using ToursWeb.ModelsDB;
-
 namespace ToursWeb.ModelsBL
 {
     public class HotelBL
@@ -14,33 +12,6 @@ namespace ToursWeb.ModelsBL
 
         public HotelBL() { }
 
-        public HotelBL(Hotel hotel)
-        {
-            Hotelid = hotel.Hotelid;
-            Name = hotel.Name;
-            Type = hotel.Type;
-            Class = hotel.Class;
-            Swimpool = hotel.Swimpool;
-            City = hotel.City;
-            Cost = hotel.Cost;
-        }
-
-        public Hotel GetHotel()
-        {
-            Hotel hotel = new Hotel()
-            {
-                Hotelid = Hotelid,
-                Name = Name,
-                Type = Type,
-                Class = Class,
-                Swimpool = Swimpool,
-                City = City,
-                Cost = Cost
-            };
-
-            return hotel;
-        }
-        
         private bool Equals(HotelBL hotel)
         {
             if (hotel is null)

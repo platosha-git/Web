@@ -29,7 +29,7 @@ namespace ToursWeb.ImpRepositories
             List<UserBL> usersBL = new List<UserBL>();
             foreach (var user in users)
             {
-                UserBL userBL = new UserBL(user);
+                UserBL userBL = user.ToBL();
                 usersBL.Add(userBL);
             }
 
@@ -50,8 +50,8 @@ namespace ToursWeb.ImpRepositories
             {
                 return null;
             }
-            
-            UserBL userBL = new UserBL(user);
+
+            UserBL userBL = user.ToBL();
             return userBL;
         }
 
@@ -59,7 +59,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                User user = obj.GetUser();
+                User user = new User(obj);
                 obj.Userid = _db.Users.Count() + 1;
                 
                 user.Userid = _db.Users.Count() + 1;
@@ -84,7 +84,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                User uUser = obj.GetUser();
+                User uUser = new User(obj);
                 _db.Users.Update(uUser);
                 _db.SaveChanges();
                 _logger.LogInformation("+UsersRep : User {Number} was updated at Users", obj.Userid);
@@ -137,7 +137,7 @@ namespace ToursWeb.ImpRepositories
             }
             
             User user = users.First();
-            UserBL userBL = new UserBL(user);
+            UserBL userBL = user.ToBL();
             return userBL;
         }
         
@@ -156,7 +156,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                User user = obj.GetUser();
+                User user = new User(obj);
                 user.Toursid = toursID.ToArray();
                 _db.Users.Update(user);
                 _db.SaveChanges();

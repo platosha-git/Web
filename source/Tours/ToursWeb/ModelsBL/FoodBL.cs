@@ -1,5 +1,3 @@
-using ToursWeb.ModelsDB; 
-
 namespace ToursWeb.ModelsBL
 {
     public enum FMenu
@@ -19,29 +17,6 @@ namespace ToursWeb.ModelsBL
 
         public FoodBL() { }
 
-        public FoodBL(Food food)
-        {
-            Foodid = food.Foodid;
-            Category = food.Category;
-            Menu = food.Menu;
-            Bar = food.Bar;
-            Cost = food.Cost;
-        }
-        
-        public Food GetFood()
-        {
-            Food food = new Food ()
-            {
-                Foodid = Foodid,
-                Category = Category,
-                Menu = Menu,
-                Bar = Bar,
-                Cost = Cost
-            };
-            
-            return food;
-        }
-        
         private bool Equals(FoodBL food)
         {
             if (food is null)

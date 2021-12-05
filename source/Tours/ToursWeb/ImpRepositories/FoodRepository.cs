@@ -29,7 +29,7 @@ namespace ToursWeb.ImpRepositories
             List<FoodBL> foodsBL = new List<FoodBL>();
             foreach (var food in foods)
             {
-                FoodBL foodBL = new FoodBL(food);
+                FoodBL foodBL = food.ToBL();
                 foodsBL.Add(foodBL);
             }
 
@@ -51,7 +51,7 @@ namespace ToursWeb.ImpRepositories
                 return null;
             }
             
-            FoodBL foodBL = new FoodBL(food);
+            FoodBL foodBL = food.ToBL();
             return foodBL;
         }
 
@@ -59,7 +59,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                Food food = obj.GetFood();
+                Food food = new Food(obj);
                 obj.Foodid = _db.Foods.Count() + 1;
                 
                 food.Foodid = _db.Foods.Count() + 1;
@@ -84,7 +84,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                Food uFood = obj.GetFood();
+                Food uFood = new Food(obj);
                 _db.Foods.Update(uFood);
                 _db.SaveChanges();
                 _logger.LogInformation("+FoodRep : Food {Number} was updated at Food", obj.Foodid);

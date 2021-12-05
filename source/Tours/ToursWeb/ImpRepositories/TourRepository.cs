@@ -29,7 +29,7 @@ namespace ToursWeb.ImpRepositories
             List<TourBL> toursBL = new List<TourBL>();
             foreach (var tour in tours)
             {
-                TourBL tourBL = new TourBL(tour);
+                TourBL tourBL = tour.ToBl();
                 toursBL.Add(tourBL);
             }
 
@@ -51,7 +51,7 @@ namespace ToursWeb.ImpRepositories
                 return null;
             }
             
-            TourBL tourBL = new TourBL(tour);
+            TourBL tourBL = tour.ToBl();
             return tourBL;
         }
 
@@ -59,7 +59,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                Tour tour = obj.GetTour();
+                Tour tour = new Tour(obj);
                 obj.Tourid = _db.Tours.Count() + 1;
                 
                 tour.Tourid = _db.Tours.Count() + 1;
@@ -84,7 +84,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                Tour uTour = obj.GetTour();
+                Tour uTour = new Tour(obj);
                 _db.Tours.Update(uTour);
                 _db.SaveChanges();
                 _logger.LogInformation("+TourRep : Tours {Number} was updated at Tours", obj.Tourid);

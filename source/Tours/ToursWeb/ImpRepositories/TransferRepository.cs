@@ -29,7 +29,7 @@ namespace ToursWeb.ImpRepositories
             List<TransferBL> transfersBL = new List<TransferBL>();
             foreach (var transfer in transfers)
             {
-                TransferBL transferBL = new TransferBL(transfer);
+                TransferBL transferBL = transfer.ToBL();
                 transfersBL.Add(transferBL);
             }
 
@@ -51,7 +51,7 @@ namespace ToursWeb.ImpRepositories
                 return null;
             }
             
-            TransferBL transferBL = new TransferBL(transfer);
+            TransferBL transferBL = transfer.ToBL();
             return transferBL;
         }
 
@@ -59,7 +59,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                Transfer transfer = obj.GetTransfer();
+                Transfer transfer = new Transfer(obj);
                 obj.Transferid = _db.Transfers.Count() + 1;
                 
                 transfer.Transferid = _db.Transfers.Count() + 1;
@@ -84,7 +84,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                Transfer transfer = obj.GetTransfer();
+                Transfer transfer = new Transfer(obj);
                 _db.Transfers.Update(transfer);
                 _db.SaveChanges();
                 _logger.LogInformation("+TransferRep : Transfer {Number} was updated at Transfers", obj.Transferid);

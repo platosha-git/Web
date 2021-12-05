@@ -13,28 +13,5 @@ namespace ToursWeb.ModelsBL
         public int? Accesslevel { get; set; }
 
         public UserBL() { }
-
-        public UserBL(User user)
-        {
-            Userid = user.Userid;
-            Toursid = user.Toursid.ToList();
-            Login = user.Login;
-            Password = user.Password;
-            Accesslevel = user.Accesslevel;
-        }
-
-        public User GetUser()
-        {
-            User user = new User()
-            {
-                Userid = Userid,
-                Toursid = Toursid.ToArray(),
-                Login = Login,
-                Password = Password,
-                Accesslevel = Accesslevel
-            };
-
-            return user;
-        }
     }
 }

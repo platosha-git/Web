@@ -1,16 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using ToursWeb.ModelsBL;
 
 #nullable disable
 
 namespace ToursWeb.ModelsDB
 {
-    
-    
     public partial class Food
     {
         public Food()
         {
             Tours = new HashSet<Tour>();
+        }
+
+        public Food(FoodBL foodBL)
+        {
+            Foodid = foodBL.Foodid;
+            Category = foodBL.Category;
+            Menu = foodBL.Menu;
+            Bar = foodBL.Bar;
+            Cost = foodBL.Cost;
         }
 
         public int Foodid { get; set; }
@@ -20,5 +29,19 @@ namespace ToursWeb.ModelsDB
         public int Cost { get; set; }
 
         public virtual ICollection<Tour> Tours { get; set; }
+
+        public FoodBL ToBL()
+        {
+            FoodBL foodBL = new FoodBL()
+            {
+                Foodid = Foodid,
+                Category = Category,
+                Menu = Menu,
+                Bar = Bar,
+                Cost = Cost
+            };
+
+            return foodBL;
+        }
     }
 }

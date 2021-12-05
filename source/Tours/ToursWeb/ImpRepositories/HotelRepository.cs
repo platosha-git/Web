@@ -29,7 +29,7 @@ namespace ToursWeb.ImpRepositories
             List<HotelBL> hotelsBL = new List<HotelBL>();
             foreach (var hotel in hotels)
             {
-                HotelBL hotelBL = new HotelBL(hotel);
+                HotelBL hotelBL = hotel.ToBL();
                 hotelsBL.Add(hotelBL);
             }
 
@@ -51,7 +51,7 @@ namespace ToursWeb.ImpRepositories
                 return null;
             }
             
-            HotelBL hotelBL = new HotelBL(hotel);
+            HotelBL hotelBL = hotel.ToBL();
             return hotelBL;
         }
 
@@ -59,7 +59,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                Hotel hotel = obj.GetHotel();
+                Hotel hotel = new Hotel(obj);
                 obj.Hotelid = _db.Hotels.Count() + 1;
                 hotel.Hotelid = _db.Hotels.Count() + 1;
                 _db.Hotels.Add(hotel);
@@ -83,7 +83,7 @@ namespace ToursWeb.ImpRepositories
         {
             try
             {
-                Hotel uHotel = obj.GetHotel();
+                Hotel uHotel = new Hotel(obj);
                 _db.Hotels.Update(uHotel);
                 _db.SaveChanges();
                 _logger.LogInformation("+HotelRep : Hotel {Number} was updated in Hotels", obj.Hotelid);
